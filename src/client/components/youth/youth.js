@@ -1,14 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router';
+import {Card, CardTitle} from 'material-ui/Card';
 
 class Youth extends React.Component {
   render() {
     return (
-      <div>
-        <h1>Youth Empowerment</h1>
-        <Link to="/">Totals</Link>
-        <Link to="health">Health-Innovation</Link>
-      </div>
+      <Card>
+        <CardTitle>Youth Empowerment</CardTitle>
+      </Card>
     );
   }
 }

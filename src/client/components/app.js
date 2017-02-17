@@ -1,10 +1,12 @@
 import React from 'react';
+import Nav from './nav';
+
 
 class App extends React.Component {
   render() {
     return(
       <div>
-        <h4>Header goes here</h4>
+        <Nav />
         {this.props.children}
       </div>
     );
