@@ -1,14 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router';
+import {Card, CardTitle} from 'material-ui/Card';
 
 class Health extends React.Component {
   render() {
     return (
-      <div>
-        <h1>Health Innovation</h1>
-        <Link to="/">Totals</Link>
-        <Link to="youth">Youth Empowerment</Link>
-      </div>
+      <Card>
+        <CardTitle>Health Innovation</CardTitle>
+      </Card>
     );
   }
 }
