@@ -18,6 +18,10 @@ const Nav = () => (
       containerElement={<Link to="youth"/>}
       primaryText="Youth Empowerment"
     />
+  <MenuItem
+    containerElement={<Link to="courses"/>}
+    primaryText="Courses"
+    />
   </Menu>
 );
 
