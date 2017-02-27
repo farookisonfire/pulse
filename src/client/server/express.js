@@ -9,5 +9,5 @@ app.use(bodyParser.json());
 app.use('/api', router);
 
 app.listen(3000, () => {
-  console.log('listening on 3000')
+  console.log('listening on 1337')
 });
