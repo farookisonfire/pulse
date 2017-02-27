@@ -1,9 +1,15 @@
 import {Router} from 'express';
 
-const router = new Router();
+module.exports = function routes(db) {
+  const router = new Router();
+  const myCollection = db.collection('pulse');
 
-router.get('/', (req,res) => {
-  res.send("wa gwan, bredren");
-});
+  router.get('/', (req,res) => {
+    myCollection.find().toArray((err,docs) => {
+      if(err) return res.sendStatus(500);
+      res.json(docs);
+    });
+  });
 
-module.exports = router;
+  return router;
+};

@@ -10,7 +10,8 @@
     "lint": "esw src",
     "lint:watch": "npm run lint -- --watch",
     "lint:serve": "npm-run-all --parallel lint:watch serve",
-    "server": "babel-node src/client/server/express.js",
+    "server": "babel-node src/client/server/index.js",
+    "watch:server": "nodemon --exec babel-node src/client/server/index.js",
     "start": "npm-run-all build server"
   },
   "repository": {
@@ -37,6 +38,7 @@
     "eslint-watch": "^2.1.14",
     "express": "^4.14.1",
     "material-ui": "^0.16.7",
+    "mongodb": "^2.2.24",
     "npm-run-all": "^4.0.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

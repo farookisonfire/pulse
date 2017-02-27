@@ -1,13 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import router from './router';
+import routes from './router';
 
-const app = express();
+module.exports = function createApp(db) {
 
-app.use(express.static(__dirname + '/../../../build'));
-app.use(bodyParser.json());
-app.use('/api', router);
+  const app = express();
 
-app.listen(3000, () => {
-  console.log('listening on 1337')
-});
+  app.use(express.static(__dirname + '/../../../build'));
+  app.use(bodyParser.json());
+  app.use('/api', routes(db));
+
+  return app;
+};
