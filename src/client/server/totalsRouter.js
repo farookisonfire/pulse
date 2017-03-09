@@ -1,6 +1,6 @@
 import {Router} from 'express';
 
-module.exports = function routes(db) {
+module.exports = function totalsRoutes(db) {
   const router = new Router();
   const myCollection = db.collection('pulse');
 

@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import routes from './router';
+import totalsRoutes from './totalsRouter';
 
 module.exports = function createApp(db) {
 
@@ -8,7 +8,7 @@ module.exports = function createApp(db) {
 
   app.use(express.static(__dirname + '/../../../build'));
   app.use(bodyParser.json());
-  app.use('/api', routes(db));
+  app.use('/api/totals', totalsRoutes(db));
 
   return app;
 };

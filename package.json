@@ -12,6 +12,7 @@
     "lint:serve": "npm-run-all --parallel lint:watch serve",
     "server": "babel-node src/client/server/index.js",
     "watch:server": "nodemon --exec babel-node src/client/server/index.js",
+    "watch:all": "npm-run-all lint:serve watch:server",
     "start": "npm-run-all build server"
   },
   "repository": {
@@ -37,16 +38,19 @@
     "eslint-plugin-react": "^6.9.0",
     "eslint-watch": "^2.1.14",
     "express": "^4.14.1",
+    "highcharts": "^5.0.9",
     "material-ui": "^0.16.7",
     "mongodb": "^2.2.24",
     "npm-run-all": "^4.0.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-highcharts": "^11.5.0",
     "react-redux": "^5.0.2",
     "react-router": "^3.0.2",
     "react-router-redux": "^4.0.8",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
   }
