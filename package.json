@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "mocha --reporter spec  --compilers js:babel-core/register \"src/**/*.test.js\"",
     "build": "webpack",
     "watch": "webpack --watch",
     "serve": "webpack-dev-server",
     "lint": "esw src",
     "lint:watch": "npm run lint -- --watch",
     "lint:serve": "npm-run-all --parallel lint:watch serve",
-    "server": "babel-node src/client/server/index.js",
-    "watch:server": "nodemon --exec babel-node src/client/server/index.js",
+    "server": "babel-node src/server/index.js",
+    "watch:server": "nodemon --exec babel-node src/server/index.js",
     "start": "npm-run-all build server"
   },
   "repository": {
@@ -49,5 +50,12 @@
     "redux": "^3.6.0",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "enzyme": "^2.8.2",
+    "mocha": "^3.3.0",
+    "nyc": "^10.2.0",
+    "react-addons-test-utils": "^15.5.1"
   }
 }
