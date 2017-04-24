@@ -6,7 +6,7 @@ module.exports = function createApp(db) {
 
   const app = express();
 
-  app.use(express.static(__dirname + '/../../../build'));
+  app.use(express.static(__dirname + '/../../build'));
   app.use(bodyParser.json());
   app.use('/api', routes(db));
 
