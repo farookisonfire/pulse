@@ -10,5 +10,9 @@ module.exports = function createApp(db) {
   app.use(bodyParser.json());
   app.use('/api', routes(db));
 
+  app.use((err, req, res, next) => {
+    res.status(500).send("500 Internal server error");
+  });
+
   return app;
 };

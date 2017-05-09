@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter spec  --compilers js:babel-core/register \"src/**/*.test.js\"",
     "build": "webpack",
     "watch": "webpack --watch",
     "serve": "webpack-dev-server",
@@ -13,7 +12,8 @@
     "lint:serve": "npm-run-all --parallel lint:watch serve",
     "server": "babel-node src/server/index.js",
     "watch:server": "nodemon --exec babel-node src/server/index.js",
-    "start": "npm-run-all build server"
+    "start": "npm-run-all build server",
+    "start:dev": "npm-run-all --parallel lint:serve watch:server"
   },
   "repository": {
     "type": "git",
