@@ -7,9 +7,15 @@ module.exports = {
   },
 
   devServer: {
-    port: 3001,
+    port: 3000,
     contentBase: './build',
     inline: true,
+    proxy: {
+     '/api': {
+       target: 'http://localhost:1337',
+       secure: false
+     }
+   }
   },
 
   module: {
