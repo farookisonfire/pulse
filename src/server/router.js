@@ -1,5 +1,7 @@
 import {Router} from 'express';
 import {mapAnswersToQuestions} from './typeform';
+import fetch from 'node-fetch';
+import {createSlackText} from './slack';
 
 module.exports = function routes(db) {
   const router = new Router();
@@ -15,8 +17,27 @@ module.exports = function routes(db) {
   router.post('/', (req, res) => {
     const questions = req.body.form_response.definition.fields;
     const answers = req.body.form_response.answers;
-    myCollection.insert(mapAnswersToQuestions(questions, answers));
+    const formResponse = mapAnswersToQuestions(questions, answers);
+
+    myCollection.insert(formResponse, (err, inserted) => {
+      if (err) { return console.log(err); }
+      console.log('the document was inserted successfully',inserted);
+    });
+
     res.status(200).json(req.body);
+
+    fetch('https://hooks.slack.com/services/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', { 
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: createSlackText(formResponse)
+     })
+     .then(response => {
+       if (!response.ok) { throw Error(response.statusText); }
+       console.log('response was ok')
+     })
+     .catch(err => console.log(err));
+
+    
   });
 
   return router;
