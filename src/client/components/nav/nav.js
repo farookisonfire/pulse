@@ -8,7 +8,7 @@ const Nav = () => (
   <Menu>
     <MenuItem
       containerElement={<Link to="/" />}
-      primaryText="Total Enrolled"
+      primaryText="Applicants"
     />
     <MenuItem
       containerElement={<Link to="health" />}

@@ -9,10 +9,10 @@ import configureStore from './store/configureStore';
 
 injectTapEventPlugin();
 
-const store = configureStore();
+window.store = configureStore();
 
 render (
-  <Provider store={store}>
+  <Provider store={window.store}>
     <MuiThemeProvider>
       <Router history={browserHistory} routes={routes}/>
     </MuiThemeProvider>

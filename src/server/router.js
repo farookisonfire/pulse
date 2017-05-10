@@ -21,7 +21,7 @@ module.exports = function routes(db) {
 
     myCollection.insert(formResponse, (err, inserted) => {
       if (err) { return console.log(err); }
-      console.log('the document was inserted successfully',inserted);
+      console.log('inserted', inserted);
     });
 
     res.status(200).json(req.body);
@@ -33,7 +33,7 @@ module.exports = function routes(db) {
      })
      .then(response => {
        if (!response.ok) { throw Error(response.statusText); }
-       console.log('response was ok')
+       console.log('ok')
      })
      .catch(err => console.log(err));
 
