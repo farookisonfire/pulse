@@ -4,6 +4,10 @@ import {Card, CardTitle} from 'material-ui/Card';
 import ApplicantTable from './ApplicantTable';
 import {connect} from 'react-redux';
 import {fetchApplicants} from './applicantActions';
+import {formatApplicants} from './applicantHelpers';
+import RefreshBtn from './RefreshBtn';
+import Spinner from 'react-spinkit';
+import {spinner} from './applicantStyles';
 
 class Total extends React.Component {
   constructor(props) {
@@ -13,44 +17,22 @@ class Total extends React.Component {
   }
   
   render() {
-    console.log('table headers', this.props.tableHeaders);
-    console.log('applicants', this.props.applicants);
     return(
-      <Card>
+      <Card style={{height:"90vh"}}>
         <CardTitle>Applicants</CardTitle>
-        <ApplicantTable tableHeaders={this.props.tableHeaders} applicants={this.props.applicants}/>
+        <RefreshBtn onTouchTap={this.props.fetchApplicants}/>
+        {this.props.fetching 
+          ? <Spinner spinnerName="wave" noFadeIn style={spinner}/>
+          : <ApplicantTable tableHeaders={this.props.tableHeaders} applicants={this.props.applicants}/>}
       </Card>
     );
   }
 }
 
-const formatApplicants = (applicants) => {
-  
-  const formatted = [];
-  if (applicants.length) {
-    applicants.map(applicant => {
-        const format = {};
-        format.name = applicant["First Name"] + ' ' + applicant["Last Name"];
-        format.email = applicant["Email"];
-        format.phone = applicant["Mobile Phone Number"];
-        format.dob = applicant["Date of Birth"];
-        format.gender = applicant["Gender"];
-        applicant["University you attend(ed)"] === '- Other University -' 
-          ? format.university = applicant["Name of University"]
-          : format.university = applicant["University you attend(ed)"];
-        format.why = applicant["Why do you want to volunteer with OHS?"];
-        format.program = applicant["Which program are you most interested in?"];
-        
-        formatted.push(format);
-      });
-  }
-  return formatted;
-};
-
-const mapStateToProps = ({applicants}) => {
-  console.log('original', applicants)
+const mapStateToProps = ({applicants, fetching}) => {
   const tableHeaders = ["Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Program", "Why OHS"];
   return {
+    fetching,
     tableHeaders,
     applicants: formatApplicants(applicants)
   };
