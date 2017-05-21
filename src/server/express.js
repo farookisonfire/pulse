@@ -8,7 +8,7 @@ module.exports = function createApp(db) {
 
   app.use(express.static(__dirname + '/../../build'));
   app.use(bodyParser.json());
-  app.use('/api', routes(db));
+  app.use('/api/applicants', routes(db));
 
   app.use((err, req, res, next) => {
     res.status(500).send("500 Internal server error");

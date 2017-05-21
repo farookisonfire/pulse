@@ -4,7 +4,7 @@ import NavDrawer from './nav-drawer';
 
 const NavBar = () => (
   <AppBar
-    title="2017 Enrolled"
+    title="Pulse"
     iconElementLeft = {<NavDrawer />}
   />
 );

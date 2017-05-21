@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './components/app';
-import Total from './components/Total';
+import Total from './components/total';
 import Youth from './components/youth';
 import Health from './components/health';
 import CoursesPage from './components/courses/CoursesPage';
