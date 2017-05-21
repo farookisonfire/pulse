@@ -3,6 +3,9 @@ import {mapAnswersToQuestions} from './typeform';
 import fetch from 'node-fetch';
 import {createSlackText} from './slack';
 
+const ObjectId = require('mongodb').ObjectID;
+
+
 module.exports = function routes(db) {
   const router = new Router();
   const myCollection = db.collection('pulse');
@@ -35,9 +38,21 @@ module.exports = function routes(db) {
        if (!response.ok) { throw Error(response.statusText); }
        console.log('ok')
      })
-     .catch(err => console.log(err));
+     .catch(err => console.log(err));  
+  });
 
-    
+  router.put('/:id/:status', (req,res) => {
+    const id = req.params.id;
+    const status = req.params.status
+    myCollection.update(
+      {_id: ObjectId(id)}, 
+      {$set:{status: status}}, 
+      (err, result) => {
+        if (err) { return console.log(err); }
+        console.log('update successful');
+        console.log('~~~~~~~status~~~~~~', result);
+        res.status(200).json(result);
+    });
   });
 
   return router;

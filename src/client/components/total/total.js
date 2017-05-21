@@ -1,41 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router';
-import {Card, CardTitle} from 'material-ui/Card';
-import ApplicantTable from './ApplicantTable';
-import {connect} from 'react-redux';
-import {fetchApplicants} from './applicantActions';
-import {formatApplicants} from './applicantHelpers';
-import RefreshBtn from './RefreshBtn';
-import Spinner from 'react-spinkit';
-import {spinner} from './applicantStyles';
+import {Tabs, Tab} from 'material-ui/Tabs';
+import {Card} from 'material-ui/Card';
+import Applied from '../applied';
+import Accepted from '../accepted';
+import Denied from '../denied';
 
-class Total extends React.Component {
-  constructor(props) {
-    super(props);
-    
-    this.props.fetchApplicants();
-  }
-  
+
+class Total extends React.Component{
   render() {
-    return(
+    return (
       <Card style={{height:"90vh"}}>
-        <CardTitle>Applicants</CardTitle>
-        <RefreshBtn onTouchTap={this.props.fetchApplicants}/>
-        {this.props.fetching 
-          ? <Spinner spinnerName="wave" noFadeIn style={spinner}/>
-          : <ApplicantTable tableHeaders={this.props.tableHeaders} applicants={this.props.applicants}/>}
+        <Tabs>
+          <Tab label="Applied">
+            <Applied />
+          </Tab>
+          <Tab label="Accepted">
+            <Accepted />
+          </Tab>
+          <Tab label="Denied">
+            <Denied />
+          </Tab>
+          <Tab label="Confirmed">
+            
+          </Tab>
+          <Tab label="Deferred">
+            
+          </Tab>
+        </Tabs>
       </Card>
     );
   }
 }
 
-const mapStateToProps = ({applicants, fetching}) => {
-  const tableHeaders = ["Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Program", "Why OHS"];
-  return {
-    fetching,
-    tableHeaders,
-    applicants: formatApplicants(applicants)
-  };
-};
-
-export default connect(mapStateToProps, {fetchApplicants})(Total);
+export default Total;

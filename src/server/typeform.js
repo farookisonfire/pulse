@@ -16,6 +16,7 @@ const LEGAL = "legal";
 
 export function mapAnswersToQuestions(questions, answers) {
   const map = {};
+  map.status = 'applied';
   questions.map(question => {
     answers.map(answer => {
       if(question.id === answer.field.id) {

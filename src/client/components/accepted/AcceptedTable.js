@@ -25,7 +25,7 @@ const styles = {
   }
 };
 
-const ApplicantTable = ({tableHeaders, applicants}) => {
+const AcceptedTable = ({tableHeaders, acceptedApplicants}) => {
   
   function makeTableHeader(header, idx) {
     return (
@@ -44,7 +44,6 @@ const ApplicantTable = ({tableHeaders, applicants}) => {
         <TableRowColumn style={styles.tableRowColumn} key={`${idx}-${applicant.university}`} >{applicant.university}</TableRowColumn>
         <TableRowColumn style={styles.tableRowColumn} key={`${idx}-${applicant.program}`} >{applicant.program}</TableRowColumn>
         <TableRowColumn style={styles.tableRowColumn} key={`${idx}-${applicant.why}`} >{applicant.why}</TableRowColumn>
-        
       </TableRow>
     );
   }
@@ -57,9 +56,9 @@ const ApplicantTable = ({tableHeaders, applicants}) => {
         </TableRow>
       </TableHeader>
       <TableBody showRowHover={true}>
-        {applicants.map(makeTableRow)}
+        {acceptedApplicants.map(makeTableRow)}
       </TableBody>
     </Table>);
 };
 
-export default ApplicantTable;
+export default AcceptedTable;

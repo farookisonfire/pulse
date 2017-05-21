@@ -1,4 +1,4 @@
-import * as applicantActionTypes from '../components/total/applicantActionTypes';
+import * as applicantActionTypes from '../components/applied/applicantActionTypes';
 
 export default function fetchingReducer(state=false, action) {
   switch(action.type) {
