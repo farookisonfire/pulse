@@ -1,5 +1,6 @@
 import * as types from './applicantActionTypes';
 import { addError } from '../global/errorActions';
+import getBaseUrl from '../../baseUrl';
 
 function requestApplicants() {
   return { type: types.REQUEST_APPLICANTS };
@@ -14,18 +15,19 @@ function receiveApplicantsFail(err) {
 }
 
 export function fetchApplicants() {
+  console.log('the node env',process.env.NODE_ENV)
   return function(dispatch) {
     dispatch(requestApplicants());
-    return fetch('/api/applicants')
+    return fetch(getBaseUrl() + '/api/applicants')
       .then(res => {
         if (res.ok) {
-          return res.json()
+          return res.json();
         }
         throw new Error(res.statusText);
       })
       .then(applicants => dispatch(receiveApplicants(applicants)))
       .catch(err => {
-        dispatch(receiveApplicantsFail(err));
+        dispatch(receiveApplicantsFail());
         dispatch(addError(err));
       });
   };
@@ -33,7 +35,7 @@ export function fetchApplicants() {
 
 export function updateApplicant(applicantId, status) {
   return function(dispatch) {
-    return fetch(`/api/applicants/${applicantId}/${status}`, {method: 'PUT'})
+    return fetch(getBaseUrl() + `/api/applicants/${applicantId}/${status}`, {method: 'PUT'})
       .then(res => {
         if (res.ok) {
           return dispatch(fetchApplicants());
