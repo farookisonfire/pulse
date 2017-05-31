@@ -5,7 +5,6 @@ import {createSlackText} from './slack';
 
 const ObjectId = require('mongodb').ObjectID;
 
-
 module.exports = function routes(db) {
   const router = new Router();
   const myCollection = db.collection('pulse');

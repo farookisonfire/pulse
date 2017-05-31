@@ -57,7 +57,7 @@ const AcceptedTable = ({tableHeaders, acceptedApplicants}) => {
       </TableHeader>
       <TableBody showRowHover={true}>
         {acceptedApplicants.map(makeTableRow)}
-      </TableBody>
+      </TableBody>  
     </Table>);
 };
 
