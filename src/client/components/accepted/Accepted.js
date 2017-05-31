@@ -3,7 +3,7 @@ import AcceptedTable from './AcceptedTable';
 import {formatApplicants} from '../applied/applicantHelpers';
 import {connect} from 'react-redux';
 
-class Accepted extends React.Component{
+export class Accepted extends React.Component{
   render() {
     return (
       <div>
