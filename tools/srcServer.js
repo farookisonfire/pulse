@@ -1,6 +1,7 @@
 import express from 'express';
 import webpack from 'webpack';
 import path from 'path';
+import bodyParser from 'body-parser';
 import config from '../webpack.config.dev';
 import routes from './router';
 
@@ -16,6 +17,9 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));
+
+app.use(bodyParser.json());
+
 app.use('/api/applicants', routes());
 
 app.get('*', function(req, res) {

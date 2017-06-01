@@ -52,6 +52,10 @@ module.exports = function routes(db) {
         console.log('~~~~~~~status~~~~~~', result);
         res.status(200).json(result);
     });
+
+
+
+
   });
 
   return router;
