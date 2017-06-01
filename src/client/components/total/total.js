@@ -5,7 +5,6 @@ import Applied from '../applied';
 import Accepted from '../accepted';
 import Denied from '../denied';
 
-
 class Total extends React.Component{
   render() {
     return (
