@@ -1,12 +1,12 @@
+/* eslint-disable no-console */
 import {Router} from 'express';
-import fetch from 'node-fetch';
 import {MongoClient} from 'mongodb';
 import {mapAnswersToQuestions} from './typeform';
-import {createSlackText} from './slack';
+import {updateSlack} from './slack';
+import {sendMail} from './mailer';
 
 const MONGODB_URI = 'mongodb://localhost:27017/ohs';
 const ObjectId = require('mongodb').ObjectID;
-
 
 module.exports = function routes() {
   const router = new Router();
@@ -28,27 +28,20 @@ module.exports = function routes() {
     const answers = req.body.form_response.answers;
     const formResponse = mapAnswersToQuestions(questions, answers);
 
-    MongoClient.connect(MONGODB_URI, (err, db) => {
-      const myCollection = db.collection('pulse');
-      myCollection.insert(formResponse, (err, inserted) => {
-        if (err) { return console.log(err); }
-        console.log('inserted', inserted);
+    console.log('this is the form resopnse', formResponse);
+
+    storeApplicant(formResponse)
+      .then(() => updateSlack(formResponse))
+      .then(() => {
+        console.log('ABOUT TO CALL SEND MAIL')
+        sendMail(formResponse);
+      })
+      .then(() => res.status(200).json(req.body))
+      
+      .catch(err => {
+        console.log(err);
+        res.sendStatus(500);
       });
-      db.close();
-    });
-
-    fetch('https://hooks.slack.com/services/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', { 
-      method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      body: createSlackText(formResponse)
-     })
-     .then(response => {
-       if (!response.ok) { throw Error(response.statusText); }
-       console.log('ok');
-     })
-     .catch(err => console.log(err));  
-
-     res.status(200).json(req.body);
   });
 
   router.put('/:id/:status', (req,res) => {
@@ -70,3 +63,27 @@ module.exports = function routes() {
 
   return router;
 };
+
+function storeApplicant(formResponse) {
+    console.log('in the new function')
+    return new Promise((resolve, reject) => {
+      MongoClient.connect(MONGODB_URI, (err, db) => {
+        if (!err) {
+          const myCollection = db.collection('pulse');
+          myCollection.insert(formResponse, (error, inserted) => {
+            db.close();
+            if (!err) { 
+              console.log('inserted', inserted);
+              resolve(inserted);
+            } else {
+              console.log(error);
+              reject();
+            }
+          });
+        } else {
+          console.log(err);
+          reject();
+        }
+      });
+    });
+  }
