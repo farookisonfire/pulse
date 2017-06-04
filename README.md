@@ -28,5 +28,7 @@ $ npm install
 
 * Start the project.
 ```bash
-$ npm run serve
+$ npm start
 ```
+
+* Once project has been built, and served, navigate to `localhost:3030` in your browser.
