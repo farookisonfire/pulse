@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
+    "test:cover": "jest --coverage",
     "lint": "esw webpack.config.* src tools --color",
     "lint:watch": "npm run lint -- --watch",
     "start": "npm-run-all --parallel open:src lint:watch test:watch",
