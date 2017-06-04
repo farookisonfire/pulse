@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import App from './components/app';
-import Total from './components/total';
-import Youth from './components/youth';
-import Health from './components/health';
-import CoursesPage from './components/courses/CoursesPage';
+import App from './features/app';
+import Total from './features/total';
+import Youth from './features/youth';
+import Health from './features/health';
+import CoursesPage from './features/courses/CoursesPage';
 
 export default (
   <Route path="/" component={App}>
