@@ -8,7 +8,6 @@
     "test:watch": "jest --watch",
     "lint": "esw webpack.config.* src tools --color",
     "lint:watch": "npm run lint -- --watch",
-    "watch:server": "nodemon --exec babel-node src/server/index.js",
     "start": "npm-run-all --parallel open:src lint:watch",
     "open:src": "babel-node tools/srcServer.js",
     "clean-dist": "rimraf ./dist && mkdir dist",

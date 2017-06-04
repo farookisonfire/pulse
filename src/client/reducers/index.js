@@ -1,11 +1,9 @@
 import {combineReducers} from 'redux';
-import courses from './courseReducer';
-import applicants from '../components/applied/applicantReducer';
+import applicants from '../features/applied/applicantReducer';
 import fetching from './fetchingReducer';
-import auth from '../components/auth/authReducer';
+import auth from '../features/auth/authReducer';
 
 const rootReducer = combineReducers({
-  courses,
   applicants,
   fetching,
   auth
