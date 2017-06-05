@@ -7,10 +7,10 @@ export function createMail(formResponse) {
   let email = new helper.Email("admissions@oneheartsource.org", "ONE HEART SOURCE");
   mail.setFrom(email);
   mail.setSubject(`New Applications Submission - ${formResponse['First Name']}`);
-  let personalization = new helper.Personalization()
+  let personalization = new helper.Personalization();
   email = new helper.Email("farook.khan@gmail.com", "Farook Khan");
   personalization.addTo(email);
-  mail.addPersonalization(personalization)
+  mail.addPersonalization(personalization);
   let content = new helper.Content("text/plain", createTextContent(formResponse));
   mail.addContent(content);
   content = new helper.Content("text/html", createHTMLContent(formResponse));
