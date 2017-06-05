@@ -6,6 +6,8 @@ export default function fetchingReducer(state=false, action) {
       return true;
     case applicantActionTypes.RECEIVE_APPLICANTS:
       return false;
+    case applicantActionTypes.RECEIVE_APPLICANTS_FAIL:
+      return false; 
     default:
       return state;
   }
