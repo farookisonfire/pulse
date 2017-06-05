@@ -10,7 +10,7 @@ function receiveApplicants(applicants) {
   return {type: types.RECEIVE_APPLICANTS, applicants};
 }
 
-function receiveApplicantsFail(err) {
+function receiveApplicantsFail() {
   return {type: types.RECEIVE_APPLICANTS_FAIL};
 }
 
@@ -41,6 +41,6 @@ export function updateApplicant(applicantId, status) {
         }
         throw new Error(res.statusText);
       })
-      .catch(err => console.log('in the action',err));
+      .catch(err => dispatch(addError(err)));
   };
 }
