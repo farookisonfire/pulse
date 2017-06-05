@@ -5,6 +5,8 @@ import bodyParser from 'body-parser';
 import config from '../webpack.config.dev';
 import routes from './router';
 
+require('dotenv').config();
+
 /* eslint-disable no-console */
 
 const port = 3030;
