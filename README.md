@@ -1,4 +1,16 @@
 # pulse
+A full stack react/node web application for non-profit or education administrators to manage admissions and enrollment related workflows.
+
+## Key Technologies
+* React + Redux
+* ES6 w/ Babel
+* Node.js + Express
+* MongoDB
+* Webpack
+* Auth0 (authentication)
+* Sendgrid (mailer)
+* Jest + Enzyme (testing)
+* Travis CI (continuous integration)
 
 ## Development
 * Install MongoDB.
