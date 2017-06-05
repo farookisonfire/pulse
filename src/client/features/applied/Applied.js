@@ -9,13 +9,16 @@ import CheckBtn from './CheckBtn';
 import DenyBtn from './DenyBtn';
 import Spinner from 'react-spinkit';
 import {spinner} from './applicantStyles';
+import ConfirmDecision from './ConfirmDecision';
 
 class Applied extends React.Component {
   constructor(props) {
     super(props);
     
     this.state = {
-      selectedRow: undefined
+      selectedRow: undefined,
+      modalStatus: false,
+      decision: ''
     };
 
     this.props.fetchApplicants();
@@ -23,27 +26,41 @@ class Applied extends React.Component {
     this.handleRowSelect = (rows) => {
       const row = rows[0];
       Number.isInteger(row) ? 
-        (this.setState({selectedRow:row, selectedId: this.props.applicants[row].id})) :
+        (this.setState({selectedRow:row, selectedId: this.props.applicants[row].id, selectedName: this.props.applicants[row].name})) :
         this.setState({selectedRow: undefined});
     };
+
+    this.handleModalOpen = (decision) => this.setState({modalStatus: true, decision: decision});
+    this.handleModalClose = () => this.setState({modalStatus: false});
+    this.handleModalConfirm = () => {
+      this.setState({modalStatus: false});
+      this.props.updateApplicant(this.state.selectedId, this.state.decision);
+    }
   }
   
   render() {
-
     return(
       <div>
         <RefreshBtn onTouchTap={this.props.fetchApplicants}/>      
         {Number.isInteger(this.state.selectedRow) && (
           <span>
-            <CheckBtn onTouchTap={() => this.props.updateApplicant(this.state.selectedId, 'accepted')} /> 
-            <DenyBtn onTouchTap={() => this.props.updateApplicant(this.state.selectedId, 'denied')}/>
+            <CheckBtn onTouchTap={() => this.handleModalOpen('accepted')} /> 
+            <DenyBtn onTouchTap={() => this.handleModalOpen('denied')}/>
           </span>)}
+        
         {this.props.fetching ? 
           <Spinner spinnerName="wave" noFadeIn style={spinner}/> : 
           <ApplicantTable 
               tableHeaders={this.props.tableHeaders} 
               applicants={this.props.applicants}
               handleRowSelect={this.handleRowSelect}/>}
+        
+        <ConfirmDecision 
+          handleModalClose={this.handleModalClose} 
+          handleModalConfirm={this.handleModalConfirm}
+          modalStatus={this.state.modalStatus}
+          decision={this.state.decision}
+          selectedName={this.state.selectedName}/>
       </div>
     );
   }
