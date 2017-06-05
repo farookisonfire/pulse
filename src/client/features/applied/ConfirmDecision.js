@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const ConfirmDecision = ({handleModalClose, handleModalConfirm, modalStatus, decision, selectedName}) => {
   let enrollmentDecision;
-  decision === 'accepted' ? enrollmentDecision = "ACCEPT" : enrollmentDecision = "DENY"
+  decision === 'accepted' ? enrollmentDecision = "ACCEPT" : enrollmentDecision = "DENY";
   
   const actions = [
       <FlatButton

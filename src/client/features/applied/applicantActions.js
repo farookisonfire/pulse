@@ -15,7 +15,6 @@ function receiveApplicantsFail(err) {
 }
 
 export function fetchApplicants() {
-  console.log('the node env',process.env.NODE_ENV)
   return function(dispatch) {
     dispatch(requestApplicants());
     return fetch(getBaseUrl() + '/api/applicants')

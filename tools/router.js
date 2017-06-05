@@ -58,7 +58,7 @@ module.exports = function routes() {
 };
 
 function storeApplicant(formResponse) {
-    console.log('in the new function')
+    console.log('in the new function');
     return new Promise((resolve, reject) => {
       MongoClient.connect(MONGODB_URI, (err, db) => {
         if (!err) {
@@ -80,3 +80,4 @@ function storeApplicant(formResponse) {
       });
     });
   }
+  
