@@ -5,6 +5,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import routes from './router';
 
+require('dotenv').config();
 
 /* eslint-disable no-console */
 
