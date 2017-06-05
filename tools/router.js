@@ -3,7 +3,7 @@ import {Router} from 'express';
 import {MongoClient} from 'mongodb';
 import {mapAnswersToQuestions} from './typeform';
 import {updateSlack} from './slack';
-import {sendMail} from './mailer';
+import {sendMail, createMail} from './mailer';
 
 const MONGODB_URI = 'mongodb://localhost:27017/ohs';
 const ObjectId = require('mongodb').ObjectID;
@@ -11,7 +11,6 @@ const ObjectId = require('mongodb').ObjectID;
 module.exports = function routes() {
   const router = new Router();
   
-
   router.get('/', (req,res) => {
     MongoClient.connect(MONGODB_URI, (err, db) => {
       const myCollection = db.collection('pulse');
@@ -28,16 +27,10 @@ module.exports = function routes() {
     const answers = req.body.form_response.answers;
     const formResponse = mapAnswersToQuestions(questions, answers);
 
-    console.log('this is the form resopnse', formResponse);
-
     storeApplicant(formResponse)
       .then(() => updateSlack(formResponse))
-      .then(() => {
-        console.log('ABOUT TO CALL SEND MAIL')
-        sendMail(formResponse);
-      })
+      .then(() => sendMail(createMail(formResponse)))
       .then(() => res.status(200).json(req.body))
-      
       .catch(err => {
         console.log(err);
         res.sendStatus(500);
