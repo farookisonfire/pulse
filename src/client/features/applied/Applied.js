@@ -10,6 +10,7 @@ import DenyBtn from './DenyBtn';
 import Spinner from 'react-spinkit';
 import {spinner} from './applicantStyles';
 import ConfirmDecision from './ConfirmDecision';
+import ConfirmSnackbar from './ConfirmSnackbar';
 
 class Applied extends React.Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class Applied extends React.Component {
     this.state = {
       selectedRow: undefined,
       modalStatus: false,
-      decision: ''
+      decision: '',
+      snackbarStatus: false
     };
 
     this.props.fetchApplicants();
@@ -35,7 +37,10 @@ class Applied extends React.Component {
     this.handleModalConfirm = () => {
       this.setState({modalStatus: false});
       this.props.updateApplicant(this.state.selectedId, this.state.decision);
-    }
+      this.handleSnackbarOpen();
+    };
+    this.handleSnackbarOpen = () => this.setState({snackbarStatus:true});
+    this.handleSnackbarClose = () => this.setState({snackbarStatus: false});
   }
   
   render() {
@@ -61,6 +66,11 @@ class Applied extends React.Component {
           modalStatus={this.state.modalStatus}
           decision={this.state.decision}
           selectedName={this.state.selectedName}/>
+        <ConfirmSnackbar
+          snackbarStatus={this.state.snackbarStatus}
+          handleSnackbarClose={this.handleSnackbarClose}
+          decision={this.state.decision}
+          selectedName={this.state.selectedName} />
       </div>
     );
   }
