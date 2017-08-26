@@ -13,12 +13,13 @@ module.exports = function routes() {
   
   router.get('/', (req,res) => {
     MongoClient.connect(MONGODB_URI, (err, db) => {
-      const myCollection = db.collection('pulse');
-      myCollection.find().toArray((err,docs) => {
-        if(err) return res.sendStatus(500);
+      if(err) return res.status(500).send('unable to connect to db.');
+      const myCollection = db.collection('applied');
+      myCollection.find().toArray((error, docs) => {
+        if(error) return res.status(500).send(error);
         res.json(docs);
+        db.close();
       });
-      db.close();
     });
   });
 
@@ -29,7 +30,7 @@ module.exports = function routes() {
 
     storeApplicant(formResponse)
       .then(() => updateSlack(formResponse))
-      .then(() => sendMail(createMail(formResponse)))
+      // .then(() => sendMail(createMail(formResponse)))
       .then(() => res.status(200).json(req.body))
       .catch(err => {
         console.log(err);
@@ -37,20 +38,31 @@ module.exports = function routes() {
       });
   });
 
-  router.put('/:id/:status', (req,res) => {
-    const id = req.params.id;
-    const status = req.params.status;
+  router.put('/:id/:status/:program', (req,res) => {
+    const applicant = req.params || {};
+    const id = applicant.id;
+    const status = applicant.status;
+    
+    // TODO: improve this undefined check
+    const program = applicant.program === "undefined" || applicant.program === undefined ? 
+      undefined :
+      applicant.program;
+    
+    const updatePayload = program ? 
+      {status: status, secondary: program} :
+      {status:status};
+
     MongoClient.connect(MONGODB_URI, (err, db) => {
-      const myCollection = db.collection('pulse');
+      const myCollection = db.collection('applied');
       myCollection.update(
         {_id: ObjectId(id)}, 
-        {$set:{status: status}}, 
+        {$set: updatePayload}, 
         (err, result) => {
           if (err) { return console.log(err); }
           console.log('update successful', result);
           res.status(200).json(result);
+          db.close();
       });
-      db.close();
     });
   });
 
@@ -62,10 +74,10 @@ function storeApplicant(formResponse) {
     return new Promise((resolve, reject) => {
       MongoClient.connect(MONGODB_URI, (err, db) => {
         if (!err) {
-          const myCollection = db.collection('pulse');
+          const myCollection = db.collection('applied');
           myCollection.insert(formResponse, (error, inserted) => {
             db.close();
-            if (!err) { 
+            if (!error) { 
               console.log('inserted', inserted);
               resolve(inserted);
             } else {

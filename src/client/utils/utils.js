@@ -2,6 +2,7 @@ export const formatApplicants = (applicants, filter) => {
   const formatted = [];
   if (applicants.length) {
     applicants.map(applicant => {
+      console.log('the appplicant filter', applicant.status)
       if (applicant.status === filter) {
         const format = {};
         format.status = applicant.status;

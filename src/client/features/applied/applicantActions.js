@@ -32,9 +32,9 @@ export function fetchApplicants() {
   };
 }
 
-export function updateApplicant(applicantId, status) {
+export function updateApplicant(applicantId, status, program) {
   return function(dispatch) {
-    return fetch(getBaseUrl() + `/api/applicants/${applicantId}/${status}`, {method: 'PUT'})
+    return fetch(getBaseUrl() + `/api/applicants/${applicantId}/${status}/${program}`, {method: 'PUT'})
       .then(res => {
         if (res.ok) {
           return dispatch(fetchApplicants());

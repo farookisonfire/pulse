@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import ApplicantTable from './ApplicantTable';
 import {connect} from 'react-redux';
 import {fetchApplicants, updateApplicant} from './applicantActions';
-import {formatApplicants} from './applicantHelpers';
+import { formatApplicants } from '../../utils/utils';
 import RefreshBtn from './RefreshBtn';
 import CheckBtn from './CheckBtn';
 import DenyBtn from './DenyBtn';
@@ -20,23 +20,29 @@ class Applied extends React.Component {
       selectedRow: undefined,
       modalStatus: false,
       decision: '',
-      snackbarStatus: false
+      snackbarStatus: false,
+      selectedId: '',
+      selectedName: '',
     };
 
     this.props.fetchApplicants();
 
     this.handleRowSelect = (rows) => {
+      // TODO: refactor in order to do sorting. 
       const row = rows[0];
       Number.isInteger(row) ? 
         (this.setState({selectedRow:row, selectedId: this.props.applicants[row].id, selectedName: this.props.applicants[row].name})) :
         this.setState({selectedRow: undefined});
     };
 
-    this.handleModalOpen = (decision) => this.setState({modalStatus: true, decision: decision});
+    this.handleModalOpen = (decision) => this.setState({modalStatus: true, decision});
     this.handleModalClose = () => this.setState({modalStatus: false});
-    this.handleModalConfirm = () => {
+    this.handleModalConfirm = (program) => {
       this.setState({modalStatus: false});
-      this.props.updateApplicant(this.state.selectedId, this.state.decision);
+      const status = this.state.decision ?
+        'secondary' :
+        'denied';
+      this.props.updateApplicant(this.state.selectedId, status, program);
       this.handleSnackbarOpen();
     };
     this.handleSnackbarOpen = () => this.setState({snackbarStatus:true});
@@ -49,8 +55,8 @@ class Applied extends React.Component {
         <RefreshBtn onTouchTap={this.props.fetchApplicants}/>      
         {Number.isInteger(this.state.selectedRow) && (
           <span>
-            <CheckBtn onTouchTap={() => this.handleModalOpen('accepted')} /> 
-            <DenyBtn onTouchTap={() => this.handleModalOpen('denied')}/>
+            <CheckBtn onTouchTap={() => this.handleModalOpen('secondary')} /> 
+            <DenyBtn onTouchTap={() => this.handleModalOpen()}/>
           </span>)}
         
         {this.props.fetching ? 

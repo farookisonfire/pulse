@@ -2,8 +2,10 @@ import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import {Card} from 'material-ui/Card';
 import Applied from '../applied';
-import Accepted from '../accepted';
+import AcceptedPage from '../accepted';
 import Denied from '../denied';
+import TableContainer from '../shared/TableContainer';
+import SecondaryPage from '../secondary/SecondaryPage';
 
 class Total extends React.Component{
   render() {
@@ -13,17 +15,17 @@ class Total extends React.Component{
           <Tab label="Applied">
             <Applied />
           </Tab>
+          <Tab label="Secondary">
+            <SecondaryPage />
+          </Tab>
           <Tab label="Accepted">
-            <Accepted />
+            <AcceptedPage />
           </Tab>
           <Tab label="Denied">
             <Denied />
           </Tab>
-          <Tab label="Confirmed">
-            
-          </Tab>
           <Tab label="Deferred">
-            
+            <TableContainer />
           </Tab>
         </Tabs>
       </Card>

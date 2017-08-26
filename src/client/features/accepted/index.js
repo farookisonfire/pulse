@@ -1,2 +1,2 @@
-import Accepted from './Accepted';
-export default Accepted;
+import AcceptedPage from './AcceptedPage';
+export default AcceptedPage;

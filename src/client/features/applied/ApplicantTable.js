@@ -25,7 +25,12 @@ const styles = {
   }
 };
 
-const ApplicantTable = ({tableHeaders, applicants, handleRowSelect}) => {
+const ApplicantTable = (props) => {
+  const {
+    tableHeaders = [],
+    applicants = [],
+    handleRowSelect = () => {},
+  } = props;
   
   function makeTableHeader(header, idx) {
     return (

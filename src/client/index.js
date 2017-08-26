@@ -6,11 +6,12 @@ import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import configureStore from './store/configureStore';
+import initialState from './reducers/initialState';
 import './index.css';
 
 injectTapEventPlugin();
 
-window.store = configureStore();
+window.store = configureStore(initialState);
 
 render (
   <Provider store={window.store}>
