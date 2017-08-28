@@ -32,9 +32,16 @@ export function fetchApplicants() {
   };
 }
 
-export function updateApplicant(applicantId, status, program) {
+export function updateApplicant(applicantDetails, status, program) {
+  const {
+    applicantId,
+    applicantFirstName,
+    applicantLastName,
+    applicantEmail,
+  } = applicantDetails;
+  
   return function(dispatch) {
-    return fetch(getBaseUrl() + `/api/applicants/${applicantId}/${status}/${program}`, {method: 'PUT'})
+    return fetch(getBaseUrl() + `/api/applicants/${applicantId}/${applicantFirstName}/${applicantLastName}/${applicantEmail}/${status}/${program}`, {method: 'PUT'})
       .then(res => {
         if (res.ok) {
           return dispatch(fetchApplicants());

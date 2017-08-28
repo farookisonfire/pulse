@@ -84,7 +84,6 @@ class TablePage extends React.Component {
 
     return(
       <div>
-        <h1>Generic Table Page Component</h1>
         { childrenWithProps }
       </div>
     );

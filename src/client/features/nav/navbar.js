@@ -39,7 +39,7 @@ class NavBar extends React.Component {
 
     return (
       <AppBar
-        title="Pulse"
+        title="Admissions Prototype | V.0.2"
         iconElementLeft = {<NavDrawer />}
         iconElementRight={authButton}
       />

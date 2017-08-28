@@ -5,6 +5,10 @@ import {mapAnswersToQuestions} from './typeform';
 import {updateSlack} from './slack';
 import {sendMail, createMail} from './mailer';
 
+var Mailchimp = require('mailchimp-api-v3');
+var mailchimp = new Mailchimp('a06d10ae8a5fc56027fedde2d2d5f19a-us14'); 
+const listId = 'b5972e3719';
+
 const MONGODB_URI = 'mongodb://localhost:27017/ohs';
 const ObjectId = require('mongodb').ObjectID;
 
@@ -38,30 +42,47 @@ module.exports = function routes() {
       });
   });
 
-  router.put('/:id/:status/:program', (req,res) => {
+  router.put('/:id/:firstName/:lastName/:email/:status/:program', (req,res) => {
     const applicant = req.params || {};
     const id = applicant.id;
     const status = applicant.status;
+    const firstName = applicant.firstName;
+    const lastName = applicant.lastName;
+    const email = applicant.email;
     
     // TODO: improve this undefined check
     const program = applicant.program === "undefined" || applicant.program === undefined ? 
       undefined :
       applicant.program;
     
-    const updatePayload = program ? 
+    const dbPayload = program ? 
       {status: status, secondary: program} :
       {status:status};
+
+    console.log('-----------------------')
+    console.log('mailchimp about to be called')
+    console.log('-----------------------')
+
+    const mailClientPayload = {
+          "email_address": email, 
+          "status":"subscribed",
+          "merge_fields": {
+            "FNAME": firstName,
+            "LNAME": lastName,
+          }
+        };
 
     MongoClient.connect(MONGODB_URI, (err, db) => {
       const myCollection = db.collection('applied');
       myCollection.update(
         {_id: ObjectId(id)}, 
-        {$set: updatePayload}, 
+        {$set: dbPayload},
         (err, result) => {
-          if (err) { return console.log(err); }
-          console.log('update successful', result);
-          res.status(200).json(result);
+          if (err) { 
+            return res.status(500).send('Unable to update user');
+          }
           db.close();
+          addToMailList(res, mailClientPayload, listId);
       });
     });
   });
@@ -92,4 +113,18 @@ function storeApplicant(formResponse) {
       });
     });
   }
+
+  function addToMailList(res, mailPayload, listId) {
+      mailchimp.post({
+        path: `lists/${listId}/members`,
+        body: mailPayload,
+      }, function(err, result){
+        if (err) {
+          console.log(err);
+          return res.status(500).send('unable to add new list member.');
+        } 
+        console.log(result);
+        res.status(200).send('User added to list successfully.');
+      });
+    }
   

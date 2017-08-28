@@ -23,6 +23,7 @@ class Applied extends React.Component {
       snackbarStatus: false,
       selectedId: '',
       selectedName: '',
+      selectedEmail: '',
     };
 
     this.props.fetchApplicants();
@@ -31,7 +32,12 @@ class Applied extends React.Component {
       // TODO: refactor in order to do sorting. 
       const row = rows[0];
       Number.isInteger(row) ? 
-        (this.setState({selectedRow:row, selectedId: this.props.applicants[row].id, selectedName: this.props.applicants[row].name})) :
+        (this.setState({
+          selectedRow:row, 
+          selectedId: this.props.applicants[row].id, 
+          selectedName: this.props.applicants[row].name,
+          selectedEmail: this.props.applicants[row].email,
+        })) :
         this.setState({selectedRow: undefined});
     };
 
@@ -42,7 +48,18 @@ class Applied extends React.Component {
       const status = this.state.decision ?
         'secondary' :
         'denied';
-      this.props.updateApplicant(this.state.selectedId, status, program);
+
+      const applicantName = this.state.selectedName.split(' ');
+        const firstName = applicantName[0];
+        const lastName = applicantName[applicantName.length - 1];
+
+      const applicantDetails = {
+        applicantId: this.state.selectedId,
+        applicantFirstName: firstName,
+        applicantLastName: lastName,
+        applicantEmail: this.state.selectedEmail,
+      };
+      this.props.updateApplicant(applicantDetails, status, program);
       this.handleSnackbarOpen();
     };
     this.handleSnackbarOpen = () => this.setState({snackbarStatus:true});

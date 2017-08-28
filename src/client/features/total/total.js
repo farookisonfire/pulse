@@ -21,11 +21,7 @@ class Total extends React.Component{
           <Tab label="Accepted">
             <AcceptedPage />
           </Tab>
-          <Tab label="Denied">
-            <Denied />
-          </Tab>
-          <Tab label="Deferred">
-            <TableContainer />
+          <Tab label="Confirmed">
           </Tab>
         </Tabs>
       </Card>
