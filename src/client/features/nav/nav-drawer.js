@@ -17,9 +17,14 @@ class NavDrawer extends React.Component {
   render() {
     return(
       <div>
-        <IconButton onTouchTap={this.handleToggle} >
-          <MoreVertIcon color="white"/>
-        </IconButton>
+        <span style={{position: 'relative', top: -5}}>
+          <IconButton onTouchTap={this.handleToggle} >
+            <MoreVertIcon color="white"/>
+          </IconButton>
+        </span>
+        <img 
+            style={{width: 40, marginRight: 12}}
+            src="https://s3.amazonaws.com/minimal-spaces/heart-400.png"/>
         <Drawer
           docked={false}
           open={this.state.open}

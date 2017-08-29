@@ -6,3 +6,7 @@ body {
   font-size: 100%;
   background-color: rgb(60,60,60);
 }
+
+.auth0-lock-badge-bottom {
+  display: none;
+}
