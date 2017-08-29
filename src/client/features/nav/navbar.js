@@ -32,15 +32,17 @@ class NavBar extends React.Component {
     this.setState({ loggedIn: this.auth.loggedIn() });
     this.props.loginStatus(this.auth.loggedIn());
   }
-
   
   render() {
-    const authButton = this.state.loggedIn ? <FlatButton onTouchTap={this.logout.bind(this)} label="LOGOUT"/> : <FlatButton onClick={this.login.bind(this)} label="LOGIN" />;
+    const authButton = this.state.loggedIn ? 
+    <FlatButton onTouchTap={this.logout.bind(this)} label="LOGOUT"/> : 
+    <FlatButton onClick={this.login.bind(this)} label="LOGIN" />;
 
     return (
       <AppBar
-        title="Admissions Prototype | V.0.2"
-        iconElementLeft = {<NavDrawer />}
+        title="Admissions 2017/18"
+        titleStyle={{fontWeight: 200}}
+        iconElementLeft={<NavDrawer/>}
         iconElementRight={authButton}
       />
     );
