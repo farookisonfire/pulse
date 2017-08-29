@@ -75,9 +75,6 @@ module.exports = function routes() {
   return router;
 };
 
-
-
-
 function storeApplicant(formResponse) {
     return new Promise((resolve, reject) => {
       MongoClient.connect(MONGODB_URI, (err, db) => {
@@ -162,7 +159,7 @@ function storeApplicant(formResponse) {
 
   function resolveMailClientPayload(email, firstName, lastName) {
     const payload = {
-      "email_address": email, 
+      "email_address": email,
       "status": "subscribed",
       "merge_fields": {
         "FNAME": firstName,
