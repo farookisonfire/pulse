@@ -43,27 +43,37 @@ class Applied extends React.Component {
 
     this.handleModalOpen = (decision) => this.setState({modalStatus: true, decision});
     this.handleModalClose = () => this.setState({modalStatus: false});
-    this.handleModalConfirm = (program) => {
-      this.setState({modalStatus: false});
-      const status = this.state.decision ?
-        'secondary' :
-        'denied';
+    this.handleSnackbarOpen = () => this.setState({snackbarStatus:true});
+    this.handleSnackbarClose = () => this.setState({snackbarStatus: false});
 
-      const applicantName = this.state.selectedName.split(' ');
+    this.handleModalConfirm = (programForSecondary) => {
+      this.setState({modalStatus: false});
+
+      const {
+        selectedId = '',
+        selectedEmail = '',
+        selectedName = '',
+        decision = '',
+      } = this.state;
+
+      const status = decision ? 'secondary' : 'denied';
+      const program = programForSecondary ? programForSecondary : '';
+      const applicantName = selectedName.split(' ');
         const firstName = applicantName[0];
         const lastName = applicantName[applicantName.length - 1];
 
       const applicantDetails = {
-        applicantId: this.state.selectedId,
-        applicantFirstName: firstName,
-        applicantLastName: lastName,
-        applicantEmail: this.state.selectedEmail,
+        id: selectedId,
+        email: selectedEmail,
+        firstName: firstName,
+        lastName: lastName,
+        status: status,
+        program: program,
       };
-      this.props.updateApplicant(applicantDetails, status, program);
+
+      this.props.updateApplicant(applicantDetails);
       this.handleSnackbarOpen();
     };
-    this.handleSnackbarOpen = () => this.setState({snackbarStatus:true});
-    this.handleSnackbarClose = () => this.setState({snackbarStatus: false});
   }
   
   render() {

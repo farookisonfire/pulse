@@ -7,9 +7,17 @@ import {sendMail, createMail} from './mailer';
 
 var Mailchimp = require('mailchimp-api-v3');
 var mailchimp = new Mailchimp('a06d10ae8a5fc56027fedde2d2d5f19a-us14'); 
-const listId = 'b5972e3719';
+
+const lists = {
+  test: 'b5972e3719',
+  denied: '0',
+  secondaryHealth: 1,
+  secondaryEducation: 2,
+  secondaryImpact: 3
+};
 
 const MONGODB_URI = 'mongodb://localhost:27017/ohs';
+const COLLECTION = 'applied'
 const ObjectId = require('mongodb').ObjectID;
 
 module.exports = function routes() {
@@ -18,7 +26,7 @@ module.exports = function routes() {
   router.get('/', (req,res) => {
     MongoClient.connect(MONGODB_URI, (err, db) => {
       if(err) return res.status(500).send('unable to connect to db.');
-      const myCollection = db.collection('applied');
+      const myCollection = db.collection(COLLECTION);
       myCollection.find().toArray((error, docs) => {
         if(error) return res.status(500).send(error);
         res.json(docs);
@@ -42,60 +50,39 @@ module.exports = function routes() {
       });
   });
 
-  router.put('/:id/:firstName/:lastName/:email/:status/:program', (req,res) => {
-    const applicant = req.params || {};
-    const id = applicant.id;
-    const status = applicant.status;
-    const firstName = applicant.firstName;
-    const lastName = applicant.lastName;
-    const email = applicant.email;
-    
-    // TODO: improve this undefined check
-    const program = applicant.program === "undefined" || applicant.program === undefined ? 
-      undefined :
-      applicant.program;
+  router.put('/:id', (req,res) => {
+    const {
+      id = '',
+      email = '',
+      firstName = '',
+      lastName = '',
+      status = '',
+      program = '',
+    } = req.body;
     
     const dbPayload = program ? 
       {status: status, secondary: program} :
-      {status:status};
+      {status: status};
 
-    console.log('-----------------------')
-    console.log('mailchimp about to be called')
-    console.log('-----------------------')
+    const mailClientPayload = resolveMailClientPayload(email, firstName, lastName);
+    const listId = resolveListId(status, program);
 
-    const mailClientPayload = {
-          "email_address": email, 
-          "status":"subscribed",
-          "merge_fields": {
-            "FNAME": firstName,
-            "LNAME": lastName,
-          }
-        };
-
-    MongoClient.connect(MONGODB_URI, (err, db) => {
-      const myCollection = db.collection('applied');
-      myCollection.update(
-        {_id: ObjectId(id)}, 
-        {$set: dbPayload},
-        (err, result) => {
-          if (err) { 
-            return res.status(500).send('Unable to update user');
-          }
-          db.close();
-          addToMailList(res, mailClientPayload, listId);
-      });
-    });
+    updateApplicant(res, id, dbPayload)
+      .then(result => addToMailList(res, mailClientPayload, listId))
+      .catch((err) => console.log('caught after UpdateApp and addToMail', err));    
   });
 
   return router;
 };
 
+
+
+
 function storeApplicant(formResponse) {
-    console.log('in the new function');
     return new Promise((resolve, reject) => {
       MongoClient.connect(MONGODB_URI, (err, db) => {
         if (!err) {
-          const myCollection = db.collection('applied');
+          const myCollection = db.collection(COLLECTION);
           myCollection.insert(formResponse, (error, inserted) => {
             db.close();
             if (!error) { 
@@ -114,17 +101,74 @@ function storeApplicant(formResponse) {
     });
   }
 
-  function addToMailList(res, mailPayload, listId) {
-      mailchimp.post({
-        path: `lists/${listId}/members`,
-        body: mailPayload,
-      }, function(err, result){
-        if (err) {
-          console.log(err);
-          return res.status(500).send('unable to add new list member.');
-        } 
-        console.log(result);
-        res.status(200).send('User added to list successfully.');
+  function updateApplicant(res, id, dbPayload ) {
+  return new Promise((resolve, reject) => {
+    MongoClient.connect(MONGODB_URI, (err, db) => {
+      if (err) {
+        return res.status(500).send('unable to connect to DB');
+      }
+      const myCollection = db.collection(COLLECTION);
+      myCollection.update(
+        {_id: ObjectId(id)},
+        {$set: dbPayload},
+        (err, result) => {
+          if (err) {
+            db.close();
+            reject();
+          }
+          db.close();
+          resolve(result);
       });
+    });
+  });
+}
+
+  function addToMailList(res, mailPayload, listId) {
+    mailchimp.post({
+      path: `lists/${listId}/members`,
+      body: mailPayload,
+    }, function(err, result){
+      if (err) {
+        console.log(err);
+        return res.status(500).send('unable to add new list member.');
+      }
+      console.log('MAILCHIMP RESULT:', result);
+      res.status(200).send('User added to list successfully.');
+    });
+  }
+
+  function resolveListId(status, program) {
+    if (status === 'denied') {
+      return lists.denied;
     }
-  
+
+    if (status === 'secondary' && program) {
+      switch(program) {
+        case 'Health':
+          // return lists.secondaryHealth;
+          return lists.test;
+        case 'Education':
+          // return lists.secondaryEducation;
+          return lists.test;
+        case 'Impact':
+          // return lists.secondaryImpact;
+          return lists.test;
+        default:
+          return;
+      }
+    }
+    return;
+  }
+
+  function resolveMailClientPayload(email, firstName, lastName) {
+    const payload = {
+      "email_address": email, 
+      "status": "subscribed",
+      "merge_fields": {
+        "FNAME": firstName,
+        "LNAME": lastName,
+      }
+    };
+
+    return payload;
+  }
