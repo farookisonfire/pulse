@@ -7,7 +7,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { muiTheme } from './theme';
+import { muiThemeLight } from './theme';
 import configureStore from './store/configureStore';
 import initialState from './reducers/initialState';
 import './index.css';
@@ -18,7 +18,7 @@ window.store = configureStore(initialState);
 
 render (
   <Provider store={window.store}>
-    <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
+    <MuiThemeProvider muiTheme={getMuiTheme(muiThemeLight)}>
       <Router history={browserHistory} routes={routes}/>
     </MuiThemeProvider>
   </Provider>
