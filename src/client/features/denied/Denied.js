@@ -1,6 +1,6 @@
 import React from 'react';
 import DeniedTable from './DeniedTable';
-import {formatApplicants} from '../applied/applicantHelpers';
+import {formatApplicants} from '../../utils/utils';
 import {connect} from 'react-redux';
 
 class Denied extends React.Component{
