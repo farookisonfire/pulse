@@ -14,8 +14,6 @@ class SecondaryPage extends Component {
   }
   
   render() {
-    console.log('PORPS IN SECONDARY', this.props)
-
     const {
       secondaryPages = [],
     } = this.props;

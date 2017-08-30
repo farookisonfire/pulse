@@ -56,11 +56,11 @@ class TablePage extends React.Component {
   }
 
   render() {
-    console.log(this.state);
-
     const {
       applicants,
       tableHeaders,
+      fetchApplicants,
+      updateApplicant,
     } = this.props;
 
     const childrenWithProps = React.Children.map(this.props.children, child => {
@@ -79,6 +79,8 @@ class TablePage extends React.Component {
         selectedId: this.state.selectedId,
         applicants,
         tableHeaders,
+        fetchApplicants,
+        updateApplicant,
       });
     });
 
