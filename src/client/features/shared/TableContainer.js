@@ -15,6 +15,7 @@ import ConfirmSnackbar from '../applied/ConfirmSnackbar';
 const TableContainer = (props) => {
   const {
     fetchApplicants,
+    updateApplicant,
     selectedRow,
     selectedName,
     decision,
@@ -29,8 +30,6 @@ const TableContainer = (props) => {
     handleSnackbarClose,
     fetching,
   } = props;
-
-  console.log('props passed to TableContainer', props);
 
   return(
     <div>

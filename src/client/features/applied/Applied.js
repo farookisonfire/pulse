@@ -1,116 +1,39 @@
-import React from 'react';
-import { Link } from 'react-router';
-import ApplicantTable from './ApplicantTable';
-import {connect} from 'react-redux';
-import {fetchApplicants, updateApplicant} from './applicantActions';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Shared from '../shared';
 import { formatApplicants } from '../../utils/utils';
-import RefreshBtn from './RefreshBtn';
-import CheckBtn from './CheckBtn';
-import DenyBtn from './DenyBtn';
-import Spinner from 'react-spinkit';
-import {spinner} from './applicantStyles';
-import ConfirmDecision from './ConfirmDecision';
-import ConfirmSnackbar from './ConfirmSnackbar';
+import {fetchApplicants, updateApplicant} from './applicantActions';
 
-class Applied extends React.Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      selectedRow: undefined,
-      modalStatus: false,
-      decision: '',
-      snackbarStatus: false,
-      selectedId: '',
-      selectedName: '',
-      selectedEmail: '',
-    };
-
-    this.props.fetchApplicants();
-
-    this.handleRowSelect = (rows) => {
-      // TODO: refactor in order to do sorting. 
-      const row = rows[0];
-      Number.isInteger(row) ? 
-        (this.setState({
-          selectedRow:row, 
-          selectedId: this.props.applicants[row].id, 
-          selectedName: this.props.applicants[row].name,
-          selectedEmail: this.props.applicants[row].email,
-        })) :
-        this.setState({selectedRow: undefined});
-    };
-
-    this.handleModalOpen = (decision) => this.setState({modalStatus: true, decision});
-    this.handleModalClose = () => this.setState({modalStatus: false});
-    this.handleSnackbarOpen = () => this.setState({snackbarStatus:true});
-    this.handleSnackbarClose = () => this.setState({snackbarStatus: false});
-
-    this.handleModalConfirm = (programForSecondary) => {
-      this.setState({modalStatus: false});
-
-      const {
-        selectedId = '',
-        selectedEmail = '',
-        selectedName = '',
-        decision = '',
-      } = this.state;
-
-      const status = decision ? 'secondary' : 'denied';
-      const program = programForSecondary ? programForSecondary : '';
-      const applicantName = selectedName.split(' ');
-        const firstName = applicantName[0];
-        const lastName = applicantName[applicantName.length - 1];
-
-      const applicantDetails = {
-        id: selectedId,
-        email: selectedEmail,
-        firstName: firstName,
-        lastName: lastName,
-        status: status,
-        program: program,
-      };
-
-      this.props.updateApplicant(applicantDetails);
-      this.handleSnackbarOpen();
-    };
-  }
-  
+class Applied extends Component {
   render() {
+    const {
+      tableHeaders = [],
+      fetchApplicants,
+      updateApplicant,
+    } = this.props;
+
     return(
-      <div>
-        <RefreshBtn onTouchTap={this.props.fetchApplicants}/>      
-        {Number.isInteger(this.state.selectedRow) && (
-          <span>
-            <CheckBtn onTouchTap={() => this.handleModalOpen('secondary')} /> 
-            <DenyBtn onTouchTap={() => this.handleModalOpen()}/>
-          </span>)}
-        
-        {this.props.fetching ? 
-          <Spinner spinnerName="wave" noFadeIn style={spinner}/> : 
-          <ApplicantTable 
-              tableHeaders={this.props.tableHeaders} 
-              applicants={this.props.applicants}
-              handleRowSelect={this.handleRowSelect}/>}
-        
-        <ConfirmDecision 
-          handleModalClose={this.handleModalClose} 
-          handleModalConfirm={this.handleModalConfirm}
-          modalStatus={this.state.modalStatus}
-          decision={this.state.decision}
-          selectedName={this.state.selectedName}/>
-        <ConfirmSnackbar
-          snackbarStatus={this.state.snackbarStatus}
-          handleSnackbarClose={this.handleSnackbarClose}
-          decision={this.state.decision}
-          selectedName={this.state.selectedName} />
-      </div>
+      <Shared.TablePage
+        applicants={this.props.applicants}
+        tableHeaders={tableHeaders}
+        fetchApplicants={fetchApplicants}
+        updateApplicant={updateApplicant}
+        >
+        <Shared.TableContainer/>
+      </Shared.TablePage>
     );
   }
 }
 
-const mapStateToProps = ({applicants, fetching}) => {
-  const tableHeaders = ["Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Program", "Why OHS"];
+const mapStateToProps = ({applicants, pageProfiles, fetching}) => {  
+  const {
+    applied
+  } = pageProfiles;
+
+  const {
+    tableHeaders,
+  } = applied;
+
   return {
     fetching,
     tableHeaders,
