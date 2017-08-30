@@ -8,6 +8,7 @@ class Applied extends Component {
   render() {
     const {
       tableHeaders = [],
+      tableHeadersMap = [],
       fetchApplicants,
       updateApplicant,
     } = this.props;
@@ -16,6 +17,7 @@ class Applied extends Component {
       <Shared.TablePage
         applicants={this.props.applicants}
         tableHeaders={tableHeaders}
+        tableHeadersMap={tableHeadersMap}
         fetchApplicants={fetchApplicants}
         updateApplicant={updateApplicant}
         >
@@ -32,11 +34,13 @@ const mapStateToProps = ({applicants, pageProfiles, fetching}) => {
 
   const {
     tableHeaders,
+    tableHeadersMap,
   } = applied;
 
   return {
     fetching,
     tableHeaders,
+    tableHeadersMap,
     applicants: formatApplicants(applicants, 'applied')
   };
 };

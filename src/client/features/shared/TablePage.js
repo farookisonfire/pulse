@@ -59,6 +59,7 @@ class TablePage extends React.Component {
     const {
       applicants,
       tableHeaders,
+      tableHeadersMap,
       fetchApplicants,
       updateApplicant,
     } = this.props;
@@ -79,6 +80,7 @@ class TablePage extends React.Component {
         selectedId: this.state.selectedId,
         applicants,
         tableHeaders,
+        tableHeadersMap,
         fetchApplicants,
         updateApplicant,
       });

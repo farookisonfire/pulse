@@ -25,6 +25,7 @@ const TableContainer = (props) => {
     handleModalClose,
     handleModalConfirm,
     tableHeaders,
+    tableHeadersMap,
     applicants,
     handleRowSelect,
     handleSnackbarClose,
@@ -44,6 +45,7 @@ const TableContainer = (props) => {
         <Spinner spinnerName="wave" noFadeIn style={spinner}/> : 
         <ApplicantTable 
             tableHeaders={tableHeaders} 
+            tableHeadersMap={tableHeadersMap}
             applicants={applicants}
             handleRowSelect={handleRowSelect}/>}
       

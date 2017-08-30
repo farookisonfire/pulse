@@ -24,13 +24,15 @@ class SecondaryPage extends Component {
 
     const selectedPage = secondaryPages.filter(page => page.program.toLowerCase() === activePage)[0];
     const {
-      tableHeaders = []
+      tableHeaders = [],
+      tableHeadersMap = [],
     } = selectedPage;
 
     return(
       <Shared.TablePage
         applicants={this.props.applicants}
-        tableHeaders={tableHeaders}>
+        tableHeaders={tableHeaders}
+        tableHeadersMap={tableHeadersMap}>
         <Shared.TableContainer/>
       </Shared.TablePage>
     );

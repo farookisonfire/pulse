@@ -30,6 +30,7 @@ const styles = {
 const ApplicantTable = (props) => {
   const {
     tableHeaders = [],
+    tableHeadersMap = [],
     applicants = [],
     handleRowSelect = () => {},
   } = props;
@@ -41,16 +42,19 @@ const ApplicantTable = (props) => {
   }
 
   function makeTableRow(applicant, idx) {
+    const tableRowColumns =  tableHeadersMap.map(header => {
+      return (
+        <TableRowColumn 
+          style={styles.tableRowColumn} 
+          key={`${idx}-${applicant[header]}`}>
+          {applicant[header]}
+        </TableRowColumn>
+      );
+    });
+
     return (
-      <TableRow key={idx}>
-        <TableRowColumn style={styles.tableRowColumn} key={`${idx}-${applicant.name}`} >{applicant.name}</TableRowColumn>
-        <TableRowColumn style={styles.tableRowColumn} key={`${idx}-${applicant.email}`} >{applicant.email}</TableRowColumn>
-        <TableRowColumn style={styles.tableRowColumn} key={`${idx}-${applicant.phone}`} >{applicant.phone}</TableRowColumn>
-        <TableRowColumn style={styles.tableRowColumn} key={`${idx}-${applicant.dob}`} >{applicant.dob}</TableRowColumn>
-        <TableRowColumn style={styles.tableRowColumn} key={`${idx}-${applicant.gender}`} >{applicant.gender}</TableRowColumn>
-        <TableRowColumn style={styles.tableRowColumn} key={`${idx}-${applicant.university}`} >{applicant.university}</TableRowColumn>
-        <TableRowColumn style={styles.tableRowColumn} key={`${idx}-${applicant.program}`} >{applicant.program}</TableRowColumn>
-        <TableRowColumn style={styles.tableRowColumn} key={`${idx}-${applicant.why}`} >{applicant.why}</TableRowColumn>
+      <TableRow key={`row-${applicant.name}-${idx}`}>
+        {tableRowColumns}
       </TableRow>
     );
   }
