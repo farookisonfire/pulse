@@ -13,7 +13,9 @@ const styles = {
   tableHeaderColumn : {
     paddingLeft: '7.5px',
     paddingRight: '7.5px',
-    textAlign: 'center'
+    textAlign: 'center',
+    whiteSpace: 'normal', 
+    wordWrap: 'break-word',
   },
 
   tableRowColumn : {
@@ -21,7 +23,7 @@ const styles = {
     paddingRight: '7.5px', 
     fontSize: '11px', 
     whiteSpace: 'normal', 
-    wordWrap: 'break-word' 
+    wordWrap: 'break-word',
   }
 };
 
