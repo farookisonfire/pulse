@@ -5,22 +5,48 @@ import { formatApplicants } from '../../utils/utils';
 import {fetchApplicants, updateApplicant} from '../applied/applicantActions';
 
 class SecondaryPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activePage: 'health',
+    };
+  }
+  
   render() {
+    console.log('PORPS IN SECONDARY', this.props)
+
+    const {
+      secondaryPages = [],
+    } = this.props;
+
+    const {
+      activePage = 'health',
+    } = this.state;
+
+    const selectedPage = secondaryPages.filter(page => page.program.toLowerCase() === activePage)[0];
+    const {
+      tableHeaders = []
+    } = selectedPage;
+
     return(
       <Shared.TablePage
         applicants={this.props.applicants}
-        tableHeaders={this.props.tableHeaders}>
+        tableHeaders={tableHeaders}>
         <Shared.TableContainer/>
       </Shared.TablePage>
     );
   }
 }
 
-const mapStateToProps = ({applicants, fetching}) => {
-  const tableHeaders = ["Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Program", "Why OHS"];
+const mapStateToProps = ({applicants, fetching, pageProfiles}) => {
+  const {
+    secondary
+  } = pageProfiles;
+
   return {
     fetching,
-    tableHeaders,
+    secondaryPages: secondary,
     applicants: formatApplicants(applicants, 'secondary')
   };
 };
