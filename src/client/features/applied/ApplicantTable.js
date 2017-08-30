@@ -44,8 +44,8 @@ const ApplicantTable = (props) => {
   function makeTableRow(applicant, idx) {
     const tableRowColumns =  tableHeadersMap.map(header => {
       return (
-        <TableRowColumn 
-          style={styles.tableRowColumn} 
+        <TableRowColumn
+          style={styles.tableRowColumn}
           key={`${idx}-${applicant[header]}`}>
           {applicant[header]}
         </TableRowColumn>
