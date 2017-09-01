@@ -6,7 +6,7 @@ import {updateSlack} from './slack';
 import {sendMail, createMail} from './mailer';
 
 var Mailchimp = require('mailchimp-api-v3');
-var mailchimp = new Mailchimp('a06d10ae8a5fc56027fedde2d2d5f19a-us14'); 
+var mailchimp = new Mailchimp('ebf8c9937157a2aed625ac2abc8dfbfa-us14'); 
 
 const lists = {
   test: 'b5972e3719',
@@ -35,10 +35,45 @@ module.exports = function routes() {
     });
   });
 
+  router.post('/secondary', (req, res) => {
+    const questions = req.body.form_response.definition.fields;
+    const answers = req.body.form_response.answers;
+    const id = req.body.form_response.hidden.dbid;
+
+    if (id !== "hidden_value") {
+      const questions = req.body.form_response.definition.fields;
+      const answers = req.body.form_response.answers;
+      const status = 'secondary';
+      const formResponse = mapAnswersToQuestions(questions, answers, status);
+
+      console.log('`````````````````````````````````````````````````')
+      console.log('result', formResponse)
+      console.log('`````````````````````````````````````````````````')
+
+      updateApplicant(res, id, formResponse)
+        .then((result) => {
+          console.log('`````````````````````````````````````````````````')
+          console.log('result', result)
+          console.log('`````````````````````````````````````````````````')
+          res.status(200).send('Applicant update with secondary success.')
+        })
+        .catch(err => res.status(500).send('Error, unable to update applicant with secondary.'));
+
+    } else {
+      res.status(500).send('Invalid UserId');
+      
+    }
+    console.log('questions ------------->', questions);
+    console.log('answers -------------->', answers);
+
+    
+  });
+
   router.post('/', (req, res) => {
     const questions = req.body.form_response.definition.fields;
     const answers = req.body.form_response.answers;
-    const formResponse = mapAnswersToQuestions(questions, answers);
+    const status = 'applied';
+    const formResponse = mapAnswersToQuestions(questions, answers, status);
 
     storeApplicant(formResponse)
       .then(() => updateSlack(formResponse))
@@ -59,12 +94,12 @@ module.exports = function routes() {
       status = '',
       program = '',
     } = req.body;
-    
+
     const dbPayload = program ? 
       {status: status, secondary: program} :
       {status: status};
 
-    const mailClientPayload = resolveMailClientPayload(email, firstName, lastName);
+    const mailClientPayload = resolveMailClientPayload(email, firstName, lastName, id);
     const listId = resolveListId(status, program);
 
     updateApplicant(res, id, dbPayload)
@@ -157,13 +192,14 @@ function storeApplicant(formResponse) {
     return;
   }
 
-  function resolveMailClientPayload(email, firstName, lastName) {
+  function resolveMailClientPayload(email, firstName, lastName, id) {
     const payload = {
       "email_address": email,
       "status": "subscribed",
       "merge_fields": {
         "FNAME": firstName,
         "LNAME": lastName,
+        "DBID": id,
       }
     };
 

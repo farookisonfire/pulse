@@ -5,12 +5,13 @@ class TablePage extends React.Component {
     super(props);
     
     this.state = {
-      selectedRow: undefined,
-      modalStatus: false,
-      decision: '',
-      snackbarStatus: false,
-      selectedId: '',
-      selectedName: '',
+      selectedRow: undefined,		
+      modalStatus: false,		
+      decision: '',		
+      snackbarStatus: false,		
+      selectedId: '',		
+      selectedName: '',		
+      selectedEmail: '',
     };
 
     this.handleRowSelect = this.handleRowSelect.bind(this);
@@ -21,38 +22,63 @@ class TablePage extends React.Component {
     this.handleSnackbarClose = this.handleSnackbarClose.bind(this);
   }
 
-  handleRowSelect(rows) {
-    // TODO: refactor in order to do sorting. 
-    const row = rows[0];
-    Number.isInteger(row) ? 
-      (this.setState({selectedRow:row, selectedId: this.props.applicants[row].id, selectedName: this.props.applicants[row].name})) :
-      this.setState({selectedRow: undefined});
+  handleRowSelect(rows) {		
+    // TODO: refactor in order to do sorting. 		
+    const row = rows[0];		
+    Number.isInteger(row) ? 		
+      (this.setState({		
+        selectedRow:row, 		
+        selectedId: this.props.applicants[row].id, 		
+        selectedName: this.props.applicants[row].name,		
+        selectedEmail: this.props.applicants[row].email,		
+      })) :		
+      this.setState({selectedRow: undefined});		
   }
 
   handleModalOpen(decision) { 
     this.setState({modalStatus: true, decision});
   }
 
-
   handleModalClose() {
-    this.setState({modalStatus: false})
+    this.setState({modalStatus: false});
   }
 
-  handleModalConfirm(program) {
-      this.setState({modalStatus: false});
-      const status = this.state.decision ?
-        'secondary' :
-        'denied';
-      this.props.updateApplicant(this.state.selectedId, status, program);
-      this.handleSnackbarOpen();
+  handleModalConfirm (programForSecondary) {		
+    this.setState({modalStatus: false});		
+
+    const {		
+      selectedId = '',		
+      selectedEmail = '',		
+      selectedName = '',		
+      decision = '',		
+    } = this.state;		
+
+    const status = decision ? 'secondary' : 'denied';		
+    const program = programForSecondary ? programForSecondary : '';		
+    const applicantName = selectedName.split(' ');		
+    const firstName = applicantName[0];		
+    const lastName = applicantName[applicantName.length - 1];		
+
+    const applicantDetails = {		
+      id: selectedId,		
+      email: selectedEmail,		
+      firstName: firstName,		
+      lastName: lastName,		
+      status: status,		
+      program: program,		
+    };		
+
+    this.props.updateApplicant(applicantDetails);		
+    this.handleSnackbarOpen();		
   }
+
     
   handleSnackbarOpen() {
-    this.setState({snackbarStatus:true})
+    this.setState({snackbarStatus:true});
   }
   
   handleSnackbarClose() {
-    this.setState({snackbarStatus: false})
+    this.setState({snackbarStatus: false});
   }
 
   render() {
