@@ -9,8 +9,8 @@ export default {
       {
         program: 'health',
         selectable: true,
-        tableHeaders: ["Name", "Email", "Phone", "D.O.B.", "Gender", "Method of Contact", "Timezone", "Major", "Volunteered with OHS?", "Top Strengths", "Ideal Vocation", "What would you change about volunteer experience?"],
-        tableHeadersMap: ["name", "email", "phone", "dob", "gender", "methodOfContact", "timezone", "major", "volunteeredWithOhs", "topStrengths", "idealVocation", "changeExperience"],
+        tableHeaders: ["Name", "Email", "Phone", "D.O.B.", "Gender", "Method of Contact", "Timezone", "Best Time To Call?", "Volunteered With OHS?", "Questions or Suggestions", "Top Strengths" , "Ideal Vocation", "Hope To Gain", "Hope To Give"],
+        tableHeadersMap: ["name", "email", "phone", "dob", "gender", "methodOfContact", "timezone", "bestTime", "pastVolunteer", "questionOrSuggestion", "topStrengths", "idealVocation", "hopeToGain", "hopeToGive"],
       }
     ],
     applied: {
