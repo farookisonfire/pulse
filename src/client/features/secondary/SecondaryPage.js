@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Shared from '../shared';
-import { formatApplicants } from '../../utils/utils';
+import { formatSecondaryApplicants } from '../../utils/utils';
 import {fetchApplicants, updateApplicant} from '../applied/applicantActions';
 
 class SecondaryPage extends Component {
@@ -47,7 +47,7 @@ const mapStateToProps = ({applicants, fetching, pageProfiles}) => {
   return {
     fetching,
     secondaryPages: secondary,
-    applicants: formatApplicants(applicants, 'secondary')
+    applicants: formatSecondaryApplicants(applicants, 'secondary')
   };
 };
 

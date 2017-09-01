@@ -6,7 +6,7 @@ import {updateSlack} from './slack';
 import {sendMail, createMail} from './mailer';
 
 var Mailchimp = require('mailchimp-api-v3');
-var mailchimp = new Mailchimp('ebf8c9937157a2aed625ac2abc8dfbfa-us14'); 
+var mailchimp = new Mailchimp(process.env.MAILCHIMP_KEY); 
 
 const lists = {
   test: 'b5972e3719',
@@ -17,7 +17,7 @@ const lists = {
 };
 
 const MONGODB_URI = 'mongodb://localhost:27017/ohs';
-const COLLECTION = 'applied'
+const COLLECTION = 'appliedv2'
 const ObjectId = require('mongodb').ObjectID;
 
 module.exports = function routes() {
@@ -39,34 +39,24 @@ module.exports = function routes() {
     const questions = req.body.form_response.definition.fields;
     const answers = req.body.form_response.answers;
     const id = req.body.form_response.hidden.dbid;
+    const status = 'secondary';
 
     if (id !== "hidden_value") {
-      const questions = req.body.form_response.definition.fields;
-      const answers = req.body.form_response.answers;
-      const status = 'secondary';
       const formResponse = mapAnswersToQuestions(questions, answers, status);
 
       console.log('`````````````````````````````````````````````````')
-      console.log('result', formResponse)
+      console.log('Mapped Answer and Questions ------>', formResponse)
       console.log('`````````````````````````````````````````````````')
 
       updateApplicant(res, id, formResponse)
         .then((result) => {
-          console.log('`````````````````````````````````````````````````')
-          console.log('result', result)
-          console.log('`````````````````````````````````````````````````')
           res.status(200).send('Applicant update with secondary success.')
         })
         .catch(err => res.status(500).send('Error, unable to update applicant with secondary.'));
-
+        
     } else {
       res.status(500).send('Invalid UserId');
-      
     }
-    console.log('questions ------------->', questions);
-    console.log('answers -------------->', answers);
-
-    
   });
 
   router.post('/', (req, res) => {
