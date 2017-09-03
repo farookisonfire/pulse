@@ -5,19 +5,19 @@ import {mapAnswersToQuestions} from './typeform';
 import {updateSlack} from './slack';
 import {sendMail, createMail} from './mailer';
 
-var Mailchimp = require('mailchimp-api-v3');
-var mailchimp = new Mailchimp(process.env.MAILCHIMP_KEY); 
+const Mailchimp = require('mailchimp-api-v3');
+const mailchimp = new Mailchimp(process.env.MAILCHIMP_KEY); 
 
 const lists = {
   test: 'b5972e3719',
-  denied: '0',
-  secondaryHealth: 1,
-  secondaryEducation: 2,
-  secondaryImpact: 3
+  denied: 'b5605e65e2',
+  secondaryHealth: 'e5b5eaa47c',
+  secondaryEducation: '6d961a792a',
+  secondaryImpact: '5c163c3011',
 };
 
 const MONGODB_URI = 'mongodb://localhost:27017/ohs';
-const COLLECTION = 'appliedv2'
+const COLLECTION = 'appliedv2';
 const ObjectId = require('mongodb').ObjectID;
 
 module.exports = function routes() {
@@ -167,14 +167,11 @@ function storeApplicant(formResponse) {
     if (status === 'secondary' && program) {
       switch(program) {
         case 'Health':
-          // return lists.secondaryHealth;
-          return lists.test;
+          return lists.secondaryHealth;
         case 'Education':
-          // return lists.secondaryEducation;
-          return lists.test;
+          return lists.secondaryEducation;
         case 'Impact':
-          // return lists.secondaryImpact;
-          return lists.test;
+          return lists.secondaryImpact;
         default:
           return;
       }
