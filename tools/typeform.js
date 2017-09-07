@@ -14,9 +14,12 @@ const OPINION_SCALE = "opinion_scale";
 const YES_NO = "yes_no";
 const LEGAL = "legal";
 
-export function mapAnswersToQuestions(questions, answers, status) {
+export function mapAnswersToQuestions(questions, answers, status, program) {
   const map = {};
   map.status = status;
+  if (program) {
+    map.secondaryProgram = program;
+  }
   questions.map(question => {
     answers.map(answer => {
       if(question.id === answer.field.id) {

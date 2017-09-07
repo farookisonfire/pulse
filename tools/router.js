@@ -5,6 +5,8 @@ import {mapAnswersToQuestions} from './typeform';
 import {updateSlack} from './slack';
 import {sendMail, createMail} from './mailer';
 
+require('dotenv').config();
+
 const Mailchimp = require('mailchimp-api-v3');
 const mailchimp = new Mailchimp(process.env.MAILCHIMP_KEY); 
 
@@ -23,6 +25,7 @@ const ObjectId = require('mongodb').ObjectID;
 module.exports = function routes() {
   const router = new Router();
   
+  // GET LIST OF APPLICANTS
   router.get('/', (req,res) => {
     MongoClient.connect(MONGODB_URI, (err, db) => {
       if(err) return res.status(500).send('unable to connect to db.');
@@ -34,31 +37,8 @@ module.exports = function routes() {
       });
     });
   });
-
-  router.post('/secondary', (req, res) => {
-    const questions = req.body.form_response.definition.fields;
-    const answers = req.body.form_response.answers;
-    const id = req.body.form_response.hidden.dbid;
-    const status = 'secondary';
-
-    if (id !== "hidden_value") {
-      const formResponse = mapAnswersToQuestions(questions, answers, status);
-
-      console.log('`````````````````````````````````````````````````')
-      console.log('Mapped Answer and Questions ------>', formResponse)
-      console.log('`````````````````````````````````````````````````')
-
-      updateApplicant(res, id, formResponse)
-        .then((result) => {
-          res.status(200).send('Applicant update with secondary success.')
-        })
-        .catch(err => res.status(500).send('Error, unable to update applicant with secondary.'));
-        
-    } else {
-      res.status(500).send('Invalid UserId');
-    }
-  });
-
+  
+  // APPLICANT SUBMITS PART 1 APP (WEBHOOK)
   router.post('/', (req, res) => {
     const questions = req.body.form_response.definition.fields;
     const answers = req.body.form_response.answers;
@@ -67,7 +47,6 @@ module.exports = function routes() {
 
     storeApplicant(formResponse)
       .then(() => updateSlack(formResponse))
-      // .then(() => sendMail(createMail(formResponse)))
       .then(() => res.status(200).json(req.body))
       .catch(err => {
         console.log(err);
@@ -75,6 +54,7 @@ module.exports = function routes() {
       });
   });
 
+  // APPLICANT IS PROMOTED TO PART 2 OR DENIED
   router.put('/:id', (req,res) => {
     const {
       id = '',
@@ -97,6 +77,29 @@ module.exports = function routes() {
       .catch((err) => console.log('caught after UpdateApp and addToMail', err));    
   });
 
+  // APPLICANT SUBMITS PART 2 APP (WEBHOOK)
+  router.post('/secondary/:program', (req, res) => {
+    const secondaryProgram = req.params.program;
+    const questions = req.body.form_response.definition.fields;
+    const answers = req.body.form_response.answers;
+    const id = req.body.form_response.hidden.dbid;
+    const status = 'secondary';  
+    
+    // validate the database id
+    const checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
+    const isValidId = checkForHexRegExp.test(id);
+    
+    if (isValidId) {
+      const formResponse = mapAnswersToQuestions(questions, answers, status, secondaryProgram);
+      
+      updateApplicant(res, id, formResponse)
+        .then((result) => res.status(200).send('Applicant update with secondary success.'))
+        .catch(err => res.status(500).send('Error, unable to update applicant with secondary.'));
+
+    } else {
+      res.status(500).send('Invalid UserId');
+    }
+  });
   return router;
 };
 
@@ -189,6 +192,5 @@ function storeApplicant(formResponse) {
         "DBID": id,
       }
     };
-
     return payload;
   }
