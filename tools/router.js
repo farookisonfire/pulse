@@ -83,15 +83,15 @@ module.exports = function routes() {
     const questions = req.body.form_response.definition.fields;
     const answers = req.body.form_response.answers;
     const id = req.body.form_response.hidden.dbid;
-    const status = 'secondary';  
-    
+    const status = 'secondary';
+
     // validate the database id
     const checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$");
     const isValidId = checkForHexRegExp.test(id);
-    
+
     if (isValidId) {
       const formResponse = mapAnswersToQuestions(questions, answers, status, secondaryProgram);
-      
+
       updateApplicant(res, id, formResponse)
         .then((result) => res.status(200).send('Applicant update with secondary success.'))
         .catch(err => res.status(500).send('Error, unable to update applicant with secondary.'));
