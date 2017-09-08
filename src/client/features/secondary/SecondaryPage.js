@@ -44,9 +44,15 @@ class SecondaryPage extends Component {
         applicants={applicantsToUse}
         tableHeaders={tableHeaders}
         tableHeadersMap={tableHeadersMap} >
-        <Shared.RadioGroup
+        <div style={{
+          display: 'flex',
+          marginTop: 16,
+          marginLeft: 16,
+        }}>
+          <Shared.RadioGroup
           radioGroupData={radioButtons}
           handleChange={this.onRadioButtonSelect} />
+        </div>
         <Shared.TableContainer/>
       </Shared.TablePage>
     );

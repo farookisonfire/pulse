@@ -16,14 +16,17 @@ const RadioGroup = (props) => {
     return (
       <RadioButton
         value={button.value}
-        label={button.label} />
+        label={button.label}
+        labelStyle={{fontSize: 12}}
+        iconStyle={{width: 20, marginRight: 8}}
+        style={{width: 200}} />
     );
   });
 
   return (
    <RadioButtonGroup 
     defaultSelected={defaultSelected}
-    onChange={handleChange}>
+    onChange={handleChange} >
      {RadioButtons}
    </RadioButtonGroup>
   );
