@@ -9,30 +9,44 @@ class SecondaryPage extends Component {
     super(props);
 
     this.state = {
-      activePage: 'health',
+      selectedProgram: '',
     };
+
+    this.onRadioButtonSelect = this.onRadioButtonSelect.bind(this);
+  }
+
+  onRadioButtonSelect(e, value) {
+    this.setState({selectedProgram: value});
   }
   
   render() {
     const {
-      secondaryPages = [],
+      secondaryPageData = {},
+      applicants = [],
     } = this.props;
 
     const {
-      activePage = 'health',
-    } = this.state;
-
-    const selectedPage = secondaryPages.filter(page => page.program.toLowerCase() === activePage)[0];
-    const {
       tableHeaders = [],
       tableHeadersMap = [],
-    } = selectedPage;
+      radioButtons = {},
+    } = secondaryPageData;
+
+    const {
+      selectedProgram
+    } = this.state;
+
+    const applicantsToUse = applicants.filter((program) => {
+      return program.secondaryProgram === selectedProgram;
+    });
 
     return(
       <Shared.TablePage
-        applicants={this.props.applicants}
+        applicants={applicantsToUse}
         tableHeaders={tableHeaders}
-        tableHeadersMap={tableHeadersMap}>
+        tableHeadersMap={tableHeadersMap} >
+        <Shared.RadioGroup
+          radioGroupData={radioButtons}
+          handleChange={this.onRadioButtonSelect} />
         <Shared.TableContainer/>
       </Shared.TablePage>
     );
@@ -46,7 +60,7 @@ const mapStateToProps = ({applicants, fetching, pageProfiles}) => {
 
   return {
     fetching,
-    secondaryPages: secondary,
+    secondaryPageData: secondary,
     applicants: formatSecondaryApplicants(applicants, 'secondary')
   };
 };
