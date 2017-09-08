@@ -12,6 +12,8 @@ class TablePage extends React.Component {
       selectedId: '',		
       selectedName: '',		
       selectedEmail: '',
+      searchText: '',
+      searchDropDownField: 'name',
     };
 
     this.handleRowSelect = this.handleRowSelect.bind(this);
@@ -20,6 +22,8 @@ class TablePage extends React.Component {
     this.handleModalConfirm = this.handleModalConfirm.bind(this);
     this.handleSnackbarOpen = this.handleSnackbarOpen.bind(this);
     this.handleSnackbarClose = this.handleSnackbarClose.bind(this);
+    this.handleSearchBarChange = this.handleSearchBarChange.bind(this);
+    this.handleSearchDropDownChange = this.handleSearchDropDownChange.bind(this);
   }
 
   handleRowSelect(rows) {		
@@ -71,7 +75,6 @@ class TablePage extends React.Component {
     this.props.updateApplicant(applicantDetails);		
     this.handleSnackbarOpen();		
   }
-
     
   handleSnackbarOpen() {
     this.setState({snackbarStatus:true});
@@ -79,6 +82,14 @@ class TablePage extends React.Component {
   
   handleSnackbarClose() {
     this.setState({snackbarStatus: false});
+  }
+
+  handleSearchBarChange(e, value) {
+    this.setState({searchText: value});
+  }
+
+  handleSearchDropDownChange(e, idx, value) {
+    this.setState({searchDropDownField: value});
   }
 
   render() {
@@ -98,12 +109,16 @@ class TablePage extends React.Component {
         handleModalConfirm: this.handleModalConfirm,
         handleSnackbarOpen: this.handleSnackbarOpen,
         handleSnackbarClose: this.handleSnackbarClose,
+        handleSearchBarChange: this.handleSearchBarChange,
+        handleSearchDropDownChange: this.handleSearchDropDownChange,
         selectedRow: this.state.selectedRow,
         selectedName: this.state.selectedName,
         modalStatus: this.state.modalStatus,
         snackbarStatus: this.state.snackbarStatus,
         decision: this.state.decision,
         selectedId: this.state.selectedId,
+        searchText: this.state.searchText,
+        searchDropDownField: this.state.searchDropDownField,
         applicants,
         tableHeaders,
         tableHeadersMap,

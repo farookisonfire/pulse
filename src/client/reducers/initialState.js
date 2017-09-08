@@ -13,7 +13,7 @@ export default {
       radioButtons : {
         buttons: [
           {value: "healthInnovation", label: "Health Innovation"},
-          {value: "education", label: "Education and Int'l Dev."}
+          {value: "education", label: "Education / Int'l Dev."}
         ],
         defaultSelected: "healthInnovation",
       }
