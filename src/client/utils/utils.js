@@ -38,7 +38,6 @@ export const formatSecondaryApplicants = (applicants, filter) => {
         format.phone = applicant["Mobile Phone Number"];
         format.dob = applicant["Date of Birth"];
         format.gender = applicant["Gender"];
-        format.program = applicant["Which program are you most interested in?"];
         format.stream = applicant["Select your preferred program focus"];
         format.methodOfContact = applicant["Preferred method of contact?"];
         format.timezone = applicant["Your time zone?"];
