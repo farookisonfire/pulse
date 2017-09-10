@@ -16,6 +16,7 @@ export const formatApplicants = (applicants, filter) => {
           : format.university = applicant["University you attend(ed)"];
         format.why = applicant["Why do you want to volunteer with OHS?"];
         format.program = applicant["Which program are you most interested in?"];
+        format.stream = applicant["Select your preferred program focus"];
         formatted.push(format);
       }
     });
@@ -37,6 +38,8 @@ export const formatSecondaryApplicants = (applicants, filter) => {
         format.phone = applicant["Mobile Phone Number"];
         format.dob = applicant["Date of Birth"];
         format.gender = applicant["Gender"];
+        format.program = applicant["Which program are you most interested in?"];
+        format.stream = applicant["Select your preferred program focus"];
         format.methodOfContact = applicant["Preferred method of contact?"];
         format.timezone = applicant["Your time zone?"];
         format.bestTime = applicant["What\'s the best time for a member of our team to call?"];

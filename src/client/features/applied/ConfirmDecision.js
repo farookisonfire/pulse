@@ -23,14 +23,9 @@ const ConfirmDecision = (props) => {
         onTouchTap={() => handleModalConfirm('healthInnovation')}
       />,
       <FlatButton
-        label="Education"
+        label="Serve a Million"
         primary={true}
-        onTouchTap={() => handleModalConfirm('education')}
-      />,
-      <FlatButton
-        label="Impact"
-        primary={true}
-        onTouchTap={() => handleModalConfirm('Impact')}
+        onTouchTap={() => handleModalConfirm('serve')}
       />,
     ];
 
