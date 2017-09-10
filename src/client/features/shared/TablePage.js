@@ -93,6 +93,8 @@ class TablePage extends React.Component {
   }
 
   render() {
+console.log('tablePage - state', this.state)
+
     const {
       applicants,
       tableHeaders,

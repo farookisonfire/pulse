@@ -30,7 +30,7 @@ export const formatSecondaryApplicants = (applicants, filter) => {
       if (applicant.status === filter) {
         const format = {};
         format.status = applicant.status;
-        format.secondaryProgram = applicant.secondaryProgram;
+        format.secondaryProgram = applicant.secondary;
         format.id = applicant._id;
         format.name = applicant["First Name"] + ' ' + applicant["Last Name"];
         format.email = applicant["Email"];
