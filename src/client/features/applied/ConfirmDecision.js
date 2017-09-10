@@ -20,12 +20,12 @@ const ConfirmDecision = (props) => {
       <FlatButton
         label="Health"
         primary={true}
-        onTouchTap={() => handleModalConfirm('Health')}
+        onTouchTap={() => handleModalConfirm('healthInnovation')}
       />,
       <FlatButton
         label="Education"
         primary={true}
-        onTouchTap={() => handleModalConfirm('Education')}
+        onTouchTap={() => handleModalConfirm('education')}
       />,
       <FlatButton
         label="Impact"

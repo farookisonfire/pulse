@@ -28,7 +28,7 @@ const TableContainer = (props) => {
     handleModalConfirm,
     tableHeaders,
     tableHeadersMap,
-    applicants,
+    applicants = [],
     handleRowSelect,
     handleSnackbarClose,
     handleSearchBarChange,
@@ -40,7 +40,7 @@ const TableContainer = (props) => {
   
   const filterApplicantsBySearchText = (applicants, searchText, field) => {
     return applicants.filter((applicant) => {
-      return applicant[field].includes(searchText);
+      return applicant[field] && applicant[field].includes(searchText);
     });
   };
   

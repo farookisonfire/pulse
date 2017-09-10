@@ -9,7 +9,7 @@ class SecondaryPage extends Component {
     super(props);
 
     this.state = {
-      selectedProgram: '',
+      selectedProgram: 'healthInnovation',
     };
 
     this.onRadioButtonSelect = this.onRadioButtonSelect.bind(this);
@@ -23,6 +23,7 @@ class SecondaryPage extends Component {
     const {
       secondaryPageData = {},
       applicants = [],
+      fetchApplicants = () => {},
     } = this.props;
 
     const {
@@ -43,7 +44,8 @@ class SecondaryPage extends Component {
       <Shared.TablePage
         applicants={applicantsToUse}
         tableHeaders={tableHeaders}
-        tableHeadersMap={tableHeadersMap} >
+        tableHeadersMap={tableHeadersMap}
+        fetchApplicants={fetchApplicants} >
         <div style={{
           display: 'flex',
           marginTop: 16,

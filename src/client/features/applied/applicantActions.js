@@ -15,7 +15,7 @@ function receiveApplicantsFail() {
 }
 
 export function fetchApplicants() {
-  console.log('fetching applicants')
+  console.log('fetching action')
   return function(dispatch) {
     dispatch(requestApplicants());
     return fetch(getBaseUrl() + '/api/applicants')
