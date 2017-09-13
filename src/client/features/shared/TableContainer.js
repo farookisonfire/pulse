@@ -40,6 +40,9 @@ const TableContainer = (props) => {
   
   const filterApplicantsBySearchText = (applicants, searchText, field) => {
     return applicants.filter((applicant) => {
+      if (Array.isArray(applicant[field])) {
+        return applicant[field].join().includes(searchText);
+      }
       return applicant[field] && applicant[field].includes(searchText);
     });
   };
