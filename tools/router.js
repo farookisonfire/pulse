@@ -19,7 +19,7 @@ const lists = {
 };
 
 const MONGODB_URI = 'mongodb://localhost:27017/ohs';
-const COLLECTION = 'appliedv2';
+const COLLECTION = 'v2Collection';
 const ObjectId = require('mongodb').ObjectID;
 
 module.exports = function routes() {
