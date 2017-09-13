@@ -4,6 +4,7 @@ export const formatApplicants = (applicants, filter) => {
     applicants.map(applicant => {
       if (applicant.status === filter) {
         const format = {};
+        format.submitDate = applicant.primarySubmitDate;
         format.status = applicant.status;
         format.id = applicant._id;
         format.name = applicant["First Name"] + ' ' + applicant["Last Name"];
@@ -30,6 +31,7 @@ export const formatSecondaryApplicants = (applicants, filter) => {
     applicants.map(applicant => {
       if (applicant.status === filter) {
         const format = {};
+        format.submitDate = applicant.secondarySubmitDate;
         format.status = applicant.status;
         format.secondaryProgram = applicant.secondary;
         format.id = applicant._id;
