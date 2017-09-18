@@ -20,8 +20,8 @@ export default {
     },
     applied: {
       selectable: true,
-      tableHeaders: ["Date", "Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Program", "Stream",  "Why OHS"],
-      tableHeadersMap: ["submitDate", "name", "email", "phone", "dob", "gender", "university", "program", "stream", "why"],
+      tableHeaders: ["Refcode", "Date", "Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Major", "Program", "Stream",  "Why OHS"],
+      tableHeadersMap: ["refcode","submitDate", "name", "email", "phone", "dob", "gender", "university", "major", "program", "stream", "why"],
     },
   },
 };

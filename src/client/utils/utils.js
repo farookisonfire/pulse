@@ -4,6 +4,7 @@ export const formatApplicants = (applicants, filter) => {
     applicants.map(applicant => {
       if (applicant.status === filter) {
         const format = {};
+        format.refcode = applicant.refcode;
         format.submitDate = applicant.primarySubmitDate;
         format.status = applicant.status;
         format.id = applicant._id;
@@ -18,6 +19,7 @@ export const formatApplicants = (applicants, filter) => {
         format.why = applicant["Why do you want to volunteer with OHS?"];
         format.program = applicant["Which program are you most interested in?"];
         format.stream = applicant["Select your preferred program focus"];
+        format.major = applicant["What is your major or field of study/work?"];
         formatted.push(format);
       }
     });
