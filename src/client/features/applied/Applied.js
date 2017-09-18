@@ -11,11 +11,12 @@ class Applied extends Component {
       tableHeadersMap = [],
       fetchApplicants,
       updateApplicant,
+      applicants = []
     } = this.props;
 
     return(
       <Shared.TablePage
-        applicants={this.props.applicants}
+        applicants={applicants}
         tableHeaders={tableHeaders}
         tableHeadersMap={tableHeadersMap}
         fetchApplicants={fetchApplicants}
