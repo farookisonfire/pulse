@@ -8,8 +8,8 @@ export default {
     secondary: {
       program: 'health',
       selectable: true,
-      tableHeaders: ["Date", "Name", "Email", "Phone", "D.O.B.", "Gender","Stream", "Method of Contact", "Timezone", "Best Time To Call?", "Volunteered With OHS?", "Questions or Suggestions", "Top Strengths" , "Ideal Vocation", "Hope To Gain", "Hope To Give"],
-      tableHeadersMap: ["submitDate" ,"name", "email", "phone", "dob", "gender", "stream", "methodOfContact", "timezone", "bestTime", "pastVolunteer", "questionOrSuggestion", "topStrengths", "idealVocation", "hopeToGain", "hopeToGive"],
+      tableHeaders: ["Date", "Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Major", "Stream", "Method of Contact", "Timezone", "Best Time To Call?", "Volunteered With OHS?", "Questions or Suggestions", "Top Strengths" , "Ideal Vocation", "Hope To Gain", "Hope To Give"],
+      tableHeadersMap: ["submitDate" ,"name", "email", "phone", "dob", "gender", "university", "major","stream", "methodOfContact", "timezone", "bestTime", "pastVolunteer", "questionOrSuggestion", "topStrengths", "idealVocation", "hopeToGain", "hopeToGive"],
       radioButtons : {
         buttons: [
           {value: "healthInnovation", label: "Health Innovation"},

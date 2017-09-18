@@ -11,17 +11,16 @@ import {
 const styles = {
   
   tableHeaderColumn : {
-    paddingLeft: '7.5px',
-    paddingRight: '7.5px',
     textAlign: 'center',
     whiteSpace: 'normal', 
     wordWrap: 'break-word',
+    width: 120
+
   },
 
   tableRowColumn : {
-    paddingLeft: '7.5px', 
-    paddingRight: '7.5px', 
     fontSize: '11px', 
+    width: 120,
     whiteSpace: 'normal', 
     wordWrap: 'break-word',
   }
@@ -61,13 +60,15 @@ const ApplicantTable = (props) => {
   
   return (
     <Table
+      bodyStyle={{overflow: 'visible'}}
       onRowSelection={handleRowSelect}>
       <TableHeader displaySelectAll={false}>
         <TableRow>
           {tableHeaders.map(makeTableHeader)}
         </TableRow>
       </TableHeader>
-      <TableBody showRowHover={true}>
+      <TableBody
+        showRowHover={true}>
         {applicants.map(makeTableRow)}
       </TableBody>
     </Table>);
