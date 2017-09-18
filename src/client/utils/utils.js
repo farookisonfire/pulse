@@ -43,6 +43,10 @@ export const formatSecondaryApplicants = (applicants, filter) => {
         format.dob = applicant["Date of Birth"];
         format.gender = applicant["Gender"];
         format.stream = applicant["Select your preferred program focus"];
+        applicant["University you attend(ed)"] === '- Other University -'
+          ? format.university = applicant["Name of University"]
+          : format.university = applicant["University you attend(ed)"];
+        format.major = applicant["What is your major or field of study/work?"];
         format.methodOfContact = applicant["Preferred method of contact?"];
         format.timezone = applicant["Your time zone?"];
         format.bestTime = applicant["What\'s the best time for a member of our team to call?"];
