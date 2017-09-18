@@ -33,6 +33,7 @@ export const formatSecondaryApplicants = (applicants, filter) => {
     applicants.map(applicant => {
       if (applicant.status === filter) {
         const format = {};
+        format.refcode = applicant.refcode;
         format.submitDate = applicant.secondarySubmitDate;
         format.status = applicant.status;
         format.secondaryProgram = applicant.secondary;
