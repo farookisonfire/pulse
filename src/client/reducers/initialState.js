@@ -16,12 +16,31 @@ export default {
           {value: "serve", label: "Serve a Million"}
         ],
         defaultSelected: "healthInnovation",
-      }
+      },
+      acceptActions: [
+        { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
+        { label: 'Accept', value: 'accepted', isPrimary: true, isSecondary: false },
+      ],
+      denyActions: [
+        { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
+        { label: 'Deny', value: 'denied', isPrimary: false, isSecondary: true },
+      ],
+      stage: 'final',
     },
     applied: {
       selectable: true,
       tableHeaders: ["Refcode", "Date", "Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Major", "Program", "Stream",  "Why OHS"],
       tableHeadersMap: ["refcode","submitDate", "name", "email", "phone", "dob", "gender", "university", "major", "program", "stream", "why"],
+      acceptActions: [
+        { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
+        { label: 'Health', value: 'healthInnovation', isPrimary: true, isSecondary: false },
+        { label: 'Serve a Million', value: 'serve', isPrimary: true, isSecondary: false },
+      ],
+      denyActions: [
+        { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
+        { label: 'Confirm', value: 'denied', isPrimary: false, isSecondary: true },
+      ],
+      stage: 'secondary',
     },
   },
 };

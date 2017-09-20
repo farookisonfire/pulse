@@ -3,7 +3,7 @@ import Snackbar from 'material-ui/Snackbar';
 
 const ConfirmSnackbar = ({snackbarStatus, handleSnackbarClose, decision, selectedName}) => {
   const outcome = decision ? 
-    `${selectedName} was advanced to Secondary.` :
+    `${selectedName} was advanced.` :
     `${selectedName} was denied.`;
   
   return (

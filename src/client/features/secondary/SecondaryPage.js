@@ -23,7 +23,11 @@ class SecondaryPage extends Component {
     const {
       secondaryPageData = {},
       applicants = [],
+      acceptActions = [],
+      denyActions = [],
+      stage = 'final',
       fetchApplicants = () => {},
+      updateApplicant = () => {},
     } = this.props;
 
     const {
@@ -45,7 +49,8 @@ class SecondaryPage extends Component {
         applicants={applicantsToUse}
         tableHeaders={tableHeaders}
         tableHeadersMap={tableHeadersMap}
-        fetchApplicants={fetchApplicants} >
+        fetchApplicants={fetchApplicants}
+        updateApplicant={updateApplicant} >
         <div style={{
           display: 'flex',
           marginTop: 16,
@@ -55,7 +60,10 @@ class SecondaryPage extends Component {
           radioGroupData={radioButtons}
           handleChange={this.onRadioButtonSelect} />
         </div>
-        <Shared.TableContainer/>
+        <Shared.TableContainer
+          acceptActions={acceptActions}
+          denyActions={denyActions}
+          stage={stage} />
       </Shared.TablePage>
     );
   }
@@ -66,10 +74,19 @@ const mapStateToProps = ({applicants, fetching, pageProfiles}) => {
     secondary
   } = pageProfiles;
 
+  const {
+    acceptActions,
+    denyActions,
+    stage,
+  } = secondary;
+
   return {
     fetching,
     secondaryPageData: secondary,
-    applicants: formatSecondaryApplicants(applicants, 'secondary')
+    applicants: formatSecondaryApplicants(applicants, 'secondary'),
+    acceptActions,
+    denyActions,
+    stage,
   };
 };
 

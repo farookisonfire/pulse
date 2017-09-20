@@ -9,8 +9,8 @@ import CheckBtn from '../applied/CheckBtn';
 import DenyBtn from '../applied/DenyBtn';
 import Spinner from 'react-spinkit';
 import {spinner} from '../applied/applicantStyles';
-import ConfirmDecision from '../applied/ConfirmDecision';
-import ConfirmSnackbar from '../applied/ConfirmSnackbar';
+import ConfirmDecisionModal from './ConfirmDecisionModal';
+import ConfirmSnackbar from './ConfirmSnackbar';
 import SearchBar from './SearchBar';
 import SearchDropDown from './SearchDropDown';
 
@@ -36,6 +36,9 @@ const TableContainer = (props) => {
     fetching,
     searchText = '',
     searchDropDownField,
+    acceptActions,
+    denyActions,
+    stage,
   } = props;
   
   const filterApplicantsBySearchText = (applicants, searchText, field) => {
@@ -67,8 +70,8 @@ const TableContainer = (props) => {
       <RefreshBtn onTouchTap={fetchApplicants}/>      
       {Number.isInteger(selectedRow) && (
         <span>
-          <CheckBtn onTouchTap={() => handleModalOpen('secondary')} /> 
-          <DenyBtn onTouchTap={() => handleModalOpen()}/>
+          <CheckBtn onTouchTap={() => handleModalOpen('accept')} />
+          <DenyBtn onTouchTap={() => handleModalOpen()} />
         </span>)}
       </div>
   
@@ -80,12 +83,15 @@ const TableContainer = (props) => {
             applicants={applicantsToUse}
             handleRowSelect={handleRowSelect}/>}
       
-      <ConfirmDecision 
-        handleModalClose={handleModalClose} 
+      <ConfirmDecisionModal 
+        handleModalClose={handleModalClose}
         handleModalConfirm={handleModalConfirm}
         modalStatus={modalStatus}
         decision={decision}
-        selectedName={selectedName}/>
+        selectedName={selectedName}
+        acceptActions={acceptActions}
+        denyActions={denyActions}
+        stage={stage} />
       <ConfirmSnackbar
         snackbarStatus={snackbarStatus}
         handleSnackbarClose={handleSnackbarClose}

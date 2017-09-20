@@ -46,35 +46,6 @@ class TablePage extends React.Component {
   handleModalClose() {
     this.setState({modalStatus: false});
   }
-
-  handleModalConfirm (programForSecondary) {		
-    this.setState({modalStatus: false});		
-
-    const {		
-      selectedId = '',		
-      selectedEmail = '',		
-      selectedName = '',		
-      decision = '',		
-    } = this.state;		
-
-    const status = decision ? 'secondary' : 'denied';		
-    const program = programForSecondary ? programForSecondary : '';		
-    const applicantName = selectedName.split(' ');		
-    const firstName = applicantName[0];		
-    const lastName = applicantName[applicantName.length - 1];		
-
-    const applicantDetails = {		
-      id: selectedId,		
-      email: selectedEmail,		
-      firstName: firstName,		
-      lastName: lastName,		
-      status: status,		
-      program: program,		
-    };		
-
-    this.props.updateApplicant(applicantDetails);		
-    this.handleSnackbarOpen();		
-  }
     
   handleSnackbarOpen() {
     this.setState({snackbarStatus:true});
@@ -90,6 +61,45 @@ class TablePage extends React.Component {
 
   handleSearchDropDownChange(e, idx, value) {
     this.setState({searchDropDownField: value});
+  }
+
+  handleModalConfirm (stage, value) {
+    this.setState({modalStatus: false});		
+
+    const {		
+      selectedId = '',		
+      selectedEmail = '',		
+      selectedName = '',		
+      decision = '',		
+    } = this.state;		
+
+    const status = stage ? stage : 'denied';
+    let finalDecision = '';
+    let program = '';
+
+    const applicantName = selectedName.split(' ');		
+    const firstName = applicantName[0];		
+    const lastName = applicantName[applicantName.length - 1];		
+
+    const applicantDetails = {		
+      id: selectedId,		
+      email: selectedEmail,		
+      firstName,
+      lastName,
+      status,
+    };
+
+    if (stage === 'secondary' && (value === 'healthInnovation' || value === 'serve')) {
+      applicantDetails.program = value;
+      applicantDetails.status = stage;
+    } else if (stage === 'final' && value === 'accepted') {
+      applicantDetails.status = value;
+    } else if (value === 'denied'){
+      applicantDetails.status = value;
+    }
+
+    this.props.updateApplicant(applicantDetails);		
+    this.handleSnackbarOpen();		
   }
 
   render() {
