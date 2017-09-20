@@ -23,9 +23,6 @@ class SecondaryPage extends Component {
     const {
       secondaryPageData = {},
       applicants = [],
-      acceptActions = [],
-      denyActions = [],
-      stage = 'final',
       fetchApplicants = () => {},
       updateApplicant = () => {},
     } = this.props;
@@ -34,6 +31,9 @@ class SecondaryPage extends Component {
       tableHeaders = [],
       tableHeadersMap = [],
       radioButtons = {},
+      acceptActions = [],
+      denyActions = [],
+      stage = 'final',
     } = secondaryPageData;
 
     const {
@@ -74,19 +74,10 @@ const mapStateToProps = ({applicants, fetching, pageProfiles}) => {
     secondary
   } = pageProfiles;
 
-  const {
-    acceptActions,
-    denyActions,
-    stage,
-  } = secondary;
-
   return {
     fetching,
     secondaryPageData: secondary,
     applicants: formatSecondaryApplicants(applicants, 'secondary'),
-    acceptActions,
-    denyActions,
-    stage,
   };
 };
 

@@ -2,8 +2,8 @@ export default {
   pageProfiles : {
     accepted: {
       selectable: false,
-      tableHeaders: ["Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Program", "Why OHS"],
-      tableHeadersMap: ["name", "email", "phone", "dob", "gender", "university", "program", "why"],
+      tableHeaders: ["Refcode", "Date", "Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Major", "Program", "Stream",  "Why OHS"],
+      tableHeadersMap: ["refcode","submitDate", "name", "email", "phone", "dob", "gender", "university", "major", "program", "stream", "why"],
     },
     secondary: {
       program: 'health',

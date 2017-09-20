@@ -39,6 +39,7 @@ const TableContainer = (props) => {
     acceptActions,
     denyActions,
     stage,
+    selectable = true,
   } = props;
   
   const filterApplicantsBySearchText = (applicants, searchText, field) => {
@@ -81,7 +82,8 @@ const TableContainer = (props) => {
             tableHeaders={tableHeaders} 
             tableHeadersMap={tableHeadersMap}
             applicants={applicantsToUse}
-            handleRowSelect={handleRowSelect}/>}
+            handleRowSelect={handleRowSelect}
+            selectable={selectable} />}
       
       <ConfirmDecisionModal 
         handleModalClose={handleModalClose}
@@ -96,7 +98,8 @@ const TableContainer = (props) => {
         snackbarStatus={snackbarStatus}
         handleSnackbarClose={handleSnackbarClose}
         decision={decision}
-        selectedName={selectedName} />
+        selectedName={selectedName}
+        stage={stage} />
     </div>
   );
 };
