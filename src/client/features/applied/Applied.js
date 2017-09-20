@@ -11,7 +11,10 @@ class Applied extends Component {
       tableHeadersMap = [],
       fetchApplicants,
       updateApplicant,
-      applicants = []
+      applicants = [],
+      acceptActions = [],
+      denyActions = [],
+      stage = '',
     } = this.props;
 
     return(
@@ -20,9 +23,11 @@ class Applied extends Component {
         tableHeaders={tableHeaders}
         tableHeadersMap={tableHeadersMap}
         fetchApplicants={fetchApplicants}
-        updateApplicant={updateApplicant}
-        >
-        <Shared.TableContainer/>
+        updateApplicant={updateApplicant}>
+        <Shared.TableContainer
+          acceptActions={acceptActions}
+          denyActions={denyActions}
+          stage={stage} />
       </Shared.TablePage>
     );
   }
@@ -30,18 +35,24 @@ class Applied extends Component {
 
 const mapStateToProps = ({applicants, pageProfiles, fetching}) => {  
   const {
-    applied
+    applied,
   } = pageProfiles;
 
   const {
     tableHeaders,
     tableHeadersMap,
+    acceptActions,
+    denyActions,
+    stage,
   } = applied;
 
   return {
     fetching,
     tableHeaders,
     tableHeadersMap,
+    acceptActions,
+    denyActions,
+    stage,
     applicants: formatApplicants(applicants, 'applied')
   };
 };
