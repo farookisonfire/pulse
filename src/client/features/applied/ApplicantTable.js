@@ -32,6 +32,7 @@ const ApplicantTable = (props) => {
     tableHeadersMap = [],
     applicants = [],
     handleRowSelect = () => {},
+    selectable = '',
   } = props;
   
   function makeTableHeader(header, idx) {
@@ -61,7 +62,8 @@ const ApplicantTable = (props) => {
   return (
     <Table
       bodyStyle={{overflow: 'visible'}}
-      onRowSelection={handleRowSelect}>
+      onRowSelection={handleRowSelect}
+      selectable={selectable}>
       <TableHeader displaySelectAll={false}>
         <TableRow>
           {tableHeaders.map(makeTableHeader)}

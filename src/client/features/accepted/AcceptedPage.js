@@ -6,11 +6,29 @@ import {fetchApplicants, updateApplicant} from '../applied/applicantActions';
 
 class AcceptedPage extends Component {
   render() {
+    const {
+      applicants = [],
+      acceptedPageData = {},
+      fetchApplicants = () => {},
+      updateApplicant = () => {},
+    } = this.props;
+
+    const {
+      tableHeaders,
+      tableHeadersMap,
+      selectable = false,
+    } = acceptedPageData;
+
     return(
-        <Shared.TableContainer
-          applicants={this.props.applicants}
-          tableHeaders={this.props.tableHeaders}
-          selectable={false} />
+        <Shared.TablePage
+          applicants={applicants}
+          tableHeaders={tableHeaders}
+          tableHeadersMap={tableHeadersMap}
+          fetchApplicants={fetchApplicants}
+          updateApplicant={updateApplicant}>
+          <Shared.TableContainer
+            selectable={selectable} />
+        </Shared.TablePage>
     );
   }
 }
@@ -19,15 +37,11 @@ const mapStateToProps = ({applicants, pageProfiles, fetching}) => {
   const {
     accepted
   } = pageProfiles;
-
-  const {
-    tableHeaders,
-  } = accepted;
   
   return {
     fetching,
-    tableHeaders,
-    applicants: formatApplicants(applicants, 'secondary')
+    acceptedPageData: accepted,
+    applicants: formatApplicants(applicants, 'accepted')
   };
 };
 

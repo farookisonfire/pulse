@@ -7,15 +7,19 @@ import {fetchApplicants, updateApplicant} from './applicantActions';
 class Applied extends Component {
   render() {
     const {
+      appliedPageData = {},
+      fetchApplicants = () => {},
+      updateApplicant = () => {},
+      applicants = [],
+    } = this.props;
+
+    const {
       tableHeaders = [],
       tableHeadersMap = [],
-      fetchApplicants,
-      updateApplicant,
-      applicants = [],
       acceptActions = [],
       denyActions = [],
       stage = '',
-    } = this.props;
+    } = appliedPageData;
 
     return(
       <Shared.TablePage
@@ -38,21 +42,9 @@ const mapStateToProps = ({applicants, pageProfiles, fetching}) => {
     applied,
   } = pageProfiles;
 
-  const {
-    tableHeaders,
-    tableHeadersMap,
-    acceptActions,
-    denyActions,
-    stage,
-  } = applied;
-
   return {
     fetching,
-    tableHeaders,
-    tableHeadersMap,
-    acceptActions,
-    denyActions,
-    stage,
+    appliedPageData: applied,
     applicants: formatApplicants(applicants, 'applied')
   };
 };
