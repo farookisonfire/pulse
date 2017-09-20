@@ -44,7 +44,6 @@ const ConfirmDecision = (props) => {
   let enrollmentDecision;
 
   if (decision) {
-    console.log('program confirmed modal, decision', decision)
     if (stage === 'secondary') {
       enrollmentDecision = `Select secondary application for ${selectedName}`
     } else if (stage === 'final') {
