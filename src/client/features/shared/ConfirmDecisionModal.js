@@ -10,6 +10,7 @@ const makeActionButtons = (actions, stage, handleModalConfirm, handleModalClose)
         value = '',
         isPrimary = false,
         isSecondary = false,
+        program = '',
       } = action;
 
       const onTouchHandlerToUse = label === 'Cancel' ? handleModalClose : handleModalConfirm;
@@ -19,7 +20,7 @@ const makeActionButtons = (actions, stage, handleModalConfirm, handleModalClose)
           label={label}
           primary={isPrimary}
           secondary={isSecondary}
-          onTouchTap={() => onTouchHandlerToUse(stage, value)}
+          onTouchTap={() => onTouchHandlerToUse(stage, value, program)}
         />
       );
     });
@@ -47,7 +48,7 @@ const ConfirmDecision = (props) => {
     if (stage === 'secondary') {
       enrollmentDecision = `Select secondary application for ${selectedName}`
     } else if (stage === 'final') {
-      enrollmentDecision = `Are you sure you want to ACCEPT ${selectedName}?`
+      enrollmentDecision = `ACCEPT ${selectedName} to which program?`
     }
   } else {
     enrollmentDecision = `Are you sure you want to DENY ${selectedName}?`

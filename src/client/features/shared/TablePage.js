@@ -63,7 +63,7 @@ class TablePage extends React.Component {
     this.setState({searchDropDownField: value});
   }
 
-  handleModalConfirm (stage, value) {
+  handleModalConfirm (stage, value, acceptedTo) {
     this.setState({modalStatus: false});		
 
     const {		
@@ -73,9 +73,9 @@ class TablePage extends React.Component {
       decision = '',		
     } = this.state;		
 
-    const status = stage ? stage : 'denied';
-    let finalDecision = '';
-    let program = '';
+    // const status = stage ? stage : 'denied';
+    // let finalDecision = '';
+    // let program = '';
 
     const applicantName = selectedName.split(' ');		
     const firstName = applicantName[0];		
@@ -86,7 +86,6 @@ class TablePage extends React.Component {
       email: selectedEmail,		
       firstName,
       lastName,
-      status,
     };
 
     if (stage === 'secondary' && (value === 'healthInnovation' || value === 'serve')) {
@@ -94,6 +93,7 @@ class TablePage extends React.Component {
       applicantDetails.status = stage;
     } else if (stage === 'final' && value === 'accepted') {
       applicantDetails.status = value;
+      applicantDetails.program = acceptedTo;
     } else if (value === 'denied'){
       applicantDetails.status = value;
     }
