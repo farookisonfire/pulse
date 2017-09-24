@@ -19,7 +19,8 @@ export default {
       },
       acceptActions: [
         { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
-        { label: 'Accept', value: 'accepted', isPrimary: true, isSecondary: false },
+        { label: 'Health Innovation', value: 'accepted', program: 'healthInnovation', isPrimary: true, isSecondary: false },
+        { label: 'Serve a Million', value: 'accepted', program: 'serve', isPrimary: true, isSecondary: false },
       ],
       denyActions: [
         { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
