@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Applied from '../applied';
 import { connect } from 'react-redux';
 import { fetchApplicants, updateApplicant } from '../applied/applicantActions';
-import { formatApplicants } from '../../utils/utils';
+import { formatApplicants, filterApplicantsBySearchText } from '../../utils/utils';
 import ApplicantTable from '../applied/ApplicantTable';
 import RefreshBtn from '../applied/RefreshBtn';
 import CheckBtn from '../applied/CheckBtn';
@@ -42,17 +42,6 @@ const TableContainer = (props) => {
     selectable = true,
   } = props;
   
-  const filterApplicantsBySearchText = (applicants, searchText, field) => {
-    return applicants.filter((applicant) => {
-      if (Array.isArray(applicant[field])) {
-        return applicant[field].join().includes(searchText);
-      }
-      return applicant[field] && applicant[field].includes(searchText);
-    });
-  };
-  
-  const applicantsToUse = filterApplicantsBySearchText(applicants, searchText, searchDropDownField);
-  
   return(
     <div>
       <div style={{
@@ -81,7 +70,7 @@ const TableContainer = (props) => {
         <ApplicantTable 
             tableHeaders={tableHeaders} 
             tableHeadersMap={tableHeadersMap}
-            applicants={applicantsToUse}
+            applicants={applicants}
             handleRowSelect={handleRowSelect}
             selectable={selectable} />}
       

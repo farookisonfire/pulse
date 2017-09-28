@@ -25,6 +25,7 @@ class SecondaryPage extends Component {
       applicants = [],
       fetchApplicants = () => {},
       updateApplicant = () => {},
+      fetching = false,
     } = this.props;
 
     const {
@@ -50,7 +51,8 @@ class SecondaryPage extends Component {
         tableHeaders={tableHeaders}
         tableHeadersMap={tableHeadersMap}
         fetchApplicants={fetchApplicants}
-        updateApplicant={updateApplicant} >
+        updateApplicant={updateApplicant}
+        fetching={fetching}>
         <div style={{
           display: 'flex',
           marginTop: 16,

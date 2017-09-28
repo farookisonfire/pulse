@@ -11,6 +11,7 @@ class Applied extends Component {
       fetchApplicants = () => {},
       updateApplicant = () => {},
       applicants = [],
+      fetching = false,
     } = this.props;
 
     const {
@@ -27,7 +28,8 @@ class Applied extends Component {
         tableHeaders={tableHeaders}
         tableHeadersMap={tableHeadersMap}
         fetchApplicants={fetchApplicants}
-        updateApplicant={updateApplicant}>
+        updateApplicant={updateApplicant}
+        fetching={fetching}>
         <Shared.TableContainer
           acceptActions={acceptActions}
           denyActions={denyActions}
