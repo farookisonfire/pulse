@@ -9,20 +9,31 @@ import {
 } from 'material-ui/Table';
 
 const styles = {
-  
   tableHeaderColumn : {
     textAlign: 'center',
-    whiteSpace: 'normal', 
+    whiteSpace: 'normal',
     wordWrap: 'break-word',
     width: 120
-
   },
-
+  tableHeaderColumnOne : {
+    textAlign: 'center',
+    whiteSpace: 'normal',
+    wordWrap: 'break-word',
+    width: 30
+  },
   tableRowColumn : {
     fontSize: '11px', 
     width: 120,
-    whiteSpace: 'normal', 
+    whiteSpace: 'normal',
     wordWrap: 'break-word',
+    textAlign: 'center',
+  },
+  tableRowColumnOne : {
+    fontSize: '11px',
+    width: 30,
+    whiteSpace: 'normal',
+    wordWrap: 'break-word',
+    textAlign: 'center',
   }
 };
 
@@ -37,7 +48,11 @@ const ApplicantTable = (props) => {
   
   function makeTableHeader(header, idx) {
     return (
-      <TableHeaderColumn key={idx} style={styles.tableHeaderColumn}>{header}</TableHeaderColumn>
+      <TableHeaderColumn
+        key={idx}
+        style={ idx === 0 ? styles.tableHeaderColumnOne : styles.tableHeaderColumn }>
+        {header}
+      </TableHeaderColumn>
     );
   }
 
@@ -52,9 +67,19 @@ const ApplicantTable = (props) => {
       );
     });
 
+    const rowNumber = (
+        <TableRowColumn
+          style={styles.tableRowColumnOne}
+          key={`${idx}-row-number`}>
+          {idx + 1}
+        </TableRowColumn>
+      );
+
+    const tableRowColumnsToRender = [rowNumber, ...tableRowColumns];
+
     return (
       <TableRow key={`row-${applicant.name}-${idx}`}>
-        {tableRowColumns}
+        {tableRowColumnsToRender}
       </TableRow>
     );
   }
