@@ -11,6 +11,7 @@ class AcceptedPage extends Component {
       acceptedPageData = {},
       fetchApplicants = () => {},
       updateApplicant = () => {},
+      fetching = false,
     } = this.props;
 
     const {
@@ -25,7 +26,8 @@ class AcceptedPage extends Component {
           tableHeaders={tableHeaders}
           tableHeadersMap={tableHeadersMap}
           fetchApplicants={fetchApplicants}
-          updateApplicant={updateApplicant}>
+          updateApplicant={updateApplicant}
+          fetching={fetching}>
           <Shared.TableContainer
             selectable={selectable} />
         </Shared.TablePage>

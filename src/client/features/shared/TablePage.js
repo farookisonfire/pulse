@@ -1,4 +1,5 @@
 import React from 'react';
+import { filterApplicantsBySearchText } from '../../utils/utils';
 
 class TablePage extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class TablePage extends React.Component {
       selectedEmail: '',
       searchText: '',
       searchDropDownField: 'name',
+      filteredList: [],
     };
 
     this.handleRowSelect = this.handleRowSelect.bind(this);
@@ -27,14 +29,17 @@ class TablePage extends React.Component {
   }
 
   handleRowSelect(rows) {		
-    // TODO: refactor in order to do sorting. 		
+    const { filteredList = [] } = this.state;
+    const { applicants = [] } = this.props;
+    const applicantListToUse = filteredList && filteredList.length ? filteredList : applicants;
+
     const row = rows[0];		
     Number.isInteger(row) ? 		
       (this.setState({		
         selectedRow:row, 		
-        selectedId: this.props.applicants[row].id, 		
-        selectedName: this.props.applicants[row].name,		
-        selectedEmail: this.props.applicants[row].email,		
+        selectedId: applicantListToUse[row].id,
+        selectedName: applicantListToUse[row].name,
+        selectedEmail: applicantListToUse[row].email,
       })) :		
       this.setState({selectedRow: undefined});		
   }
@@ -56,7 +61,11 @@ class TablePage extends React.Component {
   }
 
   handleSearchBarChange(e, value) {
-    this.setState({searchText: value});
+    const { applicants = [] } = this.props;
+    const { searchDropDownField } = this.state;
+
+    const filteredList = filterApplicantsBySearchText(applicants, value, searchDropDownField);
+    this.setState({searchText: value, filteredList});
   }
 
   handleSearchDropDownChange(e, idx, value) {
@@ -109,7 +118,14 @@ class TablePage extends React.Component {
       tableHeadersMap,
       fetchApplicants,
       updateApplicant,
+      fetching,
     } = this.props;
+
+    const {
+      filteredList = [],
+    } = this.state;
+
+    const applicantsToUse = filteredList && filteredList.length ? filteredList : applicants;
 
     const childrenWithProps = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
@@ -129,11 +145,12 @@ class TablePage extends React.Component {
         selectedId: this.state.selectedId,
         searchText: this.state.searchText,
         searchDropDownField: this.state.searchDropDownField,
-        applicants,
+        applicants: applicantsToUse,
         tableHeaders,
         tableHeadersMap,
         fetchApplicants,
         updateApplicant,
+        fetching,
       });
     });
 
