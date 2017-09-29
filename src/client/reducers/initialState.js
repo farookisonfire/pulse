@@ -43,5 +43,10 @@ export default {
       ],
       stage: 'secondary',
     },
+    confirmed: {
+      selectable: false,
+      tableHeaders: ["Row", "Refcode", "Date", "Name", "Email", "Phone", "D.O.B.", "Gender", "Program Id"],
+      tableHeadersMap: ["refcode","submitDate", "name", "email", "phone", "dob", "gender", "selectedProgramId"],
+    },
   },
 };
