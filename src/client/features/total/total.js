@@ -6,6 +6,7 @@ import AcceptedPage from '../accepted';
 import Denied from '../denied';
 import TableContainer from '../shared/TableContainer';
 import SecondaryPage from '../secondary/SecondaryPage';
+import ConfirmedPage from '../confirmed/ConfirmedPage';
 
 class Total extends React.Component{
   render() {
@@ -22,6 +23,7 @@ class Total extends React.Component{
             <AcceptedPage />
           </Tab>
           <Tab label="Confirmed">
+            <ConfirmedPage />
           </Tab>
         </Tabs>
       </Card>

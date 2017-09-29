@@ -27,6 +27,28 @@ export const formatApplicants = (applicants, filter) => {
   return formatted;
 };
 
+export const formatConfirmedApplicants = (applicants, filter) => {
+  const formatted = [];
+  if (applicants.length) {
+    applicants.map(applicant => {
+      if (applicant.status === filter) {
+        const format = {};
+        format.refcode = applicant.refcode;
+        format.status = applicant.status;
+        format.id = applicant._id;
+        format.name = applicant["First Name"] + ' ' + applicant["Last Name"];
+        format.email = applicant["Email"];
+        format.phone = applicant["Mobile Phone Number"];
+        format.dob = applicant["Date of Birth"];
+        format.gender = applicant["Gender"];
+        format.selectedProgramId = applicant.selectedProgramId;
+        formatted.push(format);
+      }
+    });
+  }
+  return formatted;
+};
+
 export const formatSecondaryApplicants = (applicants, filter) => {
   const formatted = [];
   if (applicants.length) {
