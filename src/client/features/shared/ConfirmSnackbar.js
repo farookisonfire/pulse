@@ -12,11 +12,11 @@ const ConfirmSnackbar = (props) => {
 
   let outcome;
   if (decision && stage === 'secondary') {
-    outcome = `${selectedName} was advanced.`;
+    outcome = `Advanced to Secondary!`;
   } else if (decision && stage === 'final') {
-    outcome = `${selectedName} was accepted`
+    outcome = `Accepted!`;
   } else if (!decision) {
-    `${selectedName} was denied`;
+    outcome = 'Denied!';
   }
   
   return (
