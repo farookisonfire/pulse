@@ -81,9 +81,6 @@ class TablePage extends React.Component {
   }
 
   handleModalConfirm (stage, value, acceptedTo) {
-    console.log('stage', stage, 'value', value, 'acceptedTo', acceptedTo)
-    
-    // return;
     this.setState({modalStatus: false});		
 
     const {		
