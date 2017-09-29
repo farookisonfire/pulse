@@ -81,6 +81,9 @@ class TablePage extends React.Component {
   }
 
   handleModalConfirm (stage, value, acceptedTo) {
+    console.log('stage', stage, 'value', value, 'acceptedTo', acceptedTo)
+    
+    // return;
     this.setState({modalStatus: false});		
 
     const {		
@@ -98,7 +101,7 @@ class TablePage extends React.Component {
     } else if (stage === 'final' && value === 'accepted') {
       selectedApplicantDetails.status = value;
       selectedApplicantDetails.program = acceptedTo;
-    } else if (value === 'denied'){
+    } else if (value === 'denied' || 'removed'){
       selectedApplicantDetails.status = value;
     }
 
