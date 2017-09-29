@@ -34,10 +34,10 @@ export function fetchApplicants() {
 }
 
 export function updateApplicant(applicantDetails) {
-  const { id } = applicantDetails;
+  const { id = '' } = applicantDetails;
 
   return function(dispatch) {
-    return fetch(getBaseUrl() + `/api/applicants/${id}`, {
+    return fetch(getBaseUrl() + `/api/applicants`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(applicantDetails),

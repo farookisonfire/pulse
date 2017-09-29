@@ -88,13 +88,14 @@ const ApplicantTable = (props) => {
     <Table
       bodyStyle={{overflow: 'visible'}}
       onRowSelection={handleRowSelect}
-      selectable={selectable}>
+      multiSelectable={selectable}>
       <TableHeader displaySelectAll={false}>
         <TableRow>
           {tableHeaders.map(makeTableHeader)}
         </TableRow>
       </TableHeader>
       <TableBody
+        deselectOnClickaway={false}
         showRowHover={true}>
         {applicants.map(makeTableRow)}
       </TableBody>

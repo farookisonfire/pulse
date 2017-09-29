@@ -6,16 +6,14 @@ class TablePage extends React.Component {
     super(props);
     
     this.state = {
-      selectedRow: undefined,		
       modalStatus: false,		
       decision: '',		
       snackbarStatus: false,		
-      selectedId: '',		
-      selectedName: '',		
-      selectedEmail: '',
       searchText: '',
       searchDropDownField: 'name',
       filteredList: [],
+      selectedRows: [],
+      selectedApplicants: [],
     };
 
     this.handleRowSelect = this.handleRowSelect.bind(this);
@@ -33,15 +31,25 @@ class TablePage extends React.Component {
     const { applicants = [] } = this.props;
     const applicantListToUse = filteredList && filteredList.length ? filteredList : applicants;
 
-    const row = rows[0];		
-    Number.isInteger(row) ? 		
-      (this.setState({		
-        selectedRow:row, 		
-        selectedId: applicantListToUse[row].id,
-        selectedName: applicantListToUse[row].name,
-        selectedEmail: applicantListToUse[row].email,
-      })) :		
-      this.setState({selectedRow: undefined});		
+    const selectedRows = [];
+    const selectedApplicants = [];
+
+    if (rows && rows.length) {
+      rows.forEach((row) => {
+        const applicant = {};
+        applicant.id = applicantListToUse[row].id;
+        applicant.name = applicantListToUse[row].name;
+        applicant.email = applicantListToUse[row].email;
+        
+        selectedRows.push(row);
+        selectedApplicants.push(applicant);
+      });
+    }
+
+    this.setState({
+      selectedRows,
+      selectedApplicants,
+    });
   }
 
   handleModalOpen(decision) { 
@@ -76,38 +84,25 @@ class TablePage extends React.Component {
     this.setState({modalStatus: false});		
 
     const {		
-      selectedId = '',		
-      selectedEmail = '',		
-      selectedName = '',		
+      selectedApplicants = [],
       decision = '',		
-    } = this.state;		
+    } = this.state;			
 
-    // const status = stage ? stage : 'denied';
-    // let finalDecision = '';
-    // let program = '';
-
-    const applicantName = selectedName.split(' ');		
-    const firstName = applicantName[0];		
-    const lastName = applicantName[applicantName.length - 1];		
-
-    const applicantDetails = {		
-      id: selectedId,		
-      email: selectedEmail,		
-      firstName,
-      lastName,
+    const selectedApplicantDetails = {
+      selectedApplicants,
     };
 
     if (stage === 'secondary' && (value === 'healthInnovation' || value === 'serve')) {
-      applicantDetails.program = value;
-      applicantDetails.status = stage;
+      selectedApplicantDetails.program = value;
+      selectedApplicantDetails.status = stage;
     } else if (stage === 'final' && value === 'accepted') {
-      applicantDetails.status = value;
-      applicantDetails.program = acceptedTo;
+      selectedApplicantDetails.status = value;
+      selectedApplicantDetails.program = acceptedTo;
     } else if (value === 'denied'){
-      applicantDetails.status = value;
+      selectedApplicantDetails.status = value;
     }
 
-    this.props.updateApplicant(applicantDetails);		
+    this.props.updateApplicant(selectedApplicantDetails);		
     this.handleSnackbarOpen();		
   }
 
@@ -123,6 +118,7 @@ class TablePage extends React.Component {
 
     const {
       filteredList = [],
+      selectedApplicants,
     } = this.state;
 
     const applicantsToUse = filteredList && filteredList.length ? filteredList : applicants;
@@ -137,12 +133,11 @@ class TablePage extends React.Component {
         handleSnackbarClose: this.handleSnackbarClose,
         handleSearchBarChange: this.handleSearchBarChange,
         handleSearchDropDownChange: this.handleSearchDropDownChange,
-        selectedRow: this.state.selectedRow,
-        selectedName: this.state.selectedName,
+        selectedRows: this.state.selectedRows,
+        selectedApplicants,
         modalStatus: this.state.modalStatus,
         snackbarStatus: this.state.snackbarStatus,
         decision: this.state.decision,
-        selectedId: this.state.selectedId,
         searchText: this.state.searchText,
         searchDropDownField: this.state.searchDropDownField,
         applicants: applicantsToUse,

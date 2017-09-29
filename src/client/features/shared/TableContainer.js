@@ -18,8 +18,8 @@ const TableContainer = (props) => {
   const {
     fetchApplicants,
     updateApplicant,
-    selectedRow,
-    selectedName,
+    selectedRows,
+    selectedApplicants,
     decision,
     snackbarStatus,
     modalStatus,
@@ -57,12 +57,13 @@ const TableContainer = (props) => {
           fields={tableHeadersMap} />
       </div>
       <div>
-      <RefreshBtn onTouchTap={fetchApplicants}/>      
-      {Number.isInteger(selectedRow) && (
-        <span>
-          <CheckBtn onTouchTap={() => handleModalOpen('accept')} />
-          <DenyBtn onTouchTap={() => handleModalOpen()} />
-        </span>)}
+        <RefreshBtn onTouchTap={fetchApplicants}/>
+        {selectedRows && selectedRows.length ?
+          (<span>
+            <CheckBtn onTouchTap={() => handleModalOpen('accept')} />
+            <DenyBtn onTouchTap={() => handleModalOpen()} />
+          </span>) :
+          null}
       </div>
   
       {fetching ? 
@@ -79,7 +80,7 @@ const TableContainer = (props) => {
         handleModalConfirm={handleModalConfirm}
         modalStatus={modalStatus}
         decision={decision}
-        selectedName={selectedName}
+        selectedApplicants={selectedApplicants}
         acceptActions={acceptActions}
         denyActions={denyActions}
         stage={stage} />
@@ -87,7 +88,7 @@ const TableContainer = (props) => {
         snackbarStatus={snackbarStatus}
         handleSnackbarClose={handleSnackbarClose}
         decision={decision}
-        selectedName={selectedName}
+        selectedApplicants={selectedApplicants}
         stage={stage} />
     </div>
   );

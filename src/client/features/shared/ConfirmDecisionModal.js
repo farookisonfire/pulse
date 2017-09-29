@@ -2,6 +2,7 @@ import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import {List, ListItem} from 'material-ui/List';
 
 const makeActionButtons = (actions, stage, handleModalConfirm, handleModalClose) => {
     return actions.map((action) => {
@@ -33,6 +34,7 @@ const ConfirmDecision = (props) => {
     modalStatus,
     decision = '',
     selectedName,
+    selectedApplicants = [],
     acceptActions = [],
     denyActions = [],
     stage,
@@ -46,25 +48,37 @@ const ConfirmDecision = (props) => {
 
   if (decision) {
     if (stage === 'secondary') {
-      enrollmentDecision = `Select secondary application for ${selectedName}`
+      enrollmentDecision = `Confirm SECONDARY For:`;
     } else if (stage === 'final') {
-      enrollmentDecision = `ACCEPT ${selectedName} to which program?`
+      enrollmentDecision = `Confirm ACCEPTANCE For:`;
     }
   } else {
-    enrollmentDecision = `Are you sure you want to DENY ${selectedName}?`
+    enrollmentDecision = `Confirm REJECTION For`;
   }
 
+  const selectedList = selectedApplicants.map((applicant, idx) => {
     return (
-      <div>
-        <Dialog
-          title="Confirm Decision"
-          actions={modalActions}
-          modal={true}
-          open={modalStatus}>
-          {enrollmentDecision}
-        </Dialog>
-      </div>
+      <ListItem
+        disabled
+        innerDivStyle={{padding: '8px 16px'}}
+        key={`confirm-modal-${applicant.id}`}
+        primaryText={`· ${applicant.name}`}/>
     );
+  });
+
+  return (
+    <div>
+      <Dialog
+        title={enrollmentDecision}
+        actions={modalActions}
+        modal={true}
+        open={modalStatus}>
+        <List>
+          {selectedList}
+        </List>
+      </Dialog>
+    </div>
+  );
 };
 
 export default ConfirmDecision;
