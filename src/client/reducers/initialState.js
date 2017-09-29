@@ -24,6 +24,7 @@ export default {
       ],
       denyActions: [
         { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
+        { label: 'Safe Remove', value: 'removed', isPrimary: false, isSecondary: false },
         { label: 'Deny', value: 'denied', isPrimary: false, isSecondary: true },
       ],
       stage: 'final',
@@ -39,7 +40,9 @@ export default {
       ],
       denyActions: [
         { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
+        { label: 'Safe Remove', value: 'removed', isPrimary: false, isSecondary: false },
         { label: 'Confirm', value: 'denied', isPrimary: false, isSecondary: true },
+        
       ],
       stage: 'secondary',
     },

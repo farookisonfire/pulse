@@ -98,7 +98,7 @@ class TablePage extends React.Component {
     } else if (stage === 'final' && value === 'accepted') {
       selectedApplicantDetails.status = value;
       selectedApplicantDetails.program = acceptedTo;
-    } else if (value === 'denied'){
+    } else if (value === 'denied' || 'removed'){
       selectedApplicantDetails.status = value;
     }
 
