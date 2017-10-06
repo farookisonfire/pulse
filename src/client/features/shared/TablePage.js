@@ -106,6 +106,10 @@ class TablePage extends React.Component {
     this.handleSnackbarOpen();		
   }
 
+  componentWillReceiveProps() {
+    this.setState({filteredList: this.props.applicants});
+  }
+
   render() {
     const {
       applicants,
@@ -121,7 +125,7 @@ class TablePage extends React.Component {
       selectedApplicants,
     } = this.state;
 
-    const applicantsToUse = filteredList && filteredList.length ? filteredList : applicants;
+    const applicantsToUse = filteredList && filteredList.length ? filteredList : [];
 
     const childrenWithProps = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
