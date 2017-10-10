@@ -6,7 +6,7 @@ function requestApplicants() {
   return { type: types.REQUEST_APPLICANTS };
 }
 
-function receiveApplicants(applicants) {
+export function receiveApplicants(applicants) {
   return {type: types.RECEIVE_APPLICANTS, applicants};
 }
 
@@ -15,7 +15,6 @@ function receiveApplicantsFail() {
 }
 
 export function fetchApplicants() {
-  console.log('fetching action')
   return function(dispatch) {
     dispatch(requestApplicants());
     return fetch(getBaseUrl() + '/api/applicants')
