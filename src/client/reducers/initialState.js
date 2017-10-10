@@ -1,9 +1,13 @@
 export default {
   pageProfiles : {
     accepted: {
-      selectable: false,
+      selectable: true,
       tableHeaders: ["Row", "Refcode", "Date", "Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Major", "Program", "Stream",  "Why OHS"],
       tableHeadersMap: ["refcode","submitDate", "name", "email", "phone", "dob", "gender", "university", "major", "program", "stream", "why"],
+      denyActions: [
+        { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
+        { label: 'Safe Remove', value: 'removed', isPrimary: false, isSecondary: false },
+      ],
     },
     secondary: {
       program: 'health',
@@ -42,7 +46,6 @@ export default {
         { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
         { label: 'Safe Remove', value: 'removed', isPrimary: false, isSecondary: false },
         { label: 'Confirm', value: 'denied', isPrimary: false, isSecondary: true },
-        
       ],
       stage: 'secondary',
     },

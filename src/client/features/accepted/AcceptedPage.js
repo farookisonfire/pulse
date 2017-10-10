@@ -17,7 +17,8 @@ class AcceptedPage extends Component {
     const {
       tableHeaders,
       tableHeadersMap,
-      selectable = false,
+      selectable = true,
+      denyActions = [],
     } = acceptedPageData;
 
     return(
@@ -29,7 +30,8 @@ class AcceptedPage extends Component {
           updateApplicant={updateApplicant}
           fetching={fetching}>
           <Shared.TableContainer
-            selectable={selectable} />
+            selectable={selectable}
+            denyActions={denyActions} />
         </Shared.TablePage>
     );
   }
