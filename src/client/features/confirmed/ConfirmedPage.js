@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Shared from '../shared';
-import { formatConfirmedApplicants } from '../../utils/utils';
+import { formatConfirmedApplicants, resolveProgramTypeAndDate } from '../../utils/utils';
 import {fetchApplicants, updateApplicant} from '../applied/applicantActions';
 
 class ConfirmedPage extends Component {
@@ -35,15 +35,25 @@ class ConfirmedPage extends Component {
   }
 }
 
-const mapStateToProps = ({applicants, fetching, pageProfiles}) => {
+const mapStateToProps = (state) => {
+  const {
+    applicants,
+    fetching,
+    pageProfiles,
+    programs,
+  } = state;
+
   const {
     confirmed
   } = pageProfiles;
 
+  const formattedApplicants = formatConfirmedApplicants(applicants, 'confirmed');
+  const formattedWithProgram = resolveProgramTypeAndDate(formattedApplicants, programs);
+
   return {
     fetching,
     confirmedPageData: confirmed,
-    applicants: formatConfirmedApplicants(applicants, 'confirmed'),
+    applicants: formattedWithProgram,
   };
 };
 

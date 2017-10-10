@@ -42,6 +42,10 @@ export const formatConfirmedApplicants = (applicants, filter) => {
         format.dob = applicant["Date of Birth"];
         format.gender = applicant["Gender"];
         format.selectedProgramId = applicant.selectedProgramId;
+        format.promotionDeadline = applicant.promotionDeadline;
+        format.finalDeadline = applicant.finalDeadline;
+        format.paymentStatus = applicant.paymentStatus;
+        format.qualifyPromotion = applicant.qualifyPromotion;
         formatted.push(format);
       }
     });
@@ -92,5 +96,26 @@ export const filterApplicantsBySearchText = (applicants, searchText, field) => {
       return applicant[field].join().includes(searchText);
     }
     return applicant[field] && applicant[field].includes(searchText);
+  });
+};
+
+export const resolveProgramTypeAndDate = (applicants, programs) => {
+  return applicants.map((applicant) => {
+    const selectedProgram = programs.filter((program) => {
+      return program.id === applicant.selectedProgramId;
+    });
+
+    if (selectedProgram && selectedProgram.length) {
+      const selected = selectedProgram[0];
+      const {
+        type = '',
+        date = '',
+      } = selected;
+
+      applicant.selectedProgramType = type;
+      applicant.selectedProgramDate = date;
+    }
+
+    return applicant;
   });
 };

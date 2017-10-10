@@ -48,8 +48,8 @@ export default {
     },
     confirmed: {
       selectable: false,
-      tableHeaders: ["Row", "Refcode", "Date", "Name", "Email", "Phone", "D.O.B.", "Gender", "Program Id"],
-      tableHeadersMap: ["refcode","submitDate", "name", "email", "phone", "dob", "gender", "selectedProgramId"],
+      tableHeaders: ["Row", "Refcode", "Name", "Email", "Phone", "D.O.B.", "Gender", "Program", "Program Date", "Promotion Deadline", "Final Deadline", "Payment Status", "Qualify for Promotion"],
+      tableHeadersMap: ["refcode", "name", "email", "phone", "dob", "gender", "selectedProgramType", "selectedProgramDate", "promotionDeadline", "finalDeadline", "paymentStatus", "qualifyPromotion"],
     },
   },
 };

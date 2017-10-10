@@ -7,9 +7,21 @@ import Denied from '../denied';
 import TableContainer from '../shared/TableContainer';
 import SecondaryPage from '../secondary/SecondaryPage';
 import ConfirmedPage from '../confirmed/ConfirmedPage';
+import { connect } from 'react-redux';
+import { getInitialData } from './allAdmissionsActions';
 
 class Total extends React.Component{
+  
+  componentDidMount() {
+    const { getInitialData = () => {} } = this.props;
+    getInitialData();
+  }
+
   render() {
+    const {
+      programs = [],
+    } = this.props;
+
     return (
       <Card style={{height:"90vh"}}>
         <Tabs>
@@ -23,7 +35,8 @@ class Total extends React.Component{
             <AcceptedPage />
           </Tab>
           <Tab label="Confirmed">
-            <ConfirmedPage />
+            <ConfirmedPage
+              programs={programs}/>
           </Tab>
         </Tabs>
       </Card>
@@ -31,4 +44,6 @@ class Total extends React.Component{
   }
 }
 
-export default Total;
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps, {getInitialData})(Total);

@@ -4,6 +4,7 @@ import fetching from './fetchingReducer';
 import auth from '../features/auth/authReducer';
 import errors from '../features/global/errorReducer';
 import pageProfiles from './pageProfilesReducer';
+import programs from './programsReducer';
 
 const rootReducer = combineReducers({
   applicants,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   auth,
   errors,
   pageProfiles,
+  programs,
 });
 
 export default rootReducer;
