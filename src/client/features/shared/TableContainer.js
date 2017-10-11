@@ -44,18 +44,6 @@ const TableContainer = (props) => {
   
   return(
     <div>
-      <div style={{
-        display: 'flex', 
-        justifyContent: 'center',
-        marginTop: 16,
-      }}>
-        <SearchBar
-          onSearchChange={handleSearchBarChange} />
-        <SearchDropDown
-          handleSearchDropDownChange={handleSearchDropDownChange}
-          value={searchDropDownField}
-          fields={tableHeadersMap} />
-      </div>
       <div>
         <RefreshBtn onTouchTap={fetchApplicants}/>
         {selectedRows && selectedRows.length ?
@@ -95,3 +83,16 @@ const TableContainer = (props) => {
 };
 
 export default TableContainer;
+
+{/*<div style={{
+        display: 'flex', 
+        justifyContent: 'center',
+        marginTop: 16,
+      }}>
+        <SearchBar
+          onSearchChange={handleSearchBarChange} />
+        <SearchDropDown
+          handleSearchDropDownChange={handleSearchDropDownChange}
+          value={searchDropDownField}
+          fields={tableHeadersMap} />
+      </div>*/}

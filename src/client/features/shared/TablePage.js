@@ -144,7 +144,7 @@ class TablePage extends React.Component {
         decision: this.state.decision,
         searchText: this.state.searchText,
         searchDropDownField: this.state.searchDropDownField,
-        applicants: applicantsToUse,
+        applicants: applicants,
         tableHeaders,
         tableHeadersMap,
         fetchApplicants,
