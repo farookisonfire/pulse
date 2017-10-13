@@ -54,5 +54,10 @@ export default {
       tableHeaders: ["Row", "Refcode", "Name", "Email", "Phone", "D.O.B.", "Gender", "Program", "Program Date", "Promotion Deadline", "Final Deadline", "Payment Status", "Qualify for Promotion"],
       tableHeadersMap: ["refcode", "name", "email", "phone", "dob", "gender", "selectedProgramType", "selectedProgramDate", "promotionDeadline", "finalDeadline", "paymentStatus", "qualifyPromotion"],
     },
+    fellowshipPage: {
+      selectable: false,
+      tableHeaders: ["Row", "Refcode", "Name", "Program", "Program Date", "Promotion Deadline", "Final Deadline", "Payment Status", "Qualify for Promotion"],
+      tableHeadersMap: ["refcode", "name", "selectedProgramType", "selectedProgramDate", "promotionDeadline", "finalDeadline", "paymentStatus", "qualifyPromotion"],
+    },
   },
 };
