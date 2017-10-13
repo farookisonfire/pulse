@@ -2,6 +2,17 @@ import * as types from './applicantActionTypes';
 import { addError } from '../global/errorActions';
 import getBaseUrl from '../../baseUrl';
 
+export const GENERIC_FETCH_START = 'GENERIC_FETCH_START';
+export const GENERIC_FETCH_END = 'GENERIC_FETCH_END';
+
+function genericFetchStart() {
+  return { type: GENERIC_FETCH_START };
+}
+
+function genericFetchEnd() {
+  return { type: GENERIC_FETCH_END }
+}
+
 function requestApplicants() {
   return { type: types.REQUEST_APPLICANTS };
 }
@@ -34,8 +45,8 @@ export function fetchApplicants() {
 
 export function updateApplicant(applicantDetails) {
   const { id = '' } = applicantDetails;
-
   return function(dispatch) {
+    dispatch(genericFetchStart());
     return fetch(getBaseUrl() + `/api/applicants`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -47,6 +58,9 @@ export function updateApplicant(applicantDetails) {
         }
         throw new Error(res.statusText);
       })
-      .catch(err => dispatch(addError(err)));
+      .catch(err => {
+        dispatch(addError(err));
+        dispatch(genericFetchEnd());
+      });
   };
 }
