@@ -43,7 +43,7 @@ const ApplicantTable = (props) => {
     tableHeadersMap = [],
     applicants = [],
     handleRowSelect = () => {},
-    selectable = '',
+    selectable = true,
   } = props;
   
   function makeTableHeader(header, idx) {

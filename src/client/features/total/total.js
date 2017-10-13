@@ -20,6 +20,7 @@ class Total extends React.Component{
   render() {
     const {
       programs = [],
+      fellows = [],
     } = this.props;
 
     return (

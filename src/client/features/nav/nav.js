@@ -10,6 +10,10 @@ const Nav = () => (
       containerElement={<Link to="/" />}
       primaryText="Applicants"
     />
+    <MenuItem
+      containerElement={<Link to="/fellowship" />}
+      primaryText="Fellowship"
+    />
   </Menu>
 );
 

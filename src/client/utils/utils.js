@@ -53,6 +53,27 @@ export const formatConfirmedApplicants = (applicants, filter) => {
   return formatted;
 };
 
+export const formatConfirmedFellows = (applicants, filter) => {
+  const formatted = [];
+  if (applicants.length) {
+    applicants.map(applicant => {
+      if (applicant.status === filter) {
+        const format = {};
+        format.status = applicant.status;
+        format.id = applicant._id;
+        format.name = `${applicant.firstName} ${applicant.lastName}`;
+        format.selectedProgramId = applicant.selectedProgramId;
+        format.promotionDeadline = applicant.promotionDeadline;
+        format.finalDeadline = applicant.finalDeadline;
+        format.paymentStatus = applicant.paymentStatus;
+        format.qualifyPromotion = applicant.qualifyPromotion;
+        formatted.push(format);
+      }
+    });
+  }
+  return formatted;
+};
+
 export const formatSecondaryApplicants = (applicants, filter) => {
   const formatted = [];
   if (applicants.length) {
