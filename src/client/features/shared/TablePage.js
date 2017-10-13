@@ -27,9 +27,7 @@ class TablePage extends React.Component {
   }
 
   handleRowSelect(rows) {		
-    const { filteredList = [] } = this.state;
     const { applicants = [] } = this.props;
-    const applicantListToUse = filteredList && filteredList.length ? filteredList : applicants;
 
     const selectedRows = [];
     const selectedApplicants = [];
@@ -37,10 +35,10 @@ class TablePage extends React.Component {
     if (rows && rows.length) {
       rows.forEach((row) => {
         const applicant = {};
-        applicant.id = applicantListToUse[row].id;
-        applicant.name = applicantListToUse[row].name;
-        applicant.email = applicantListToUse[row].email;
-        applicant.phone = applicantListToUse[row].phone;
+        applicant.id = applicants[row].id;
+        applicant.name = applicants[row].name;
+        applicant.email = applicants[row].email;
+        applicant.phone = applicants[row].phone;
         
         selectedRows.push(row);
         selectedApplicants.push(applicant);
