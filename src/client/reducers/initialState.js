@@ -17,14 +17,17 @@ export default {
       radioButtons : {
         buttons: [
           {value: "healthInnovation", label: "Health Innovation"},
-          {value: "serve", label: "Serve a Million"}
+          {value: "serve", label: "Serve a Million"},
+          {value: "youthEmpowerment", label: "Youth Empowerment"},
+          {value: "education", label: "Education / Social Work"},
         ],
         defaultSelected: "healthInnovation",
       },
       acceptActions: [
         { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
         { label: 'Health Innovation', value: 'accepted', program: 'healthInnovation', isPrimary: true, isSecondary: false },
-        { label: 'Serve a Million', value: 'accepted', program: 'serve', isPrimary: true, isSecondary: false },
+        { label: 'Youth Empowerment', value: 'accepted', program: 'youthEmpowerment', isPrimary: true, isSecondary: false },
+        { label: 'Education / Social Work', value: 'accepted', program: 'education', isPrimary: true, isSecondary: false },
       ],
       denyActions: [
         { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
@@ -40,7 +43,8 @@ export default {
       acceptActions: [
         { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
         { label: 'Health', value: 'healthInnovation', isPrimary: true, isSecondary: false },
-        { label: 'Serve a Million', value: 'serve', isPrimary: true, isSecondary: false },
+        { label: 'Youth Empowerment', value: 'youthEmpowerment', isPrimary: true, isSecondary: false },
+        { label: 'Education / Social Work', value: 'education', isPrimary: true, isSecondary: false },
       ],
       denyActions: [
         { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },

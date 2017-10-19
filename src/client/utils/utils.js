@@ -27,6 +27,36 @@ export const formatApplicants = (applicants, filter) => {
   return formatted;
 };
 
+export const formatAcceptedApplicants = (applicants, filter) => {
+  const formatted = [];
+  if (applicants.length) {
+    applicants.map(applicant => {
+      if (applicant.status === filter) {
+        const format = {};
+        format.refcode = applicant.refcode;
+        format.acceptedDate = applicant.acceptedDate;
+        format.enrollmentFeeDeadline = applicant.enrollmentFeeDeadline;
+        format.status = applicant.status;
+        format.id = applicant._id;
+        format.name = applicant["First Name"] + ' ' + applicant["Last Name"];
+        format.email = applicant["Email"];
+        format.phone = applicant["Mobile Phone Number"];
+        format.dob = applicant["Date of Birth"];
+        format.gender = applicant["Gender"];
+        applicant["University you attend(ed)"] === '- Other University -'
+          ? format.university = applicant["Name of University"]
+          : format.university = applicant["University you attend(ed)"];
+        format.why = applicant["Why do you want to volunteer with OHS?"];
+        format.program = applicant.acceptedTo;
+        format.stream = applicant["Select your preferred program focus"];
+        format.major = applicant["What is your major or field of study/work?"];
+        formatted.push(format);
+      }
+    });
+  }
+  return formatted;
+};
+
 export const formatConfirmedApplicants = (applicants, filter) => {
   const formatted = [];
   if (applicants.length) {
