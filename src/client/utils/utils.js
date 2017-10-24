@@ -5,7 +5,7 @@ export const formatApplicants = (applicants, filter) => {
       if (applicant.status === filter) {
         const format = {};
         format.refcode = applicant.refcode;
-        format.submitDate = applicant.primarySubmitDate;
+        format.primarySubmitDate = applicant.primarySubmitDate;
         format.status = applicant.status;
         format.id = applicant._id;
         format.name = applicant["First Name"] + ' ' + applicant["Last Name"];
@@ -16,7 +16,7 @@ export const formatApplicants = (applicants, filter) => {
         applicant["University you attend(ed)"] === '- Other University -' 
           ? format.university = applicant["Name of University"]
           : format.university = applicant["University you attend(ed)"];
-        format.why = applicant["Why do you want to volunteer with OHS?"];
+        format.why = applicant["Why do you want to join OHS?"];
         format.program = applicant["Which program are you most interested in?"];
         format.stream = applicant["Select your preferred program focus"];
         format.major = applicant["What is your major or field of study/work?"];
@@ -46,7 +46,7 @@ export const formatAcceptedApplicants = (applicants, filter) => {
         applicant["University you attend(ed)"] === '- Other University -'
           ? format.university = applicant["Name of University"]
           : format.university = applicant["University you attend(ed)"];
-        format.why = applicant["Why do you want to volunteer with OHS?"];
+        format.why = applicant["Why do you want to join OHS?"];
         format.program = applicant.acceptedTo;
         format.stream = applicant["Select your preferred program focus"];
         format.major = applicant["What is your major or field of study/work?"];
@@ -111,7 +111,9 @@ export const formatSecondaryApplicants = (applicants, filter) => {
       if (applicant.status === filter) {
         const format = {};
         format.refcode = applicant.refcode;
-        format.submitDate = applicant.secondarySubmitDate;
+        format.secondaryDate = applicant.secondaryDate;
+        format.secondaryDeadline = applicant.secondaryDeadline;
+        format.secondarySubmitDate = applicant.secondarySubmitDate;
         format.status = applicant.status;
         format.secondaryProgram = applicant.secondary;
         format.id = applicant._id;

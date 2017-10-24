@@ -2,8 +2,8 @@ export default {
   pageProfiles : {
     accepted: {
       selectable: true,
-      tableHeaders: ["Row", "Refcode", "Date", "Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Major", "Program", "Stream",  "Why OHS"],
-      tableHeadersMap: ["refcode","submitDate", "name", "email", "phone", "dob", "gender", "university", "major", "program", "stream", "why"],
+      tableHeaders: ["Row", "Refcode", "Accepted Date", "Enrollment Fee Deadline","Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Major", "Program", "Stream",  "Why OHS"],
+      tableHeadersMap: ["refcode", "acceptedDate", "enrollmentFeeDeadline", "name", "email", "phone", "dob", "gender", "university", "major", "program", "stream", "why"],
       denyActions: [
         { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
         { label: 'Safe Remove', value: 'removed', isPrimary: false, isSecondary: false },
@@ -12,8 +12,8 @@ export default {
     secondary: {
       program: 'health',
       selectable: true,
-      tableHeaders: ["Row", "Refcode", "Date", "Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Major", "Stream", "Method of Contact", "Timezone", "Best Time To Call?", "Volunteered With OHS?", "Questions or Suggestions", "Top Strengths" , "Ideal Vocation", "Hope To Gain", "Hope To Give"],
-      tableHeadersMap: ["refcode", "submitDate" ,"name", "email", "phone", "dob", "gender", "university", "major","stream", "methodOfContact", "timezone", "bestTime", "pastVolunteer", "questionOrSuggestion", "topStrengths", "idealVocation", "hopeToGain", "hopeToGive"],
+      tableHeaders: ["Row", "Refcode", "Secondary Date", "Secondary Deadline","Secondary Submit Date", "Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Major", "Stream", "Method of Contact", "Timezone", "Best Time To Call?", "Volunteered With OHS?", "Questions or Suggestions", "Top Strengths" , "Ideal Vocation", "Hope To Gain", "Hope To Give"],
+      tableHeadersMap: ["refcode", "secondaryDate", "secondaryDeadline", "secondarySubmitDate" ,"name", "email", "phone", "dob", "gender", "university", "major","stream", "methodOfContact", "timezone", "bestTime", "pastVolunteer", "questionOrSuggestion", "topStrengths", "idealVocation", "hopeToGain", "hopeToGive"],
       radioButtons : {
         buttons: [
           {value: "healthInnovation", label: "Health Innovation"},
@@ -38,8 +38,8 @@ export default {
     },
     applied: {
       selectable: true,
-      tableHeaders: ["Row", "Refcode", "Date", "Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Major", "Program", "Stream",  "Why OHS"],
-      tableHeadersMap: ["refcode","submitDate", "name", "email", "phone", "dob", "gender", "university", "major", "program", "stream", "why"],
+      tableHeaders: ["Row", "Refcode", "Primary Submit Date", "Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Major", "Program", "Stream",  "Why OHS"],
+      tableHeadersMap: ["refcode","primarySubmitDate", "name", "email", "phone", "dob", "gender", "university", "major", "program", "stream", "why"],
       acceptActions: [
         { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
         { label: 'Health', value: 'healthInnovation', isPrimary: true, isSecondary: false },

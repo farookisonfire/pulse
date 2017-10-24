@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Shared from '../shared';
-import { formatApplicants } from '../../utils/utils';
+import { formatAcceptedApplicants } from '../../utils/utils';
 import {fetchApplicants, updateApplicant} from '../applied/applicantActions';
 
 class AcceptedPage extends Component {
@@ -45,7 +45,7 @@ const mapStateToProps = ({applicants, pageProfiles, fetching}) => {
   return {
     fetching,
     acceptedPageData: accepted,
-    applicants: formatApplicants(applicants, 'accepted')
+    applicants: formatAcceptedApplicants(applicants, 'accepted')
   };
 };
 
