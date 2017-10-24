@@ -16,7 +16,9 @@ export const formatApplicants = (applicants, filter) => {
         applicant["University you attend(ed)"] === '- Other University -' 
           ? format.university = applicant["Name of University"]
           : format.university = applicant["University you attend(ed)"];
-        format.why = applicant["Why do you want to join OHS?"];
+        format.why = applicant["Why do you want to join OHS?"] ?
+          applicant["Why do you want to join OHS?"] :
+          applicant["Why do you want to volunteer with OHS?"];
         format.program = applicant["Which program are you most interested in?"];
         format.stream = applicant["Select your preferred program focus"];
         format.major = applicant["What is your major or field of study/work?"];
@@ -46,7 +48,9 @@ export const formatAcceptedApplicants = (applicants, filter) => {
         applicant["University you attend(ed)"] === '- Other University -'
           ? format.university = applicant["Name of University"]
           : format.university = applicant["University you attend(ed)"];
-        format.why = applicant["Why do you want to join OHS?"];
+        format.why = applicant["Why do you want to join OHS?"] ?
+          applicant["Why do you want to join OHS?"] :
+          applicant["Why do you want to volunteer with OHS?"];
         format.program = applicant.acceptedTo;
         format.stream = applicant["Select your preferred program focus"];
         format.major = applicant["What is your major or field of study/work?"];
