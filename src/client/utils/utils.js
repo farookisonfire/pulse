@@ -75,6 +75,9 @@ export const formatConfirmedApplicants = (applicants, filter) => {
         format.phone = applicant["Mobile Phone Number"];
         format.dob = applicant["Date of Birth"];
         format.gender = applicant["Gender"];
+        applicant["University you attend(ed)"] === '- Other University -'
+          ? format.university = applicant["Name of University"]
+          : format.university = applicant["University you attend(ed)"];
         format.selectedProgramId = applicant.selectedProgramId;
         format.promotionDeadline = applicant.promotionDeadline;
         format.finalDeadline = applicant.finalDeadline;
