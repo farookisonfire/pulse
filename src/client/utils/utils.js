@@ -22,6 +22,7 @@ export const formatApplicants = (applicants, filter) => {
         format.program = applicant["Which program are you most interested in?"];
         format.stream = applicant["Select your preferred program focus"];
         format.major = applicant["What is your major or field of study/work?"];
+        format.hbcu = applicant["Do you attend a historically black college or university (HBCU)?"];
         formatted.push(format);
       }
     });
@@ -145,6 +146,7 @@ export const formatSecondaryApplicants = (applicants, filter) => {
           applicant["What is your ideal vocation? Why?"];
         format.hopeToGain = applicant["In three words, what do you hope to gain from this experience?"];
         format.hopeToGive = applicant["In three words, what do you hope to give during this experience?"];
+        format.hbcu = applicant["Do you attend a historically black college or university (HBCU)?"];
         formatted.push(format);
       }
     });
