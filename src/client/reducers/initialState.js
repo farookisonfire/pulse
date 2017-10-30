@@ -20,6 +20,7 @@ export default {
           {value: "serve", label: "Serve a Million"},
           {value: "youthEmpowerment", label: "Youth Empowerment"},
           {value: "education", label: "Education / Social Work"},
+          {value: "hbcu", label: "HBCU"},
         ],
         defaultSelected: "healthInnovation",
       },
@@ -38,8 +39,8 @@ export default {
     },
     applied: {
       selectable: true,
-      tableHeaders: ["Row", "Refcode", "Primary Submit Date", "Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Major", "Program", "Stream",  "Why OHS"],
-      tableHeadersMap: ["refcode","primarySubmitDate", "name", "email", "phone", "dob", "gender", "university", "major", "program", "stream", "why"],
+      tableHeaders: ["Row", "Refcode", "Primary Submit Date", "Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Major", "HBCU", "Program", "Stream",  "Why OHS"],
+      tableHeadersMap: ["refcode","primarySubmitDate", "name", "email", "phone", "dob", "gender", "university", "major", "hbcu", "program", "stream", "why"],
       acceptActions: [
         { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
         { label: 'Health', value: 'healthInnovation', isPrimary: true, isSecondary: false },

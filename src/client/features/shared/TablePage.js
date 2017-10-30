@@ -39,6 +39,7 @@ class TablePage extends React.Component {
         applicant.name = applicants[row].name;
         applicant.email = applicants[row].email;
         applicant.phone = applicants[row].phone;
+        applicant.hbcu = applicants[row].hbcu;
         
         selectedRows.push(row);
         selectedApplicants.push(applicant);
