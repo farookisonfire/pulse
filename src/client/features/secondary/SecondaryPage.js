@@ -43,7 +43,6 @@ class SecondaryPage extends Component {
 
     const applicantsToUse = applicants.filter((applicant) => {
       if (selectedProgram === 'hbcu') {
-        console.log('applicant hbcu', applicant.hbcu)
         return applicant.hbcu === 'Yes';
       }
       return (applicant.secondaryProgram === selectedProgram && applicant.hbcu !== 'Yes');
