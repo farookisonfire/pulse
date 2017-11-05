@@ -46,7 +46,7 @@ export const formatAcceptedApplicants = (applicants, filter) => {
         format.phone = applicant["Mobile Phone Number"];
         format.dob = applicant["Date of Birth"];
         format.gender = applicant["Gender"];
-        applicant["University you attend(ed)"] === '- Other University -'
+      applicant["University you attend(ed)"] === '- Other University -'
           ? format.university = applicant["Name of University"]
           : format.university = applicant["University you attend(ed)"];
         format.why = applicant["Why do you want to join OHS?"] ?
@@ -62,18 +62,18 @@ export const formatAcceptedApplicants = (applicants, filter) => {
   return formatted;
 };
 
-export const formatConfirmedApplicants = (applicants, filter) => {
+export const formatConfirmedApplicants = (applicants, filter, secondaryFilter = '') => {
   const formatted = [];
   if (applicants.length) {
     applicants.map(applicant => {
-      if (applicant.status === filter) {
+      if (applicant.status === filter || applicant.status === secondaryFilter) {
         const format = {};
         format.refcode = applicant.refcode;
         format.status = applicant.status;
         format.id = applicant._id;
         format.name = applicant["First Name"] + ' ' + applicant["Last Name"];
-        format.email = applicant["Email"];
-        format.phone = applicant["Mobile Phone Number"];
+        format.email = applicant["Email"] || applicant['Please confirm your e-mail address:'];
+        format.phone = applicant["Mobile Phone Number"] || applicant['Phone:'];
         format.dob = applicant["Date of Birth"];
         format.gender = applicant["Gender"];
         applicant["University you attend(ed)"] === '- Other University -'

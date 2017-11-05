@@ -47,7 +47,7 @@ const mapStateToProps = (state) => {
     confirmed
   } = pageProfiles;
 
-  const formattedApplicants = formatConfirmedApplicants(applicants, 'confirmed');
+  const formattedApplicants = formatConfirmedApplicants(applicants, 'confirmed', 'defer-enroll');
   const formattedWithProgram = resolveProgramTypeAndDate(formattedApplicants, programs);
 
   return {
