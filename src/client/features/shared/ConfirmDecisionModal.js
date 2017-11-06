@@ -37,23 +37,26 @@ const ConfirmDecision = (props) => {
     selectedApplicants = [],
     acceptActions = [],
     denyActions = [],
+    infoActions = [],
     stage,
   } = props;
 
-  const acceptActionButtons = makeActionButtons(acceptActions, stage, handleModalConfirm, handleModalClose);
-  const denyActionButtons = makeActionButtons(denyActions, stage, handleModalConfirm, handleModalClose);
+  let titleText;
+  let modalActions;
 
-  const modalActions = decision ? acceptActionButtons : denyActionButtons;
-  let enrollmentDecision;
-
-  if (decision) {
+  if (decision === 'accept') {
+    modalActions = makeActionButtons(acceptActions, stage, handleModalConfirm, handleModalClose);
     if (stage === 'secondary') {
-      enrollmentDecision = `Confirm SECONDARY For:`;
+      titleText = `Confirm SECONDARY For:`;
     } else if (stage === 'final') {
-      enrollmentDecision = `Confirm ACCEPTANCE For:`;
+      titleText = `Confirm ACCEPTANCE For:`;
     }
+  } else if(decision === 'info') {
+    modalActions = makeActionButtons(infoActions, stage, handleModalConfirm, handleModalClose);
+    titleText = 'Confirm SEND INFO to:';
   } else {
-    enrollmentDecision = `Confirm REJECTION For`;
+    modalActions = makeActionButtons(denyActions, stage, handleModalConfirm, handleModalClose);
+    titleText = `Confirm REJECTION For`;
   }
 
   const selectedList = selectedApplicants.map((applicant, idx) => {
@@ -69,7 +72,7 @@ const ConfirmDecision = (props) => {
   return (
     <div>
       <Dialog
-        title={enrollmentDecision}
+        title={titleText}
         actions={modalActions}
         modal={true}
         open={modalStatus}>

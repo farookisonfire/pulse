@@ -7,6 +7,7 @@ import ApplicantTable from '../applied/ApplicantTable';
 import RefreshBtn from '../applied/RefreshBtn';
 import CheckBtn from '../applied/CheckBtn';
 import DenyBtn from '../applied/DenyBtn';
+import InfoBtn from './InfoBtn';
 import Spinner from 'react-spinkit';
 import {spinner} from '../applied/applicantStyles';
 import ConfirmDecisionModal from './ConfirmDecisionModal';
@@ -38,6 +39,7 @@ const TableContainer = (props) => {
     searchDropDownField,
     acceptActions,
     denyActions,
+    infoActions,
     stage,
     selectable = true,
   } = props;
@@ -50,6 +52,9 @@ const TableContainer = (props) => {
           (<span>
             <CheckBtn onTouchTap={() => handleModalOpen('accept')} />
             <DenyBtn onTouchTap={() => handleModalOpen()} />
+            { stage === 'final' ?
+              <InfoBtn onTouchTap={(() => handleModalOpen('info'))} /> :
+              null }
           </span>) :
           null}
       </div>
@@ -71,6 +76,7 @@ const TableContainer = (props) => {
         selectedApplicants={selectedApplicants}
         acceptActions={acceptActions}
         denyActions={denyActions}
+        infoActions={infoActions}
         stage={stage} />
       <ConfirmSnackbar
         snackbarStatus={snackbarStatus}

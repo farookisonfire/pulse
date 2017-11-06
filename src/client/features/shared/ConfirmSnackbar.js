@@ -11,10 +11,12 @@ const ConfirmSnackbar = (props) => {
   } = props;
 
   let outcome;
-  if (decision && stage === 'secondary') {
+  if (decision === 'accept' && stage === 'secondary') {
     outcome = `Advanced to Secondary!`;
-  } else if (decision && stage === 'final') {
+  } else if (decision === 'accept' && stage === 'final') {
     outcome = `Accepted!`;
+  } else if (decision === 'info') {
+    outcome = `Sent Info!`;
   } else if (!decision) {
     outcome = 'Denied!';
   }
