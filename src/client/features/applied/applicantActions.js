@@ -44,10 +44,18 @@ export function fetchApplicants() {
 }
 
 export function updateApplicant(applicantDetails) {
-  const { id = '' } = applicantDetails;
+  const {
+    id = '',
+    status = ''
+  } = applicantDetails;
+
+  const resourcePath = status === 'info-health' ?
+    '/info/health' :
+    'api/applicants';
+
   return function(dispatch) {
     dispatch(genericFetchStart());
-    return fetch(getBaseUrl() + `/api/applicants`, {
+    return fetch(getBaseUrl() + resourcePath, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(applicantDetails),

@@ -34,6 +34,7 @@ class SecondaryPage extends Component {
       radioButtons = {},
       acceptActions = [],
       denyActions = [],
+      infoActions = [],
       stage = 'final',
     } = secondaryPageData;
 
@@ -68,6 +69,7 @@ class SecondaryPage extends Component {
         <Shared.TableContainer
           acceptActions={acceptActions}
           denyActions={denyActions}
+          infoActions={infoActions}
           stage={stage} />
       </Shared.TablePage>
     );

@@ -35,6 +35,10 @@ export default {
         { label: 'Safe Remove', value: 'removed', isPrimary: false, isSecondary: false },
         { label: 'Deny', value: 'denied', isPrimary: false, isSecondary: true },
       ],
+      infoActions: [
+        { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
+        { label: 'Send Health Info', value: 'info-health', program: 'healthInnovation', isPrimary: true, isSecondary: false },
+      ],
       stage: 'final',
     },
     applied: {
