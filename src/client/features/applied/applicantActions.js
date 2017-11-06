@@ -51,7 +51,7 @@ export function updateApplicant(applicantDetails) {
 
   const resourcePath = status === 'info-health' ?
     '/info/health' :
-    'api/applicants';
+    '/api/applicants';
 
   return function(dispatch) {
     dispatch(genericFetchStart());

@@ -147,6 +147,7 @@ export const formatSecondaryApplicants = (applicants, filter) => {
         format.hopeToGain = applicant["In three words, what do you hope to gain from this experience?"];
         format.hopeToGive = applicant["In three words, what do you hope to give during this experience?"];
         format.hbcu = applicant["Do you attend a historically black college or university (HBCU)?"];
+        format.infoSentDate = applicant.infoSentDate;
         formatted.push(format);
       }
     });
