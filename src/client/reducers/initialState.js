@@ -12,8 +12,8 @@ export default {
     secondary: {
       program: 'health',
       selectable: true,
-      tableHeaders: ["Row", "Refcode", "Secondary Date", "Secondary Deadline","Secondary Submit Date", "Info Sent", "Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Major", "Stream", "Method of Contact", "Timezone", "Best Time To Call?", "Volunteered With OHS?", "Questions or Suggestions", "Top Strengths" , "Ideal Profession", "Hope To Gain", "Hope To Give"],
-      tableHeadersMap: ["refcode", "secondaryDate", "secondaryDeadline", "secondarySubmitDate", "infoSentDate", "name", "email", "phone", "dob", "gender", "university", "major","stream", "methodOfContact", "timezone", "bestTime", "pastVolunteer", "questionOrSuggestion", "topStrengths", "idealProfession", "hopeToGain", "hopeToGive"],
+      tableHeaders: ["Row", "Refcode", "Secondary Date", "Secondary Deadline","Secondary Submit Date", "Info Sent", "Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Major", "Program", "Stream", "Method of Contact", "Timezone", "Best Time To Call?", "Volunteered With OHS?", "Questions or Suggestions", "Top Strengths" , "Ideal Profession", "Hope To Gain", "Hope To Give"],
+      tableHeadersMap: ["refcode", "secondaryDate", "secondaryDeadline", "secondarySubmitDate", "infoSentDate", "name", "email", "phone", "dob", "gender", "university", "major","secondaryProgram", "stream", "methodOfContact", "timezone", "bestTime", "pastVolunteer", "questionOrSuggestion", "topStrengths", "idealProfession", "hopeToGain", "hopeToGive"],
       radioButtons : {
         buttons: [
           {value: "healthInnovation", label: "Health Innovation"},
