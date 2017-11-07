@@ -5,11 +5,11 @@ import getBaseUrl from '../../baseUrl';
 export const GENERIC_FETCH_START = 'GENERIC_FETCH_START';
 export const GENERIC_FETCH_END = 'GENERIC_FETCH_END';
 
-function genericFetchStart() {
+export function genericFetchStart() {
   return { type: GENERIC_FETCH_START };
 }
 
-function genericFetchEnd() {
+export function genericFetchEnd() {
   return { type: GENERIC_FETCH_END }
 }
 

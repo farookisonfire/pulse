@@ -37,7 +37,6 @@ class ConfirmedPage extends Component {
 
 const mapStateToProps = (state) => {
   const {
-    applicants,
     fetching,
     pageProfiles,
     programs,
@@ -47,13 +46,9 @@ const mapStateToProps = (state) => {
     confirmed
   } = pageProfiles;
 
-  const formattedApplicants = formatConfirmedApplicants(applicants, 'confirmed', 'defer-enroll');
-  const formattedWithProgram = resolveProgramTypeAndDate(formattedApplicants, programs);
-
   return {
     fetching,
     confirmedPageData: confirmed,
-    applicants: formattedWithProgram,
   };
 };
 

@@ -1,5 +1,5 @@
 import getBaseUrl from '../../baseUrl';
-import { receiveApplicants } from '../applied/applicantActions';
+import { receiveApplicants, genericFetchStart, genericFetchEnd } from '../applied/applicantActions';
 
 export const RECEIVE_PROGRAMS = 'RECEIVE_PROGRAMS';
 export const RECEIVE_FELLOWS = 'RECEIVE_FELLOWS';
@@ -14,6 +14,7 @@ const receiveFellows = (fellows) => {
 
 export const getInitialData = () => {
   return (dispatch) => {
+    dispatch(genericFetchStart());
     return fetch(`${getBaseUrl()}/api/initial-data`)
       .then((res) => {
         if (res.ok) {
@@ -34,6 +35,7 @@ export const getInitialData = () => {
       })
       .catch((err) => {
         console.log('Unable to get initial data');
+        dispatch(genericFetchEnd());
       });
   };
 };

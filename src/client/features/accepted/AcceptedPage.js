@@ -45,7 +45,6 @@ const mapStateToProps = ({applicants, pageProfiles, fetching}) => {
   return {
     fetching,
     acceptedPageData: accepted,
-    applicants: formatAcceptedApplicants(applicants, 'accepted')
   };
 };
 

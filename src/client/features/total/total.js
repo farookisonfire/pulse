@@ -9,34 +9,64 @@ import SecondaryPage from '../secondary/SecondaryPage';
 import ConfirmedPage from '../confirmed/ConfirmedPage';
 import { connect } from 'react-redux';
 import { getInitialData } from './allAdmissionsActions';
+import { resolveApplicantsToUse } from '../../utils/utils';
 
 class Total extends React.Component{
-  
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeTab: 'Applied'
+    };
+
+    this.onActive = this.onActive.bind(this);
+  }
+
+
   componentDidMount() {
     const { getInitialData = () => {} } = this.props;
     getInitialData();
+  }
+
+  onActive({props = {}}) {
+    const {label = '' } = props;
+    this.setState({activeTab: label});
   }
 
   render() {
     const {
       programs = [],
       fellows = [],
+      applicants = [],
     } = this.props;
+
+    const {
+      activeTab = '',
+    } = this.state;
+
+    const applicantsToUse = resolveApplicantsToUse(applicants, activeTab, programs);
 
     return (
       <Card style={{height:"90vh"}}>
         <Tabs>
-          <Tab label="Applied">
-            <Applied />
+          <Tab onActive={this.onActive} label="Applied">
+            <Applied
+              applicants={activeTab === 'Applied' ? applicantsToUse : []}
+            />
           </Tab>
-          <Tab label="Secondary">
-            <SecondaryPage />
+          <Tab onActive={this.onActive} label="Secondary">
+            <SecondaryPage
+              applicants={activeTab === 'Secondary' ? applicantsToUse : []}
+            />
           </Tab>
-          <Tab label="Accepted">
-            <AcceptedPage />
+          <Tab onActive={this.onActive} label="Accepted">
+            <AcceptedPage
+              applicants={activeTab === 'Accepted' ? applicantsToUse : []}
+            />
           </Tab>
-          <Tab label="Confirmed">
+          <Tab onActive={this.onActive} label="Confirmed">
             <ConfirmedPage
+              applicants={activeTab === 'Confirmed' ? applicantsToUse : []}
               programs={programs}/>
           </Tab>
         </Tabs>
