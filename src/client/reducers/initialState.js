@@ -60,8 +60,8 @@ export default {
     },
     confirmed: {
       selectable: false,
-      tableHeaders: ["Row", "Refcode", "Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Program", "Program Date", "Promotion Deadline", "Final Deadline", "Payment Status", "Qualify for Promotion"],
-      tableHeadersMap: ["refcode", "name", "email", "phone", "dob", "gender", "university", "selectedProgramType", "selectedProgramDate", "promotionDeadline", "finalDeadline", "paymentStatus", "qualifyPromotion"],
+      tableHeaders: ["Row", "Refcode", "Enroll Date", "Promotion Deadline", "Final Deadline","Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Program", "Program Date", "Payment Status", "Qualify for Promotion"],
+      tableHeadersMap: ["refcode","enrollDate", "promotionDeadline", "finalDeadline", "name", "email", "phone", "dob", "gender", "university", "selectedProgramType", "selectedProgramDate", "paymentStatus", "qualifyPromotion"],
     },
     fellowshipPage: {
       selectable: false,
