@@ -84,6 +84,7 @@ export const formatConfirmedApplicants = (applicants, filter, secondaryFilter = 
         format.finalDeadline = applicant.finalDeadline;
         format.paymentStatus = applicant.paymentStatus;
         format.qualifyPromotion = applicant.qualifyPromotion;
+        format.enrollDate = applicant.enrollDate;
         formatted.push(format);
       }
     });
