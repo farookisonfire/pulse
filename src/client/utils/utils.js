@@ -185,3 +185,16 @@ export const resolveProgramTypeAndDate = (applicants, programs) => {
     return applicant;
   });
 };
+
+export const resolveApplicantsToUse = (applicants, activeTab, programs) => {
+  switch(activeTab) {
+    case 'Secondary':
+      return formatSecondaryApplicants(applicants, 'secondary');
+    case 'Accepted':
+      return formatAcceptedApplicants(applicants, 'accepted');
+    case 'Confirmed':
+      return resolveProgramTypeAndDate(formatConfirmedApplicants(applicants, 'confirmed', 'defer-enroll'), programs);
+    default:
+      return formatApplicants(applicants, 'applied');
+  }
+};

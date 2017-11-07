@@ -47,7 +47,6 @@ const mapStateToProps = ({applicants, pageProfiles, fetching}) => {
   return {
     fetching,
     appliedPageData: applied,
-    applicants: formatApplicants(applicants, 'applied')
   };
 };
 

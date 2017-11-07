@@ -84,7 +84,6 @@ const mapStateToProps = ({applicants, fetching, pageProfiles}) => {
   return {
     fetching,
     secondaryPageData: secondary,
-    applicants: formatSecondaryApplicants(applicants, 'secondary'),
   };
 };
 
