@@ -18,6 +18,7 @@ class ConfirmedPage extends Component {
       tableHeaders = [],
       tableHeadersMap = [],
       stage = 'confirmed',
+      deferWithdrawActions = []
     } = confirmedPageData;
 
     return(
@@ -29,6 +30,7 @@ class ConfirmedPage extends Component {
         updateApplicant={updateApplicant}
         fetching={fetching}>
         <Shared.TableContainer
+          deferWithdrawActions={deferWithdrawActions}
           stage={stage} />
       </Shared.TablePage>
     );

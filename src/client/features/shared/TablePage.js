@@ -82,7 +82,6 @@ class TablePage extends React.Component {
 
   handleModalConfirm (stage, value, acceptedTo) {
     this.setState({modalStatus: false});		
-
     const {		
       selectedApplicants = [],
       decision = '',		
@@ -99,6 +98,8 @@ class TablePage extends React.Component {
       selectedApplicantDetails.status = value;
       selectedApplicantDetails.program = acceptedTo;
     } else if (value === 'denied' || 'removed'){
+      selectedApplicantDetails.status = value;
+    } else if (stage === 'confirmed' && (value === 'withdraw' || value === 'defer')) {
       selectedApplicantDetails.status = value;
     }
 

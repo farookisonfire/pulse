@@ -38,6 +38,7 @@ const ConfirmDecision = (props) => {
     acceptActions = [],
     denyActions = [],
     infoActions = [],
+    deferWithdrawActions = [],
     stage,
   } = props;
 
@@ -51,9 +52,12 @@ const ConfirmDecision = (props) => {
     } else if (stage === 'final') {
       titleText = `Confirm ACCEPTANCE For:`;
     }
-  } else if(decision === 'info') {
+  } else if (decision === 'info') {
     modalActions = makeActionButtons(infoActions, stage, handleModalConfirm, handleModalClose);
     titleText = 'Confirm SEND INFO to:';
+  } else if (decision === 'defer-withdraw') {
+    modalActions = makeActionButtons(deferWithdrawActions, stage, handleModalConfirm, handleModalClose);
+    titleText = 'Confirm DEFER/WITHDRAW for:';
   } else {
     modalActions = makeActionButtons(denyActions, stage, handleModalConfirm, handleModalClose);
     titleText = `Confirm REJECTION For`;
