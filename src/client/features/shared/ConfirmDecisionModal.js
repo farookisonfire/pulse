@@ -44,6 +44,7 @@ const ConfirmDecision = (props) => {
 
   let titleText;
   let modalActions;
+  let bodyText;
 
   if (decision === 'accept') {
     modalActions = makeActionButtons(acceptActions, stage, handleModalConfirm, handleModalClose);
@@ -57,7 +58,8 @@ const ConfirmDecision = (props) => {
     titleText = 'Confirm SEND INFO to:';
   } else if (decision === 'defer-withdraw') {
     modalActions = makeActionButtons(deferWithdrawActions, stage, handleModalConfirm, handleModalClose);
-    titleText = 'Send DEFER/WITHDRAW email? Note that the applicant will not be removed from the list until they choose to either defer/withdraw.';
+    titleText = 'Send DEFER/WITHDRAW email?';
+    bodyText = 'Note that the applicant will not be removed from the list until they choose to either defer/withdraw.';
   } else {
     modalActions = makeActionButtons(denyActions, stage, handleModalConfirm, handleModalClose);
     titleText = `Confirm REJECTION For`;
@@ -80,6 +82,7 @@ const ConfirmDecision = (props) => {
         actions={modalActions}
         modal={true}
         open={modalStatus}>
+        {bodyText ? bodyText : null}
         <List>
           {selectedList}
         </List>
