@@ -57,7 +57,7 @@ const ConfirmDecision = (props) => {
     titleText = 'Confirm SEND INFO to:';
   } else if (decision === 'defer-withdraw') {
     modalActions = makeActionButtons(deferWithdrawActions, stage, handleModalConfirm, handleModalClose);
-    titleText = 'Confirm DEFER/WITHDRAW for:';
+    titleText = 'Send DEFER/WITHDRAW email? Note that the applicant will not be removed from the list until they choose to either defer/withdraw.';
   } else {
     modalActions = makeActionButtons(denyActions, stage, handleModalConfirm, handleModalClose);
     titleText = `Confirm REJECTION For`;
