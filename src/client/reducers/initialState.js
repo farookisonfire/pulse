@@ -8,6 +8,7 @@ export default {
         { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
         { label: 'Safe Remove', value: 'removed', isPrimary: false, isSecondary: false },
       ],
+      stage: 'accepted'
     },
     secondary: {
       program: 'health',
@@ -62,6 +63,12 @@ export default {
       selectable: false,
       tableHeaders: ["Row", "Refcode", "Enroll Date", "Promotion Deadline", "Final Deadline","Name", "Email", "Phone", "D.O.B.", "Gender", "University", "Program", "Program Date", "Payment Status", "Qualify for Promotion"],
       tableHeadersMap: ["refcode","enrollDate", "promotionDeadline", "finalDeadline", "name", "email", "phone", "dob", "gender", "university", "selectedProgramType", "selectedProgramDate", "paymentStatus", "qualifyPromotion"],
+      deferWithdrawActions: [
+        { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
+        { label: 'Withdraw', value: 'withdraw', isPrimary: true, isSecondary: false },
+        { label: 'Defer', value: 'defer', isPrimary: true, isSecondary: false },
+      ],
+      stage: 'confirmed'
     },
     fellowshipPage: {
       selectable: false,

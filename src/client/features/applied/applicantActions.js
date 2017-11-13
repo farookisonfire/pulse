@@ -1,6 +1,7 @@
 import * as types from './applicantActionTypes';
 import { addError } from '../global/errorActions';
 import getBaseUrl from '../../baseUrl';
+import { resolvePath } from '../../utils/utils';
 
 export const GENERIC_FETCH_START = 'GENERIC_FETCH_START';
 export const GENERIC_FETCH_END = 'GENERIC_FETCH_END';
@@ -49,9 +50,7 @@ export function updateApplicant(applicantDetails) {
     status = ''
   } = applicantDetails;
 
-  const resourcePath = status === 'info-health' ?
-    '/info/health' :
-    '/api/applicants';
+  const resourcePath = resolvePath(status);
 
   return function(dispatch) {
     dispatch(genericFetchStart());

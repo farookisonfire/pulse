@@ -198,3 +198,13 @@ export const resolveApplicantsToUse = (applicants, activeTab, programs) => {
       return formatApplicants(applicants, 'applied');
   }
 };
+
+export const resolvePath = (status) => {
+  if (status === 'info-health') {
+    return '/info/health';
+  } else if (status === 'defer' || status === 'withdraw') {
+    return '/confirmed';
+  } else {
+    return '/api/applicants';
+  }
+};
