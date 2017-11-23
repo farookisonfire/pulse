@@ -18,7 +18,6 @@ export default {
       radioButtons : {
         buttons: [
           {value: "healthInnovation", label: "Health Innovation"},
-          {value: "serve", label: "Serve a Million"},
           {value: "youthEmpowerment", label: "Youth Empowerment"},
           {value: "education", label: "Education / Social Work"},
           {value: "hbcu", label: "HBCU"},
