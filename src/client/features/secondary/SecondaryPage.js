@@ -57,7 +57,8 @@ class SecondaryPage extends Component {
         tableHeadersMap={tableHeadersMap}
         fetchApplicants={fetchApplicants}
         updateApplicant={updateApplicant}
-        fetching={fetching}>
+        fetching={fetching}
+        selectedProgramTab={selectedProgram}>
         <div style={{
           display: 'flex',
           marginTop: 16,

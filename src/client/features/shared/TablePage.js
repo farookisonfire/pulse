@@ -40,6 +40,7 @@ class TablePage extends React.Component {
         applicant.email = applicants[row].email;
         applicant.phone = applicants[row].phone;
         applicant.hbcu = applicants[row].hbcu;
+        applicant.secondaryProgram = applicants[row].secondaryProgram;
         
         selectedRows.push(row);
         selectedApplicants.push(applicant);
@@ -82,6 +83,7 @@ class TablePage extends React.Component {
 
   handleModalConfirm (stage, value, acceptedTo) {
     this.setState({modalStatus: false});		
+    const { selectedProgramTab } = this.props;
     const {		
       selectedApplicants = [],
       decision = '',		
@@ -94,9 +96,12 @@ class TablePage extends React.Component {
     if (stage === 'secondary' && (value === 'healthInnovation' || value === 'education' || value === 'youthEmpowerment')) {
       selectedApplicantDetails.program = value;
       selectedApplicantDetails.status = stage;
-    } else if (stage === 'final' && (value === 'accepted' || value === 'info-health' || value === 'secondary-reminder')) {
+    } else if (stage === 'final' && (value === 'accepted' || value === 'info-health')) {
       selectedApplicantDetails.status = value;
       selectedApplicantDetails.program = acceptedTo;
+    } else if (stage === 'final' && value === 'reminder-secondary') {
+      selectedApplicantDetails.status = value;
+      selectedApplicantDetails.program = selectedProgramTab;
     } else if (value === 'denied' || 'removed'){
       selectedApplicantDetails.status = value;
     } else if (stage === 'confirmed' && (value === 'withdraw' || value === 'defer')) {
