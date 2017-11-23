@@ -19,7 +19,7 @@ const RadioGroup = (props) => {
         label={button.label}
         labelStyle={{fontSize: 12}}
         iconStyle={{width: 20, marginRight: 8}}
-        style={{width: 200}} />
+        style={{width: 300}} />
     );
   });
 
