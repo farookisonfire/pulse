@@ -9,6 +9,7 @@ import CheckBtn from '../applied/CheckBtn';
 import DenyBtn from '../applied/DenyBtn';
 import InfoBtn from './InfoBtn';
 import DeferWithdrawBtn from './DeferWithdrawBtn';
+import ReminderBtn from './ReminderBtn';
 import Spinner from 'react-spinkit';
 import {spinner} from '../applied/applicantStyles';
 import ConfirmDecisionModal from './ConfirmDecisionModal';
@@ -42,6 +43,7 @@ const TableContainer = (props) => {
     denyActions,
     infoActions,
     deferWithdrawActions,
+    reminderActions,
     stage,
     selectable = true,
   } = props;
@@ -61,6 +63,7 @@ const TableContainer = (props) => {
             <CheckBtn onTouchTap={() => handleModalOpen('accept')} />
             <DenyBtn onTouchTap={() => handleModalOpen()} />
             <InfoBtn onTouchTap={(() => handleModalOpen('info'))} />
+            <ReminderBtn onTouchTap={(() => handleModalOpen('reminder'))} />
           </span>
         );
       } else if (stage === 'accepted') { // accepted tab
@@ -107,6 +110,7 @@ const TableContainer = (props) => {
         denyActions={denyActions}
         infoActions={infoActions}
         deferWithdrawActions={deferWithdrawActions}
+        reminderActions={reminderActions}
         stage={stage} />
       <ConfirmSnackbar
         snackbarStatus={snackbarStatus}

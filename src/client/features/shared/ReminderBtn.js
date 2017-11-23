@@ -1,14 +1,13 @@
 import React from 'react';
 import IconButton from 'material-ui/IconButton';
-import CheckIcon from 'material-ui/svg-icons/navigation/check';
+import ReminderIcon from 'material-ui/svg-icons/image/timer';
 
-const CheckBtn = ({onTouchTap}) => 
+const ReminderBtn = ({onTouchTap}) => 
   <IconButton
     style={{top: 6, marginLeft: 12, marginRight: 12}}
-    tooltip={'Accept'}
+    tooltip={'Send Reminder'}
     onTouchTap={onTouchTap}>
-    <CheckIcon/>
+    <ReminderIcon />
   </IconButton>;
 
-export default CheckBtn;
-
+export default ReminderBtn;

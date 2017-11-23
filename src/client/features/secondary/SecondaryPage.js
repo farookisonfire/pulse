@@ -35,6 +35,7 @@ class SecondaryPage extends Component {
       acceptActions = [],
       denyActions = [],
       infoActions = [],
+      reminderActions = [],
       stage = 'final',
     } = secondaryPageData;
 
@@ -70,6 +71,7 @@ class SecondaryPage extends Component {
           acceptActions={acceptActions}
           denyActions={denyActions}
           infoActions={infoActions}
+          reminderActions={reminderActions}
           stage={stage} />
       </Shared.TablePage>
     );

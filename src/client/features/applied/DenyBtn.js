@@ -1,13 +1,14 @@
 import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
-import Close from 'material-ui/svg-icons/navigation/close';
+import IconButton from 'material-ui/IconButton';
+import DenyIcon from 'material-ui/svg-icons/navigation/close';
 
 const DenyBtn = ({onTouchTap}) => 
-  <FlatButton
-    icon={<Close />}
-    style={{margin:12}}
-    onTouchTap={onTouchTap}
-  />;
+  <IconButton
+    style={{top: 6, marginLeft: 12, marginRight: 12}}
+    tooltip={'Deny / Remove'}
+    onTouchTap={onTouchTap}>
+    <DenyIcon />
+  </IconButton>
 
 export default DenyBtn;
 

@@ -205,6 +205,8 @@ export const resolvePath = (status) => {
     return '/info/health';
   } else if (status === 'defer' || status === 'withdraw') {
     return '/confirmed';
+  } else if (status === 'secondary-reminder') {
+    return '/reminder/secondary';
   } else {
     return '/api/applicants';
   }
