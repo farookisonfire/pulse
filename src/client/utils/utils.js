@@ -150,6 +150,7 @@ export const formatSecondaryApplicants = (applicants, filter) => {
         format.hopeToGive = applicant["In three words, what do you hope to give during this experience?"];
         format.hbcu = applicant["Do you attend a historically black college or university (HBCU)?"];
         format.infoSentDate = applicant.infoSentDate;
+        format.secondaryReminderSentDate = applicant.secondaryReminderSentDate;
         formatted.push(format);
       }
     });
@@ -205,7 +206,7 @@ export const resolvePath = (status) => {
     return '/info/health';
   } else if (status === 'defer' || status === 'withdraw') {
     return '/confirmed';
-  } else if (status === 'secondary-reminder') {
+  } else if (status === 'reminder-secondary') {
     return '/reminder/secondary';
   } else {
     return '/api/applicants';
