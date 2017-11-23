@@ -1,13 +1,14 @@
 import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
-import Check from 'material-ui/svg-icons/navigation/check';
+import IconButton from 'material-ui/IconButton';
+import CheckIcon from 'material-ui/svg-icons/navigation/check';
 
 const CheckBtn = ({onTouchTap}) => 
-  <FlatButton
-    icon={<Check />}
-    style={{margin:12}}
-    onTouchTap={onTouchTap}
-  />;
+  <IconButton
+    style={{top: 6, marginLeft: 12, marginRight: 12}}
+    tooltip={'Accept'}
+    onTouchTap={onTouchTap}>
+    <CheckIcon/>
+  </IconButton>;
 
 export default CheckBtn;
 

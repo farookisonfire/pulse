@@ -56,7 +56,7 @@ const ConfirmDecision = (props) => {
     }
   } else if (decision === 'info') {
     modalActions = makeActionButtons(infoActions, stage, handleModalConfirm, handleModalClose);
-    titleText = 'Confirm SEND INFO to:';
+    titleText = 'Send INFO email?';
   } else if (decision === 'defer-withdraw') {
     modalActions = makeActionButtons(deferWithdrawActions, stage, handleModalConfirm, handleModalClose);
     titleText = 'Send DEFER/WITHDRAW email?';

@@ -1,13 +1,13 @@
 import React from 'react';
-import FlatButton from 'material-ui/FlatButton';
-import Info from 'material-ui/svg-icons/action/info-outline';
+import IconButton from 'material-ui/IconButton';
+import InfoIcon from 'material-ui/svg-icons/action/info-outline';
 
-const CheckBtn = ({onTouchTap}) => 
-  <FlatButton
-    icon={<Info />}
-    style={{margin:12}}
-    onTouchTap={onTouchTap}
-  />;
+const InfoBtn = ({onTouchTap}) =>
+  <IconButton
+    style={{top: 6, marginLeft: 12, marginRight: 12}}
+    tooltip={'Send Info'}
+    onTouchTap={onTouchTap}>
+    <InfoIcon />
+  </IconButton>;
 
-export default CheckBtn;
-
+export default InfoBtn;
