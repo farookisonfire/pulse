@@ -39,6 +39,10 @@ export default {
         { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
         { label: 'Send Health Info', value: 'info-health', program: 'healthInnovation', isPrimary: true, isSecondary: false },
       ],
+      reminderActions: [
+        { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
+        { label: 'Send Reminder', value: 'secondary-reminder', isPrimary: true, isSecondary: false },
+      ],
       stage: 'final',
     },
     applied: {

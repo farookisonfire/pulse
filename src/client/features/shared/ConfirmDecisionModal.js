@@ -39,6 +39,7 @@ const ConfirmDecision = (props) => {
     denyActions = [],
     infoActions = [],
     deferWithdrawActions = [],
+    reminderActions = [],
     stage,
   } = props;
 
@@ -60,6 +61,10 @@ const ConfirmDecision = (props) => {
     modalActions = makeActionButtons(deferWithdrawActions, stage, handleModalConfirm, handleModalClose);
     titleText = 'Send DEFER/WITHDRAW email?';
     bodyText = 'Note that the applicant will not be removed from the list until they choose to either defer/withdraw.';
+  } else if (decision === 'reminder') {
+    modalActions = makeActionButtons(reminderActions, stage, handleModalConfirm, handleModalClose);
+    titleText = 'Send REMINDER email?';
+    bodyText = 'The applicant will be sent an email and text message.';
   } else {
     modalActions = makeActionButtons(denyActions, stage, handleModalConfirm, handleModalClose);
     titleText = `Confirm REJECTION For`;
