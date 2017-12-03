@@ -6,6 +6,7 @@ import errors from '../features/global/errorReducer';
 import pageProfiles from './pageProfilesReducer';
 import programs from './programsReducer';
 import fellows from './fellowsReducer';
+import navDrawer from './navDrawerReducer';
 
 const rootReducer = combineReducers({
   applicants,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   pageProfiles,
   programs,
   fellows,
+  navDrawer
 });
 
 export default rootReducer;

@@ -4,7 +4,7 @@ import MenuItem from 'material-ui/MenuItem';
 import {Link} from 'react-router';
 
 
-const Nav = () => (
+const NavDrawerMenuItems = () => (
   <Menu>
     <MenuItem
       containerElement={<Link to="/" />}
@@ -17,4 +17,5 @@ const Nav = () => (
   </Menu>
 );
 
-export default Nav;
+export default NavDrawerMenuItems;
+
