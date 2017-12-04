@@ -14,6 +14,10 @@ const NavDrawerMenuItems = () => (
       containerElement={<Link to="/fellowship" />}
       primaryText="Fellowship"
     />
+    <MenuItem
+      containerElement={<Link to="/enrollment" />}
+      primaryText="Enrollment"
+    />
   </Menu>
 );
 
