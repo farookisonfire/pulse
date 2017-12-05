@@ -19,12 +19,13 @@ const RadioGroup = (props) => {
         label={button.label}
         labelStyle={{fontSize: 12}}
         iconStyle={{width: 20, marginRight: 8}}
-        style={{width: 300}} />
+        style={{width: 200}} />
     );
   });
 
   return (
-   <RadioButtonGroup 
+   <RadioButtonGroup
+    style={{display: 'flex', justifyContent: 'space-evenly', textAlign: 'center'}}
     defaultSelected={defaultSelected}
     onChange={handleChange} >
      {RadioButtons}

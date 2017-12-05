@@ -60,7 +60,6 @@ class SecondaryPage extends Component {
         fetching={fetching}
         selectedProgramTab={selectedProgram}>
         <div style={{
-          display: 'flex',
           marginTop: 16,
           marginLeft: 16,
         }}>

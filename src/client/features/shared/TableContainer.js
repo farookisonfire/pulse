@@ -86,7 +86,7 @@ const TableContainer = (props) => {
   
   return(
     <div>
-      <div>
+      <div style={{ boxShadow:'2px 2px 2px rgba(50,50,50,.5)', marginBottom: 3}}>
         <RefreshBtn onTouchTap={fetchApplicants}/>
         {ActionButtonsToRender()}
       </div>
