@@ -84,8 +84,14 @@ const ApplicantTable = (props) => {
     );
   }
   
+  let winHeight = window && window.innerHeight ?
+    window.innerHeight - 160 :
+    600;
+
   return (
     <Table
+      height={winHeight}
+      fixedHeader
       bodyStyle={{overflow: 'visible'}}
       onRowSelection={handleRowSelect}
       multiSelectable={selectable}>
