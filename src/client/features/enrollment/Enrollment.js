@@ -8,13 +8,15 @@ import Divider from 'material-ui/Divider';
 
 const EnrollmentPage = styled.div`
   background-color: white;
-  height: calc(100vh - 64px);
+  min-height: calc(100vh - 64px);
 `;
 
 const SectionTitle = styled.h2`
   margin: 0;
+  margin-left: 16px;
+  color: rgba(50,50,50,.75);
   padding: 32px 8px 24px 8px;
-  font-weight: 400;
+  font-weight: 200;
   font-size: 22px;
 `;
 
@@ -46,13 +48,12 @@ class Enrollment extends Component {
       listOpenState
     } = this.state;
 
-  console.log(this.state.listOpenState);
+  console.log('listOpenState', this.state.listOpenState);
     return (
       <EnrollmentPage>
         <div>
           <SectionTitle>PROGRAM ENROLLMENT</SectionTitle>
           <Divider style={{marginLeft: 8, marginRight: 8}} />
-          <SectionTitle>COHORT A</SectionTitle>
           <EnrollmentContent
             handleListToggle={this.handleNestedListToggle}
             listOpenState={listOpenState} />
