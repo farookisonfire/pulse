@@ -212,3 +212,46 @@ export const resolvePath = (status) => {
     return '/api/applicants';
   }
 };
+
+export const resolveAllProgramEnrollment = (applicants = []) => {
+  const enrollmentMap = {};
+  applicants.forEach((applicant) => {
+    const { selectedProgramId } = applicant;
+    if (!selectedProgramId) return;
+    if (enrollmentMap[selectedProgramId]) {
+      const applicantStatus = resolveApplicantStatus(applicant);
+      enrollmentMap[selectedProgramId][applicantStatus] += 1;
+    } else {
+      enrollmentMap[selectedProgramId] = {
+        enrolled: 0,
+        confirmed: 0,
+        waitlist: 0,
+      };
+    }
+  });
+  return enrollmentMap;
+};
+
+const resolveApplicantStatus = (applicant = {}) => {
+  if (applicant.status === 'waitlist' ) {
+    return 'waitlist';
+  } else {
+    if (applicant.paymentStatus && applicant.paymentStatus === 'paid in full') {
+      return 'confirmed';
+    } else {
+      return 'enrolled';
+    }
+  }
+};
+
+export const resolveProgramTypeEnrollment = (programs, type) => {
+  const programTypeEnrollment = { enrolled: 0, confirmed: 0, waitlist: 0 };
+  const filteredProgramsByType = programs.forEach(program => {
+    if (program.typeId === type) {
+      programTypeEnrollment.enrolled += program.enrolled;
+      programTypeEnrollment.confirmed += program.confirmed;
+      programTypeEnrollment.waitlist += program.waitlist.length;
+    }
+  });
+  return programTypeEnrollment;
+};

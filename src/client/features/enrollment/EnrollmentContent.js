@@ -10,63 +10,31 @@ const EnrollmentContentContainer = styled.div`
 const EnrollmentContent = (props) => {
   const { 
     handleListToggle,
-    listOpenState
+    listOpenState,
+    cohorts,
+    applicants,
+    programs,
+    allProgramEnrollment
   } = props;
 
-  console.log('enrollmentContent', listOpenState)
+  const cohortCards = cohorts.map(cohort => {
+    return (
+      <CohortCard
+        key={`cohort-card-${cohort.key}`}
+        handleListToggle={handleListToggle}
+        listOpenState={listOpenState}
+        cohort={cohort}
+        programs={programs}
+        allProgramEnrollment={allProgramEnrollment}
+      />
+    );
+  });
 
   return (
     <EnrollmentContentContainer>
-      <CohortCard
-        handleListToggle={handleListToggle}
-        listOpenState={listOpenState}
-      />
-      <CohortCard />
-      <CohortCard />
-      <CohortCard />
-      <CohortCard />
-      <CohortCard />
+      {cohortCards}
     </EnrollmentContentContainer>
   );
-
-
-  // return (
-  //   <EnrollmentContentContainer>
-  //     <EnrollmentList>
-  //       <ListItem
-  //         primaryText="Health Innovation"
-  //         secondaryText="20"
-  //         primaryTogglesNestedList={true}
-  //         nestedItems={[
-  //           <ListItem primaryText="4 week" secondaryText='10' />,
-  //           <ListItem primaryText="2 week" secondaryText='10' />,
-  //         ]}
-  //         onNestedListToggle={handleListToggle}
-  //         open={healthInnovation}
-  //         value={'healthInnovation'} />
-  //       <ListItem
-  //         primaryText="Youth Empowerment"
-  //         secondaryText="20"
-  //         primaryTogglesNestedList={true}
-  //         nestedItems={[
-  //           <ListItem primaryText="Drafts" />
-  //         ]}
-  //         onNestedListToggle={handleListToggle}
-  //         open={youthEmpowerment}
-  //         value={'youthEmpowerment'} />
-  //       <ListItem
-  //         primaryText="Education / Social Work"
-  //         secondaryText="20"
-  //         primaryTogglesNestedList={true}
-  //         nestedItems={[
-  //           <ListItem primaryText="Drafts" />
-  //         ]}
-  //         onNestedListToggle={handleListToggle}
-  //         open={education}
-  //         value={'education'} />
-  //     </EnrollmentList>
-  //   </EnrollmentContentContainer>
-  // );
 };
 
 export default EnrollmentContent;

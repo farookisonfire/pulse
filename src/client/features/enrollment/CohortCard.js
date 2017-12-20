@@ -10,13 +10,21 @@ import {
   pink400,
   purple500,
 } from 'material-ui/styles/colors';
+
 const CohortCard = (props) => {
   const { 
     handleListToggle = () => {},
-    listOpenState = {}
+    listOpenState = {},
+    cohort = {},
+    programs,
+    allProgramEnrollment
   } = props;
 
-  console.log('cohortCard', listOpenState)
+  const {
+    key,
+    name,
+    dateRange,
+  } = cohort;
 
   return (
     <Card
@@ -26,17 +34,20 @@ const CohortCard = (props) => {
         margin: '24px 12px',
       }}
     >
-      <CardHeader
-      title="Cohort A"
-      subtitle="July 10 - July 20"
+    <CardHeader
+      title={`Cohort ${name}`}
+      subtitle={dateRange}
       actAsExpander={true}
       showExpandableButton={false}
-      avatar={<Avatar>A</Avatar>}
+      avatar={<Avatar>{name}</Avatar>}
     />
     <CardText expandable={true}>
       <CohortCardContent
         handleListToggle={handleListToggle}
         listOpenState={listOpenState}
+        programs={programs}
+        cohortName={name}
+        allProgramEnrollment={allProgramEnrollment}
       />
     </CardText>
   </Card>

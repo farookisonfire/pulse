@@ -7,6 +7,7 @@ import pageProfiles from './pageProfilesReducer';
 import programs from './programsReducer';
 import fellows from './fellowsReducer';
 import navDrawer from './navDrawerReducer';
+import cohorts from './cohortsReducer';
 
 const rootReducer = combineReducers({
   applicants,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   pageProfiles,
   programs,
   fellows,
-  navDrawer
+  navDrawer,
+  cohorts
 });
 
 export default rootReducer;

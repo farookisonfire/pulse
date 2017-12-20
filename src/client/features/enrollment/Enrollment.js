@@ -4,7 +4,8 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import EnrollmentContent from './EnrollmentContent';
 import Divider from 'material-ui/Divider';
-
+import { connect } from 'react-redux';
+import { resolveAllProgramEnrollment } from '../../utils/utils';
 
 const EnrollmentPage = styled.div`
   background-color: white;
@@ -28,39 +29,81 @@ class Enrollment extends Component {
       listOpenState: {
         healthInnovation: false,
         youthEmpowerment: false,
-        education: false
-      }
+        education: false,
+        selectedCohort: ''
+      },
+      allProgramEnrollment: {}
     };
 
     this.handleNestedListToggle = this.handleNestedListToggle.bind(this);
   }
   
-  handleNestedListToggle(item) {
+  handleNestedListToggle(item, selectedCohort) {
     const { open } = item.state;
     const { value = '' } = item.props;
-    const newState = Object.assign({}, this.state.listOpenState, {[value]:open});
-    console.log(newState, open, value)
+    const newState = Object.assign({}, this.state.listOpenState, {
+      [value]:open,
+      selectedCohort
+    });
+
     this.setState({listOpenState: newState});
+  }
+
+  componentDidMount() {
+    const { applicants = [] } = this.props;
+    const allEnrolledApplicants = applicants
+      .filter(applicant =>
+        applicant.status === 'confirmed' ||
+        applicant.status === 'waitlist' ||
+        applicant.status === 'defer-enroll');
+    
+    const allProgramEnrollment = resolveAllProgramEnrollment(allEnrolledApplicants);
+    this.setState({allProgramEnrollment});
   }
 
   render() {
     const {
-      listOpenState
+      cohorts,
+      applicants,
+      programs
+    } = this.props;
+
+    const {
+      listOpenState,
+      allProgramEnrollment,
     } = this.state;
 
-  console.log('listOpenState', this.state.listOpenState);
     return (
       <EnrollmentPage>
         <div>
           <SectionTitle>PROGRAM ENROLLMENT</SectionTitle>
           <Divider style={{marginLeft: 8, marginRight: 8}} />
           <EnrollmentContent
+            cohorts={cohorts}
+            applicants={applicants}
+            programs={programs}
             handleListToggle={this.handleNestedListToggle}
-            listOpenState={listOpenState} />
+            listOpenState={listOpenState}
+            allProgramEnrollment={allProgramEnrollment}
+          />
         </div>
       </EnrollmentPage>
     );
   }
 }
 
-export default Enrollment;
+const mapStateToProps = (state) => {
+  const {
+    cohorts = [],
+    programs = [],
+    applicants = [],
+  } = state;
+  
+  return {
+    cohorts,
+    programs,
+    applicants
+  };
+};
+
+export default connect(mapStateToProps)(Enrollment);
