@@ -11,23 +11,20 @@ import {
   purple500,
 } from 'material-ui/styles/colors';
 
-const CohortCard = (props) => {
+const ProgramTypeCard = (props) => {
   const { 
-    handleCohortSelect = () => {},
-    cohort = {},
-    programs,
-    allProgramEnrollment
+    programType,
+    handleProgramTypeSelect
   } = props;
 
-  const {
-    key,
-    name,
-    dateRange,
-  } = cohort;
+  let cardTitle;
+  if (programType === 'healthInnovation') cardTitle = 'Health Innovation';
+  if (programType === 'education') cardTitle = 'Education';
+  if (programType === 'youthEmpowerment') cardTitle = 'Youth Empowerment';
 
   return (
     <Card
-      onClick={() => handleCohortSelect(name)}
+      onClick={() => handleProgramTypeSelect(programType)}
       style={{
         width: 250,
         display: 'inline-block',
@@ -36,12 +33,10 @@ const CohortCard = (props) => {
       }}
     >
     <CardHeader
-      title={`Cohort ${name}`}
-      subtitle={dateRange}
-      avatar={<Avatar>{name}</Avatar>}
+      title={cardTitle}
     />
   </Card>
   );
 };
 
-export default CohortCard;
+export default ProgramTypeCard;
