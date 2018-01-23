@@ -12,25 +12,36 @@ const ApplicantList = (props) => {
   const { 
     confirmedApplicants = [],
     waitlist = [],
-    handleApplicantRowSelect
+    selectedCohort,
+    selectedProgramType,
+    selectedProgramId,
+    programs
   } = props;
 
-  console.log('WAITLIST -->', waitlist);
+  let programType;
+  if (selectedProgramType === 'healthInnovation') programType = 'Health Innovation';
+  if (selectedProgramType === 'education') programType = 'Education';
+  if (selectedProgramType === 'youthEmpowerment') programType = 'Youth Empowerment';
+
+  let selectedProgram = programs.filter(program => program.id === selectedProgramId);
+  selectedProgram = selectedProgram.length ? selectedProgram[0] : {};
+
+  const { date } = selectedProgram;
+
 
   return (
     <Table
       height={'300px'}
       fixedHeader
-      selectable
-      onRowSelection={handleApplicantRowSelect}
+      selectable={false}
     >
       <TableHeader
-        adjustForCheckbox
+        adjustForCheckbox={false}
         displaySelectAll={false}
       >
         <TableRow>
           <TableHeaderColumn colSpan="3" style={{textAlign: 'center'}}>
-            Super Header
+            {`Cohort ${selectedCohort} - ${programType} - ${date}`}
           </TableHeaderColumn>
         </TableRow>
         <TableRow>
@@ -41,7 +52,7 @@ const ApplicantList = (props) => {
       </TableHeader>
       <TableBody
         showRowHover
-        displayRowCheckbox
+        displayRowCheckbox={false}
         stripedRows={false}
       >
         {confirmedApplicants.map((applicant) => {

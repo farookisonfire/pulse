@@ -41,7 +41,6 @@ class Enrollment extends Component {
     this.handleBackButtonSelect = this.handleBackButtonSelect.bind(this);
     this.handleProgramTypeSelect = this.handleProgramTypeSelect.bind(this);
     this.handleProgramDateSelect = this.handleProgramDateSelect.bind(this);
-    this.handleApplicantRowSelect = this.handleApplicantRowSelect.bind(this);
   }
   
   componentDidMount() {
@@ -85,6 +84,7 @@ class Enrollment extends Component {
     selectedProgram = selectedProgram.length ? selectedProgram[0] : {};
     
     const { waitlist = [] } = selectedProgram;
+    console.log('waitlist -->', typeof waitlist);
     const waitlistedApplicantsWithStatus = waitlist.map(app => {
       app.status = 'waitlist';
       return app;
@@ -104,17 +104,15 @@ class Enrollment extends Component {
     this.setState({ currentEnrollmentPage: prevPage });
   }
 
-  handleApplicantRowSelect(row) {
-    const {
-      confirmedApplicants,
-      waitlistedApplicants
-    } = this.state;
+  // handleApplicantRowSelect(row) {
+  //   const {
+  //     confirmedApplicants,
+  //     waitlistedApplicants
+  //   } = this.state;
 
-    const selectedRow = row[0];
-    const applicantList = [...confirmedApplicants, ...waitlistedApplicants];
-
-    console.log('selectedApplicant ===>', applicantList[selectedRow]);
-  }
+  //   const selectedRow = row[0];
+  //   const applicantList = [...confirmedApplicants, ...waitlistedApplicants];
+  // }
 
   render() {
     const {
@@ -149,7 +147,7 @@ class Enrollment extends Component {
         <div>
           <SectionTitle>PROGRAM ENROLLMENT</SectionTitle>
           <Divider style={{marginLeft: 8, marginRight: 8}} />
-          {renderPreviousPageButton && <BackButton onTouchTap={this.handleBackButtonSelect}/>}
+          {renderPreviousPageButton && <BackButton onTouchTap={this.handleBackButtonSelect} />}
           <EnrollmentContent
             cohorts={cohorts}
             selectedCohort={selectedCohort}
@@ -162,7 +160,6 @@ class Enrollment extends Component {
             handleCohortSelect={this.handleCohortSelect}
             handleProgramTypeSelect={this.handleProgramTypeSelect}
             handleProgramDateSelect={this.handleProgramDateSelect}
-            handleApplicantRowSelect={this.handleApplicantRowSelect}
             currentEnrollmentPage={currentEnrollmentPage}
             enrollmentPages={enrollmentPages}
             allProgramEnrollment={allProgramEnrollment}

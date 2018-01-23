@@ -5,6 +5,7 @@ import CohortCard from './CohortCard';
 import ProgramTypeCard from './ProgramTypeCard';
 import ProgramDateCard from './ProgramDateCard';
 import ApplicantList from './ApplicantList';
+import EnrollmentStepper from './EnrollmentStepper';
 
 const EnrollmentContentContainer = styled.div`
   padding: 48px;
@@ -15,7 +16,6 @@ const EnrollmentContent = (props) => {
     handleCohortSelect,
     handleProgramTypeSelect,
     handleProgramDateSelect,
-    handleApplicantRowSelect,
     cohorts,
     selectedCohort,
     selectedProgramType,
@@ -83,12 +83,16 @@ const EnrollmentContent = (props) => {
       <ApplicantList
         confirmedApplicants={confirmedApplicants}
         waitlist={waitlistedApplicants}
-        handleApplicantRowSelect={handleApplicantRowSelect}
+        selectedCohort={selectedCohort}
+        selectedProgramType={selectedProgramType}
+        selectedProgramId={selectedProgramId}
+        programs={programs}
       />);
   }
 
   return (
     <EnrollmentContentContainer>
+      <EnrollmentStepper currentEnrollmentPage={currentEnrollmentPage} />
       {compToRender}
     </EnrollmentContentContainer>
   );
