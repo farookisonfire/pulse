@@ -212,3 +212,135 @@ export const resolvePath = (status) => {
     return '/api/applicants';
   }
 };
+
+export const resolveTotalEnrollmentByProgram = (applicants = []) => {
+  const programEnrollment = {};
+  const confirmedApplicants = applicants
+    .filter(applicant => applicant.status === 'defer-enroll' || 'confirmed');
+  confirmedApplicants.forEach((applicant) => {
+    const { selectedProgramId } = applicant;
+    if (!selectedProgramId) return;
+    if (programEnrollment[selectedProgramId]) {
+      programEnrollment[selectedProgramId] += 1;
+    } else {
+      programEnrollment[selectedProgramId] = 1;
+    }
+  });
+  return programEnrollment;
+};
+
+export const resolveTotalEnrollmentByCohort = (programEnrollment = {}, allPrograms) => {
+  const cohortEnrollment = {};
+  const programs = Object.keys(programEnrollment);
+  programs.forEach((program) => {
+    allPrograms.forEach((p) => {
+      if (program === p.id) {
+        const { cohort } = p;
+        cohort.map((cohort) => {
+          if (cohortEnrollment[cohort]) {
+            cohortEnrollment[cohort] += programEnrollment[program];
+          } else {
+            cohortEnrollment[cohort] = programEnrollment[program];
+          }
+        });
+      }
+    });
+  });
+  return cohortEnrollment;
+};
+
+// export const resolveAllProgramEnrollment = (applicants = []) => {
+//   const enrollmentMap = {};
+//   applicants.forEach((applicant) => {
+//     const { selectedProgramId } = applicant;
+//     if (!selectedProgramId) return;
+//     if (enrollmentMap[selectedProgramId]) {
+//       const applicantStatus = resolveApplicantStatus(applicant);
+//       enrollmentMap[selectedProgramId][applicantStatus] += 1;
+//     } else {
+//       enrollmentMap[selectedProgramId] = {
+//         enrolled: 0,
+//         confirmed: 0,
+//         waitlist: 0,
+//       };
+//     }
+//   });
+//   return enrollmentMap;
+// };
+
+// const resolveApplicantStatus = (applicant = {}) => {
+//   if (applicant.status === 'waitlist' ) {
+//     return 'waitlist';
+//   } else {
+//     if (applicant.paymentStatus && applicant.paymentStatus === 'paid in full') {
+//       return 'confirmed';
+//     } else {
+//       return 'enrolled';
+//     }
+//   }
+// };
+
+export const resolveProgramTypeEnrollment = (programs, type) => {
+  const programTypeEnrollment = { enrolled: 0, confirmed: 0, waitlist: 0 };
+  const filteredProgramsByType = programs.forEach(program => {
+    if (program.typeId === type) {
+      programTypeEnrollment.enrolled += program.enrolled;
+      programTypeEnrollment.confirmed += program.confirmed;
+      programTypeEnrollment.waitlist += program.waitlist.length;
+    }
+  });
+  return programTypeEnrollment;
+};
+
+export const applyProgramFilters = (graphFilters, enrollmentByProgram) => {
+  const {
+    healthInnovation,
+    youthEmpowerment,
+    education
+  } = graphFilters;
+
+  const programs = Object.keys(enrollmentByProgram);
+  
+  if (healthInnovation && youthEmpowerment && !education) {
+    programs.forEach((program) => {
+      if (program.includes('education')) delete enrollmentByProgram[program];
+    });
+  }
+  if (healthInnovation && !youthEmpowerment && education) {
+    programs.forEach((program) => {
+      if (program.includes('youth')) delete enrollmentByProgram[program];
+    });
+  }
+  if (!healthInnovation && youthEmpowerment && education) {
+    programs.forEach((program) => {
+      if (program.includes('health')) delete enrollmentByProgram[program];
+    });
+  }
+  if (healthInnovation && !youthEmpowerment && !education) {
+    programs.forEach((program) => {
+      if (program.includes('youth') || program.includes('education')) delete enrollmentByProgram[program];
+    });
+  }
+  if (!healthInnovation && youthEmpowerment && !education) {
+    programs.forEach((program) => {
+      if (program.includes('health') || program.includes('education')) delete enrollmentByProgram[program];
+    });
+  }
+  if (!healthInnovation && !youthEmpowerment && education) {
+    programs.forEach((program) => {
+      if (program.includes('health') || program.includes('youth')) delete enrollmentByProgram[program];
+    });
+  }
+  return enrollmentByProgram;
+};
+
+export const alphabetizeList = (list) => {
+  list.sort((a,b) => {
+    const itemA = a.toLowerCase();
+    const itemB = b.toLowerCase();
+    if (itemA < itemB) return -1;
+    if (itemA > itemB) return 1;
+    return 0;
+  });
+  return list;
+};

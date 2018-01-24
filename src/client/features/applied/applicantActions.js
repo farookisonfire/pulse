@@ -11,7 +11,7 @@ export function genericFetchStart() {
 }
 
 export function genericFetchEnd() {
-  return { type: GENERIC_FETCH_END }
+  return { type: GENERIC_FETCH_END };
 }
 
 function requestApplicants() {

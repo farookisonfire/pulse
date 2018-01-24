@@ -3,6 +3,7 @@ import { receiveApplicants, genericFetchStart, genericFetchEnd } from '../applie
 
 export const RECEIVE_PROGRAMS = 'RECEIVE_PROGRAMS';
 export const RECEIVE_FELLOWS = 'RECEIVE_FELLOWS';
+export const RECEIVE_COHORTS = 'RECEIVE_COHORTS';
 
 const receivePrograms = (programs) => {
   return { type: RECEIVE_PROGRAMS, programs };
@@ -10,6 +11,10 @@ const receivePrograms = (programs) => {
 
 const receiveFellows = (fellows) => {
   return { type: RECEIVE_FELLOWS, fellows };
+};
+
+const receiveCohorts = (cohorts) => {
+  return { type: RECEIVE_COHORTS, cohorts };
 };
 
 export const getInitialData = () => {
@@ -28,10 +33,13 @@ export const getInitialData = () => {
           applicants = [],
           programs = [],
           fellows = [],
+          cohorts = []
         } = data;
         dispatch(receiveApplicants(applicants));
         dispatch(receivePrograms(programs));
         dispatch(receiveFellows(fellows));
+        dispatch(receiveCohorts(cohorts));
+        dispatch(genericFetchEnd());
       })
       .catch((err) => {
         console.log('Unable to get initial data');
