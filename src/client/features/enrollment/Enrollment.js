@@ -5,8 +5,6 @@ import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import { connect } from 'react-redux';
 import EnrollmentContent from './EnrollmentContent';
-import BackButton from '../shared/BackButton';
-import { resolveAllProgramEnrollment } from '../../utils/utils';
 
 const EnrollmentPage = styled.div`
   background-color: white;
@@ -34,27 +32,17 @@ class Enrollment extends Component {
       confirmedApplicants: [],
       waitlistedApplicants: [],
       currentEnrollmentPage: 0,
-      enrollmentPages: ['cohort', 'programType', 'programDate', 'applicantList']
+      enrollmentPages: ['cohort', 'programType', 'programDate', 'applicantList'],
+      graphFilters: { healthInnovation: true, education: true, youthEmpowerment: true }
     };
 
     this.handleCohortSelect = this.handleCohortSelect.bind(this);
     this.handleBackButtonSelect = this.handleBackButtonSelect.bind(this);
     this.handleProgramTypeSelect = this.handleProgramTypeSelect.bind(this);
     this.handleProgramDateSelect = this.handleProgramDateSelect.bind(this);
+    this.handleOnFilterCheck = this.handleOnFilterCheck.bind(this);
   }
   
-  componentDidMount() {
-    const { applicants = [] } = this.props;
-    const allEnrolledApplicants = applicants
-      .filter(applicant =>
-        applicant.status === 'confirmed' ||
-        applicant.status === 'waitlist' ||
-        applicant.status === 'defer-enroll');
-    
-    const allProgramEnrollment = resolveAllProgramEnrollment(allEnrolledApplicants);
-    this.setState({allProgramEnrollment});
-  }
-
   handleCohortSelect(selectedCohort) {
     const { currentEnrollmentPage } = this.state;
     const nextPage = currentEnrollmentPage + 1;
@@ -84,7 +72,6 @@ class Enrollment extends Component {
     selectedProgram = selectedProgram.length ? selectedProgram[0] : {};
     
     const { waitlist = [] } = selectedProgram;
-    console.log('waitlist -->', typeof waitlist);
     const waitlistedApplicantsWithStatus = waitlist.map(app => {
       app.status = 'waitlist';
       return app;
@@ -104,15 +91,12 @@ class Enrollment extends Component {
     this.setState({ currentEnrollmentPage: prevPage });
   }
 
-  // handleApplicantRowSelect(row) {
-  //   const {
-  //     confirmedApplicants,
-  //     waitlistedApplicants
-  //   } = this.state;
-
-  //   const selectedRow = row[0];
-  //   const applicantList = [...confirmedApplicants, ...waitlistedApplicants];
-  // }
+  handleOnFilterCheck(e, isInputChecked) {
+    const programType = e.target.id;
+    const { graphFilters } = this.state;
+    const nextFilterState = Object.assign({}, graphFilters, {[programType]: isInputChecked});
+    this.setState({ graphFilters: nextFilterState });
+  }
 
   render() {
     const {
@@ -123,21 +107,15 @@ class Enrollment extends Component {
 
     const {
       listOpenState,
-      allProgramEnrollment,
       currentEnrollmentPage,
       enrollmentPages,
       selectedCohort,
       selectedProgramType,
       selectedProgramId,
       confirmedApplicants,
-      waitlistedApplicants
+      waitlistedApplicants,
+      graphFilters
     } = this.state;
-
-    console.log('cohorts', cohorts);
-    console.log('applicants', applicants);
-    console.log('programs', programs);
-    console.log('enrollmentPage state', this.state);
-    console.log('allProgramEnrollment', allProgramEnrollment);
 
     const renderPreviousPageButton = currentEnrollmentPage > 0 ? true : false;
     const programs2018 = programs.filter(program => program.year === 2018);
@@ -147,7 +125,6 @@ class Enrollment extends Component {
         <div>
           <SectionTitle>PROGRAM ENROLLMENT</SectionTitle>
           <Divider style={{marginLeft: 8, marginRight: 8}} />
-          {renderPreviousPageButton && <BackButton onTouchTap={this.handleBackButtonSelect} />}
           <EnrollmentContent
             cohorts={cohorts}
             selectedCohort={selectedCohort}
@@ -160,9 +137,12 @@ class Enrollment extends Component {
             handleCohortSelect={this.handleCohortSelect}
             handleProgramTypeSelect={this.handleProgramTypeSelect}
             handleProgramDateSelect={this.handleProgramDateSelect}
+            handleBackButtonSelect={this.handleBackButtonSelect}
+            handleOnFilterCheck={this.handleOnFilterCheck}
             currentEnrollmentPage={currentEnrollmentPage}
             enrollmentPages={enrollmentPages}
-            allProgramEnrollment={allProgramEnrollment}
+            graphFilters={graphFilters}
+            renderPreviousPageButton={renderPreviousPageButton}
           />
         </div>
       </EnrollmentPage>

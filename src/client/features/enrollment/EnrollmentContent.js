@@ -1,11 +1,16 @@
 import React from 'react';
 import Subheader from 'material-ui/Subheader';
 import styled from 'styled-components';
+import Divider from 'material-ui/Divider';
 import CohortCard from './CohortCard';
 import ProgramTypeCard from './ProgramTypeCard';
 import ProgramDateCard from './ProgramDateCard';
 import ApplicantList from './ApplicantList';
 import EnrollmentStepper from './EnrollmentStepper';
+import EnrollmentGraph from './EnrollmentGraph';
+import EnrollmentGraphFilters from './EnrollmentGraphFilters';
+import BackButton from '../shared/BackButton';
+
 
 const EnrollmentContentContainer = styled.div`
   padding: 48px;
@@ -16,6 +21,8 @@ const EnrollmentContent = (props) => {
     handleCohortSelect,
     handleProgramTypeSelect,
     handleProgramDateSelect,
+    handleOnFilterCheck,
+    handleBackButtonSelect,
     cohorts,
     selectedCohort,
     selectedProgramType,
@@ -26,7 +33,8 @@ const EnrollmentContent = (props) => {
     enrollmentPages,
     applicants,
     programs,
-    allProgramEnrollment
+    graphFilters,
+    renderPreviousPageButton
   } = props;
 
   let compToRender;
@@ -39,7 +47,6 @@ const EnrollmentContent = (props) => {
           handleCohortSelect={handleCohortSelect}
           cohort={cohort}
           programs={programs}
-          allProgramEnrollment={allProgramEnrollment}
         />
       );
     });
@@ -92,6 +99,24 @@ const EnrollmentContent = (props) => {
 
   return (
     <EnrollmentContentContainer>
+      <EnrollmentGraphFilters
+        handleOnFilterCheck={handleOnFilterCheck}
+        graphFilters={graphFilters}
+      />
+      <EnrollmentGraph 
+        applicants={applicants}
+        programs={programs}
+        graphFilters={graphFilters}
+      />
+      <Divider style={{
+        width: '80%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: 56,
+        marginBottom: 48,
+        backgroundColor: 'rgba(158,158,158,.6)'
+      }} />
+      {renderPreviousPageButton ? <BackButton onTouchTap={handleBackButtonSelect} /> : <div style={{width: 48, height: 48}}/>}
       <EnrollmentStepper currentEnrollmentPage={currentEnrollmentPage} />
       {compToRender}
     </EnrollmentContentContainer>

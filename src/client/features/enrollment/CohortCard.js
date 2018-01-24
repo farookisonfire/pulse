@@ -16,7 +16,6 @@ const CohortCard = (props) => {
     handleCohortSelect = () => {},
     cohort = {},
     programs,
-    allProgramEnrollment
   } = props;
 
   const {
