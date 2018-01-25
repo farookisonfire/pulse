@@ -202,8 +202,8 @@ export const resolveApplicantsToUse = (applicants, activeTab, programs) => {
 };
 
 export const resolvePath = (status) => {
-  if (status === 'info-health') {
-    return '/info/health';
+  if (status === 'info-health' || status === 'info-youth') {
+    return '/info';
   } else if (status === 'defer' || status === 'withdraw') {
     return '/confirmed';
   } else if (status === 'reminder-secondary') {

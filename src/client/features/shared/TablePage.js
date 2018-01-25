@@ -96,7 +96,7 @@ class TablePage extends React.Component {
     if (stage === 'secondary' && (value === 'healthInnovation' || value === 'education' || value === 'youthEmpowerment')) {
       selectedApplicantDetails.program = value;
       selectedApplicantDetails.status = stage;
-    } else if (stage === 'final' && (value === 'accepted' || value === 'info-health')) {
+    } else if (stage === 'final' && (value === 'accepted' || value === 'info-health' || value === 'info-youth')) {
       selectedApplicantDetails.status = value;
       selectedApplicantDetails.program = acceptedTo;
     } else if (stage === 'final' && value === 'reminder-secondary') {
