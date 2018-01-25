@@ -37,7 +37,8 @@ export default {
       ],
       infoActions: [
         { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
-        { label: 'Send Health Info', value: 'info-health', program: 'healthInnovation', isPrimary: true, isSecondary: false },
+        { label: 'Health Info', value: 'info-health', program: 'healthInnovation', isPrimary: true, isSecondary: false },
+        { label: 'Y.E. Info', value: 'info-youth', program: 'youthEmpowerment', isPrimary: true, isSecondary: false },
       ],
       reminderActions: [
         { label: 'Cancel', value: '', isPrimary: false, isSecondary: false },
