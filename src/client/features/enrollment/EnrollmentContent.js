@@ -118,7 +118,9 @@ const EnrollmentContent = (props) => {
       }} />
       {renderPreviousPageButton ? <BackButton onTouchTap={handleBackButtonSelect} /> : <div style={{width: 48, height: 48}}/>}
       <EnrollmentStepper currentEnrollmentPage={currentEnrollmentPage} />
-      {compToRender}
+      <div style={{minHeight: 400}}>
+        {compToRender}
+      </div>
     </EnrollmentContentContainer>
   );
 };
