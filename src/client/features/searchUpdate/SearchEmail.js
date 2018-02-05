@@ -10,6 +10,8 @@ import {fullWhite} from 'material-ui/styles/colors';
 const SearchEmailContainer = styled.div`
   text-align: center;
   margin-top: 24px;
+  padding-top: 32px;
+  padding-bottom: 32px;
 `;
 
 const style = {
