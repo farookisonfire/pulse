@@ -15,17 +15,24 @@ export const receiveApplicant = (applicant) => ({type: RECEIVE_APPLICANT, applic
 export const openSnackBar = (msg) => ({ type: OPEN_SNACK_BAR, msg });
 export const handleSnackbarClose = () => ({ type: HANDLE_SNACKBAR_CLOSE });
 export const enableEdit = () => ({ type: ENABLE_EDIT});
-export const disableEdit = () => ({ type: DISABLE_EDIT});
-export const editApplicant = (e, data) => {
-  return ({
+export const disableEdit = (originalApplicant) => ({ type: DISABLE_EDIT , originalApplicant});
+export const editApplicant = (e, data, dropdownValue) => {
+  if (!e.target.name && dropdownValue) {
+    return {
+      type: EDIT_APPLICANT, 
+      field: 'selectedProgramId',
+      value: dropdownValue
+    };
+  }
+  
+  return {
     type: EDIT_APPLICANT, 
     field: e.target.name,
     value: data
-    });
+  };
 };
 
 export const saveApplicantDetails = (applicant) => {
-  console.log('SAVE APPLICANT DETAILS ---->', applicant);
   return (dispatch) => {
     dispatch(startFetch());
     return fetch(`${getBaseUrl()}/api/applicant`, {

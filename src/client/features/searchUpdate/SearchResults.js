@@ -5,10 +5,17 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import ProgramDropdown  from './ProgramDropdown';
 
-const SearchEmailContainer = styled.div`
+const SearchResultsContainer = styled.div`
   text-align: left;
-  padding-bottom: 24px;
   padding-left: 32px;
+`;
+
+const SearchResultsProgramsContainer = styled.div`
+  padding-left: 8px;
+`;
+
+const SearchResultsButtonContainer = styled.div`
+  padding-bottom: 24px;
 `;
 
 const SearchResults = (props) => {
@@ -20,7 +27,8 @@ const SearchResults = (props) => {
     handleInputChange,
     handleEditSubmit,
     disableSubmit,
-    programs
+    programs,
+    originalApplicant
   } = props;
 
   const {
@@ -43,6 +51,7 @@ const SearchResults = (props) => {
           name="secondary"
           disabled={!editEnabled}
           onChange={handleInputChange}
+          style={{marginLeft: 24}}
         />);
       case 'accepted': return (
         <TextField
@@ -51,6 +60,7 @@ const SearchResults = (props) => {
           name="acceptedTo"
           disabled={!editEnabled}
           onChange={handleInputChange}
+          style={{marginLeft: 24}}
         />);
       case 'confirmed': return (
         <ProgramDropdown
@@ -59,7 +69,7 @@ const SearchResults = (props) => {
           selectedProgramId={selectedProgramId}
           name="selectedProgramId"
           disabled={!editEnabled}
-          onChange={() => {}}
+          handleDropdownChange={handleInputChange}
         />);
       default: return null;
     }
@@ -75,7 +85,7 @@ const SearchResults = (props) => {
     <div style={{display: 'flex'}}>
       <RaisedButton
         label="Cancel"
-        onClick={handleCancelClick}
+        onClick={() => handleCancelClick(originalApplicant)}
         style={{ marginLeft: 'auto', marginRight: 32 }} />
       <RaisedButton
         label="Save"
@@ -86,48 +96,50 @@ const SearchResults = (props) => {
 
 return (
   <div>
-  <SearchEmailContainer>
-    <TextField
-      floatingLabelText="Applicant Id"
-      value={id}
-      name="id"
-      disabled={true}
-      onChange={handleInputChange}
-    /><br />
-    <TextField
-      floatingLabelText="First Name"
-      value={firstName}
-      name="firstName"
-      disabled={!editEnabled}
-      onChange={handleInputChange}
-    /><br />
-    <TextField
-      floatingLabelText="Last Name"
-      value={lastName}
-      name="lastName"
-      disabled={!editEnabled}
-      onChange={handleInputChange}
-    /><br />
-    <TextField
-      floatingLabelText="Email"
-      value={email}
-      name="email"
-      disabled={!editEnabled}
-      onChange={handleInputChange}
-    /><br />
-    <TextField
-      floatingLabelText="Status"
-      value={status}
-      name="status"
-      disabled={!editEnabled}
-      onChange={handleInputChange}
-    /><br />
-  </SearchEmailContainer>
-  {additionalTextField(status)}
-    <div>
+    <SearchResultsContainer>
+      <TextField
+        floatingLabelText="Applicant Id"
+        value={id}
+        name="id"
+        disabled={true}
+        onChange={handleInputChange}
+      /><br />
+      <TextField
+        floatingLabelText="First Name"
+        value={firstName}
+        name="firstName"
+        disabled={!editEnabled}
+        onChange={handleInputChange}
+      /><br />
+      <TextField
+        floatingLabelText="Last Name"
+        value={lastName}
+        name="lastName"
+        disabled={!editEnabled}
+        onChange={handleInputChange}
+      /><br />
+      <TextField
+        floatingLabelText="Email"
+        value={email}
+        name="email"
+        disabled={!editEnabled}
+        onChange={handleInputChange}
+      /><br />
+      <TextField
+        floatingLabelText="Status"
+        value={status}
+        name="status"
+        disabled={!editEnabled}
+        onChange={handleInputChange}
+      /><br />
+    </SearchResultsContainer>
+    <SearchResultsProgramsContainer>
+      {additionalTextField(status)}
+    </SearchResultsProgramsContainer>
+    <SearchResultsButtonContainer>
       {buttonsToRender}
-    </div>
-    </div>
+    </SearchResultsButtonContainer>
+  </div>
 );
 };
 

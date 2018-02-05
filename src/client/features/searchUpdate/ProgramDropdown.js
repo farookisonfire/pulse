@@ -7,7 +7,8 @@ const ProgramDropdown = (props) => {
     programs,
     selectedProgramId,
     disabled,
-    floatingLabelText
+    floatingLabelText,
+    handleDropdownChange
   } = props;
 
   console.log('programDropdown props', props);
@@ -18,15 +19,17 @@ const ProgramDropdown = (props) => {
         value={program.id}
         key={`program-dropdown-${program.id}`}
         primaryText={`${program.type} ${program.length} ${program.date}`}
-        floatingLabelText={floatingLabelText}
+        
       />
     );
   });
   
   return (
     <DropDownMenu
+      name={'selectedProgramId'}
       value={selectedProgramId}
       disabled={disabled}
+      onChange={handleDropdownChange}
     >
       {programList}
     </DropDownMenu>

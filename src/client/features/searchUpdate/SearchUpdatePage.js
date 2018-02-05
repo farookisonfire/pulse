@@ -133,6 +133,7 @@ class SearchUpdatePage extends Component {
                 handleSearchEmailKeyPress={this.handleSearchEmailKeyPress}
               />
               <SearchResults
+                originalApplicant={originalApplicant}
                 programs={programs}
                 editEnabled={editEnabled}
                 handleEditClick={enableEdit}

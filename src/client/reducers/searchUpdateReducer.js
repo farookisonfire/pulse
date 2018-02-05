@@ -20,7 +20,7 @@ export default (state = {}, action) => {
     case ENABLE_EDIT:
       return Object.assign({}, state, {editEnabled: true});
     case DISABLE_EDIT:
-      return Object.assign({}, state, {editEnabled: false});
+      return Object.assign({}, state, {editEnabled: false, applicant: action.originalApplicant});
     case EDIT_APPLICANT:
       return Object.assign({}, state, {applicant: editedApplicant});
     case START_FETCH:
