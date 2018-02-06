@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import ProgramDropdown  from './ProgramDropdown';
+import StatusDropdown  from './StatusDropdown';
 
 const SearchResultsContainer = styled.div`
   text-align: left;
@@ -54,26 +55,22 @@ const SearchResults = (props) => {
           style={{marginLeft: 24}}
         />);
       case 'accepted': return (
-        <TextField
+        <ProgramDropdown
+          programs={programs}
           floatingLabelText="Accepted To"
-          value={acceptedTo}
-          name="acceptedTo"
+          selectedProgramId={acceptedTo}
           disabled={!editEnabled}
-          onChange={handleInputChange}
-          style={{marginLeft: 24}}
-        />);
+          handleDropdownChange={(e, data, dropdownValue) => handleInputChange(e, data, dropdownValue, 'acceptedTo')} />);
       case 'confirmed': return (
         <ProgramDropdown
           programs={programs}
           floatingLabelText="Selected Program Id"
           selectedProgramId={selectedProgramId}
-          name="selectedProgramId"
           disabled={!editEnabled}
-          handleDropdownChange={handleInputChange}
-        />);
+          handleDropdownChange={(e, data, dropdownValue) => handleInputChange(e, data, dropdownValue, 'selectedProgramId')} />);
       default: return null;
     }
-  }
+  };
 
   const buttonsToRender = !editEnabled ? (
     <div style={{display: 'flex'}}>
@@ -125,16 +122,21 @@ return (
         disabled={!editEnabled}
         onChange={handleInputChange}
       /><br />
-      <TextField
-        floatingLabelText="Status"
-        value={status}
-        name="status"
+      <StatusDropdown
+        floatingLabelText="Applicant Status"
+        status={status}
         disabled={!editEnabled}
-        onChange={handleInputChange}
+        handleDropdownChange={(e, data, dropdownValue) => handleInputChange(e, data, dropdownValue, 'status')}
       /><br />
+      <ProgramDropdown
+        programs={programs}
+        floatingLabelText="Enrolled In"
+        selectedProgramId={selectedProgramId}
+        disabled={!editEnabled}
+        handleDropdownChange={(e, data, dropdownValue) => handleInputChange(e, data, dropdownValue, 'selectedProgramId')}
+      />
     </SearchResultsContainer>
     <SearchResultsProgramsContainer>
-      {additionalTextField(status)}
     </SearchResultsProgramsContainer>
     <SearchResultsButtonContainer>
       {buttonsToRender}

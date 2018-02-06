@@ -29,7 +29,7 @@ const SearchEmail = (props) => {
     <SearchEmailContainer>
       <TextField
         value={emailToSearch}
-        hintText="Applicant Email"
+        hintText="Search by email..."
         onChange={handleSearchEmailChange}
         onKeyPress={handleSearchEmailKeyPress}
       />

@@ -16,11 +16,11 @@ export const openSnackBar = (msg) => ({ type: OPEN_SNACK_BAR, msg });
 export const handleSnackbarClose = () => ({ type: HANDLE_SNACKBAR_CLOSE });
 export const enableEdit = () => ({ type: ENABLE_EDIT});
 export const disableEdit = (originalApplicant) => ({ type: DISABLE_EDIT , originalApplicant});
-export const editApplicant = (e, data, dropdownValue) => {
+export const editApplicant = (e, data, dropdownValue, dropdownFieldName) => {
   if (!e.target.name && dropdownValue) {
     return {
       type: EDIT_APPLICANT, 
-      field: 'selectedProgramId',
+      field: dropdownFieldName,
       value: dropdownValue
     };
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import DropDownMenu from 'material-ui/DropDownMenu';
+import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
 const ProgramDropdown = (props) => {
@@ -8,10 +8,8 @@ const ProgramDropdown = (props) => {
     selectedProgramId,
     disabled,
     floatingLabelText,
-    handleDropdownChange
+    handleDropdownChange,
   } = props;
-
-  console.log('programDropdown props', props);
 
   const programList = programs.map((program) => {
     return (
@@ -23,16 +21,19 @@ const ProgramDropdown = (props) => {
       />
     );
   });
-  
+
   return (
-    <DropDownMenu
-      name={'selectedProgramId'}
+    <SelectField
+      floatingLabelFixed
+      hintText={'Hasn\'t enrolled yet'}
       value={selectedProgramId}
       disabled={disabled}
       onChange={handleDropdownChange}
+      floatingLabelText={floatingLabelText}
+      style={{ width: 435 }}
     >
       {programList}
-    </DropDownMenu>
+    </SelectField>
   );
 };
 

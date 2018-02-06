@@ -21,6 +21,7 @@ import { spinner } from '../applied/applicantStyles';
 
 const SearchUpdatePageContainer = styled.div`
   background-color: #f8f7f7;
+  height: 100%;
   min-height: calc(100vh - 64px);
 `;
 
@@ -109,7 +110,7 @@ class SearchUpdatePage extends Component {
       searchUpdatePage: {
         fetching = false,
         originalApplicant = {},
-        applicant = {},
+        applicant,
         editEnabled = false,
         receiveApplicantFail = false,
         snackbarMessage
@@ -132,7 +133,7 @@ class SearchUpdatePage extends Component {
                 handleSearchEmailChange={this.handleSearchEmailChange}
                 handleSearchEmailKeyPress={this.handleSearchEmailKeyPress}
               />
-              <SearchResults
+              {applicant && <SearchResults
                 originalApplicant={originalApplicant}
                 programs={programs}
                 editEnabled={editEnabled}
@@ -141,7 +142,7 @@ class SearchUpdatePage extends Component {
                 applicantDetails={applicant}
                 handleInputChange={editApplicant}
                 handleEditSubmit={this.handleEditSubmit}
-                disableSubmit={JSON.stringify(applicant) === JSON.stringify(originalApplicant)} />
+                disableSubmit={JSON.stringify(applicant) === JSON.stringify(originalApplicant)} />}
             </SearchUpdatePageCard>
             <Snackbar
               open={receiveApplicantFail}
