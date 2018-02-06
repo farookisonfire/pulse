@@ -45,29 +45,30 @@ const SearchResults = (props) => {
 
   const additionalTextField = (status) => {
     switch (status) {
-      case 'secondary': return (
-        <TextField
-          floatingLabelText="Secondary"
-          value={secondary}
-          name="secondary"
-          disabled={!editEnabled}
-          onChange={handleInputChange}
-          style={{marginLeft: 24}}
-        />);
-      case 'accepted': return (
-        <ProgramDropdown
-          programs={programs}
-          floatingLabelText="Accepted To"
-          selectedProgramId={acceptedTo}
-          disabled={!editEnabled}
-          handleDropdownChange={(e, data, dropdownValue) => handleInputChange(e, data, dropdownValue, 'acceptedTo')} />);
+      // case 'secondary': return (
+      //   <TextField
+      //     floatingLabelText="Secondary"
+      //     value={secondary}
+      //     name="secondary"
+      //     disabled={!editEnabled}
+      //     onChange={handleInputChange}
+      //     style={{marginLeft: 24}}
+      //   />);
+      // case 'accepted': return (
+      //   <ProgramDropdown
+      //     programs={programs}
+      //     floatingLabelText="Accepted To"
+      //     selectedProgramId={acceptedTo}
+      //     disabled={!editEnabled}
+      //     handleDropdownChange={(e, data, dropdownValue) => handleInputChange(e, data, dropdownValue, 'acceptedTo')} />);
       case 'confirmed': return (
         <ProgramDropdown
           programs={programs}
-          floatingLabelText="Selected Program Id"
+          floatingLabelText="Enrolled In"
           selectedProgramId={selectedProgramId}
           disabled={!editEnabled}
-          handleDropdownChange={(e, data, dropdownValue) => handleInputChange(e, data, dropdownValue, 'selectedProgramId')} />);
+          handleDropdownChange={(e, data, dropdownValue) => handleInputChange(e, data, dropdownValue, 'selectedProgramId')}
+        />);
       default: return null;
     }
   };
@@ -128,13 +129,7 @@ return (
         disabled={!editEnabled}
         handleDropdownChange={(e, data, dropdownValue) => handleInputChange(e, data, dropdownValue, 'status')}
       /><br />
-      <ProgramDropdown
-        programs={programs}
-        floatingLabelText="Enrolled In"
-        selectedProgramId={selectedProgramId}
-        disabled={!editEnabled}
-        handleDropdownChange={(e, data, dropdownValue) => handleInputChange(e, data, dropdownValue, 'selectedProgramId')}
-      />
+      {additionalTextField(status)}
     </SearchResultsContainer>
     <SearchResultsProgramsContainer>
     </SearchResultsProgramsContainer>

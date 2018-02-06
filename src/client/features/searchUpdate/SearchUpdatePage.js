@@ -68,8 +68,7 @@ class SearchUpdatePage extends Component {
   handleInputSubmit() {
     const { emailToSearch } = this.state;
     const { fetchApplicant } = this.props;
-    fetchApplicant(emailToSearch)
-      // need to show toast fetching aplicant was unsuccessful
+    fetchApplicant(emailToSearch);
   }
 
   handleEditSubmit() {
@@ -77,6 +76,7 @@ class SearchUpdatePage extends Component {
       saveApplicantDetails,
       fetchApplicant,
       endFetch,
+      disableEdit,
       openSnackBar,
       searchUpdatePage: {
         applicant,
@@ -84,24 +84,22 @@ class SearchUpdatePage extends Component {
     } = this.props;
 
     saveApplicantDetails(applicant)
-      .then(fetchApplicant(applicant.email))
       .then(endFetch)
-      .then(() => openSnackBar('Applicant update successful'))
+      .then(() => {
+        openSnackBar('Applicant update successful');
+        disableEdit(applicant);
+      })
       .catch((err) => {
         console.log('Error updating applicant: ', err);
         openSnackBar('There was an error updating the applicant');
       });
   }
-        // remember to update the prod db so all emails are lowercased;
-
   handleSnackbarClose() {
     this.props.handleSnackbarClose();
   }
 
 
   render() {
-    console.log('SearchUpdatePage state', this.state);
-    console.log('SearchUpdatePage props', this.props);
     const {
       enableEdit,
       disableEdit,

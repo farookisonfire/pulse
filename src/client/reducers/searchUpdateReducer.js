@@ -6,7 +6,8 @@ import {
   START_FETCH,
   END_FETCH,
   OPEN_SNACK_BAR,
-  HANDLE_SNACKBAR_CLOSE
+  HANDLE_SNACKBAR_CLOSE,
+  REMOVE_APPLICANT_FROM_STORE
 } from '../features/searchUpdate/searchUpdateActions';
 
 export default (state = {}, action) => {
@@ -17,6 +18,8 @@ export default (state = {}, action) => {
   switch(action.type) {
     case RECEIVE_APPLICANT:
       return Object.assign({}, state, {applicant: action.applicant, originalApplicant: action.applicant});
+    case REMOVE_APPLICANT_FROM_STORE:
+      return Object.assign({}, state, {applicant: undefined, originalApplicant: undefined});
     case ENABLE_EDIT:
       return Object.assign({}, state, {editEnabled: true});
     case DISABLE_EDIT:

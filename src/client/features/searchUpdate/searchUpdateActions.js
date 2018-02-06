@@ -8,6 +8,7 @@ export const DISABLE_EDIT = 'DISABLE_EDIT';
 export const EDIT_APPLICANT = 'EDIT_APPLICANT';
 export const OPEN_SNACK_BAR = 'OPEN_SNACK_BAR';
 export const HANDLE_SNACKBAR_CLOSE = 'HANDLE_SNACKBAR_CLOSE';
+export const REMOVE_APPLICANT_FROM_STORE = 'REMOVE_APPLICANT_FROM_STORE';
 
 export const startFetch = () => ({type: START_FETCH});
 export const endFetch = () => ({type: END_FETCH});
@@ -16,6 +17,7 @@ export const openSnackBar = (msg) => ({ type: OPEN_SNACK_BAR, msg });
 export const handleSnackbarClose = () => ({ type: HANDLE_SNACKBAR_CLOSE });
 export const enableEdit = () => ({ type: ENABLE_EDIT});
 export const disableEdit = (originalApplicant) => ({ type: DISABLE_EDIT , originalApplicant});
+export const removeApplicantFromStore = () => ({ type: REMOVE_APPLICANT_FROM_STORE })
 export const editApplicant = (e, data, dropdownValue, dropdownFieldName) => {
   if (!e.target.name && dropdownValue) {
     return {
@@ -43,7 +45,8 @@ export const saveApplicantDetails = (applicant) => {
     .then((res) => {
       if (res.ok) return res.json();
       throw new Error('Unable to update applicant');
-    });
+    })
+    .then(() => dispatch(fetchApplicant(applicant.email)));
   };
 };
 
@@ -63,6 +66,7 @@ export const fetchApplicant = (email) => {
       .catch((err) => {
         console.log('Error fetching applicant: ', err);
         dispatch(endFetch());
+        dispatch(removeApplicantFromStore());
         dispatch(openSnackBar('Unable to find applicant with that email'));
       })
       ;
