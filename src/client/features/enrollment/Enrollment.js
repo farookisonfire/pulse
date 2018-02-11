@@ -70,13 +70,11 @@ class Enrollment extends Component {
     let selectedProgram = programs
       .filter(program => program.id === selectedProgramId);
     selectedProgram = selectedProgram.length ? selectedProgram[0] : {};
-    
-    const { waitlist = [] } = selectedProgram;
-    const waitlistedApplicantsWithStatus = waitlist.map(app => {
-      app.status = 'waitlist';
-      return app;
-    });
-    
+
+    const waitlistedApplicantsWithStatus = applicants
+      .filter(applicant =>
+        applicant.selectedProgramId === selectedProgramId && applicant.status === 'waitlist');
+
     this.setState({
       selectedProgramId,
       currentEnrollmentPage: nextPage,

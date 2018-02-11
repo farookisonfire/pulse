@@ -67,10 +67,10 @@ const ApplicantList = (props) => {
 
         {waitlist.map((applicant) => {
           return (
-            <TableRow key={`waitlist-${applicant.email}`}>
+            <TableRow key={`waitlist-${applicant['Email']}`}>
               <TableRowColumn>{applicant.status}</TableRowColumn>
-              <TableRowColumn>{`${applicant.firstName} ${applicant.lastName}`}</TableRowColumn>
-              <TableRowColumn>{applicant.email}</TableRowColumn>
+              <TableRowColumn>{`${applicant["First Name"]} ${applicant["Last Name"]}`}</TableRowColumn>
+              <TableRowColumn>{applicant['Email']}</TableRowColumn>
             </TableRow>
           );
         })}
